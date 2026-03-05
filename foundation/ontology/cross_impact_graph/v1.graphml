@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d0" for="node" attr.name="label" attr.type="string"/>
+  <key id="d1" for="edge" attr.name="weight" attr.type="double"/>
+  <key id="d2" for="edge" attr.name="direction" attr.type="string"/>
+  <key id="d3" for="edge" attr.name="rationale" attr.type="string"/>
+
+  <graph id="cross_impact_v1" edgedefault="directed">
+    <node id="macroeconomy"><data key="d0">Macroeconomy</data></node>
+    <node id="policy_politics"><data key="d0">PolicyPolitics</data></node>
+    <node id="geopolitics_security"><data key="d0">GeopoliticsSecurity</data></node>
+    <node id="supply_chain_trade"><data key="d0">SupplyChainTrade</data></node>
+    <node id="cyber_information"><data key="d0">CyberInformation</data></node>
+
+    <edge id="e1" source="policy_politics" target="macroeconomy">
+      <data key="d1">0.72</data>
+      <data key="d2">positive_or_negative</data>
+      <data key="d3">Policy shocks move rates, inflation, fiscal expectations</data>
+    </edge>
+    <edge id="e2" source="geopolitics_security" target="supply_chain_trade">
+      <data key="d1">0.81</data>
+      <data key="d2">disruption_risk</data>
+      <data key="d3">Conflict and sanctions alter logistics and trade flows</data>
+    </edge>
+    <edge id="e3" source="supply_chain_trade" target="macroeconomy">
+      <data key="d1">0.68</data>
+      <data key="d2">cost_pass_through</data>
+      <data key="d3">Supply disruptions transmit to inflation and growth</data>
+    </edge>
+    <edge id="e4" source="cyber_information" target="geopolitics_security">
+      <data key="d1">0.64</data>
+      <data key="d2">escalation_signal</data>
+      <data key="d3">Cyber incidents and narratives influence geopolitical posture</data>
+    </edge>
+    <edge id="e5" source="macroeconomy" target="policy_politics">
+      <data key="d1">0.59</data>
+      <data key="d2">feedback_loop</data>
+      <data key="d3">Economic stress shifts political choices and regulation pace</data>
+    </edge>
+  </graph>
+</graphml>

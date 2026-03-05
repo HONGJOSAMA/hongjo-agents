@@ -1,0 +1,182 @@
+// prediction extension merged for specialforce/schema.prisma (additive only)
+// 기준: uuid PK, organization 경계, 기존 Session/AAR/ActionItem 루프와 FK 연동
+
+// ---- required enum additions in specialforce/schema.prisma ----
+enum PredictionRunStatus {
+  DRAFT
+  FINAL
+  SCORED
+  ARCHIVED
+}
+
+enum PredictionHorizonUnit {
+  HOUR
+  DAY
+  WEEK
+  MONTH
+}
+
+enum EvidenceFreshness {
+  REALTIME
+  DAILY
+  WEEKLY
+  STALE
+}
+
+enum PredictionOutcomeLabel {
+  HIT
+  MISS
+  PARTIAL
+  UNKNOWN
+}
+
+// ---- required relation additions to existing models ----
+// model Organization { predictionRuns PredictionRun[] predictionCalibrations PredictionCalibration[] }
+// model TrainingSession { predictionRuns PredictionRun[] }
+// model AARReport { predictionRuns PredictionRun[] }
+// model ActionItem { predictionActionLinks PredictionActionLink[] }
+// model User { createdPredictionRuns PredictionRun[] @relation("PredictionRunCreatedBy") }
+
+model PredictionRun {
+  id                 String              @id @default(uuid())
+  organizationId     String
+  trainingSessionId  String?
+  aarReportId        String?
+  createdByUserId    String?
+
+  runKey             String              @unique // 외부 run_id
+  domainKey          String              // macroeconomy/policy/geopolitics...
+  scenarioKey        String?
+  runStatus          PredictionRunStatus @default(DRAFT)
+  horizonValue       Int                 @default(7)
+  horizonUnit        PredictionHorizonUnit @default(DAY)
+
+  probability        Float
+  confidence         Float?
+  selectedPolicyRule String?
+  conflictScore      Float?
+  dissentCount       Int                 @default(0)
+
+  modelProvider      String?
+  modelName          String?
+  modelVersion       String
+  promptHash         String
+  inferenceCostUsd   Float?
+  inferenceLatencyMs Int?
+
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+
+  organization       Organization        @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  trainingSession    TrainingSession?    @relation(fields: [trainingSessionId], references: [id], onDelete: SetNull)
+  aarReport          AARReport?          @relation(fields: [aarReportId], references: [id], onDelete: SetNull)
+  createdByUser      User?               @relation("PredictionRunCreatedBy", fields: [createdByUserId], references: [id], onDelete: SetNull)
+
+  evidences          PredictionEvidence[]
+  dissents           PredictionDissent[]
+  outcomes           PredictionOutcome[]
+  actionLinks        PredictionActionLink[]
+
+  @@index([organizationId, createdAt(sort: Desc)])
+  @@index([organizationId, domainKey, createdAt(sort: Desc)])
+  @@index([trainingSessionId])
+  @@index([aarReportId])
+  @@index([runStatus])
+}
+
+model PredictionEvidence {
+  id                String            @id @default(uuid())
+  organizationId    String
+  predictionRunId   String
+
+  sourceType        String?
+  sourceUrl         String
+  sourceTitle       String?
+  trustScore        Float
+  freshness         EvidenceFreshness @default(DAILY)
+  excerpt           String?
+
+  createdAt         DateTime          @default(now())
+
+  organization      Organization      @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  predictionRun     PredictionRun     @relation(fields: [predictionRunId], references: [id], onDelete: Cascade)
+
+  @@index([predictionRunId, createdAt(sort: Asc)])
+  @@index([organizationId, trustScore])
+}
+
+model PredictionDissent {
+  id                String         @id @default(uuid())
+  organizationId    String
+  predictionRunId   String
+
+  domainKey         String
+  dissentReason     String
+  alternative       String
+  dissentScore      Float?
+
+  createdAt         DateTime       @default(now())
+
+  organization      Organization   @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  predictionRun     PredictionRun  @relation(fields: [predictionRunId], references: [id], onDelete: Cascade)
+
+  @@index([predictionRunId, createdAt(sort: Asc)])
+  @@index([organizationId, domainKey, createdAt(sort: Desc)])
+}
+
+model PredictionOutcome {
+  id                String                @id @default(uuid())
+  organizationId    String
+  predictionRunId   String
+
+  outcomeLabel      PredictionOutcomeLabel @default(UNKNOWN)
+  observedResult    String
+  observedAt        DateTime
+  impactScore       Float?
+  severityText      String?
+
+  createdAt         DateTime              @default(now())
+
+  organization      Organization          @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  predictionRun     PredictionRun         @relation(fields: [predictionRunId], references: [id], onDelete: Cascade)
+
+  @@index([predictionRunId, observedAt(sort: Desc)])
+  @@index([organizationId, outcomeLabel])
+}
+
+model PredictionCalibration {
+  id                String         @id @default(uuid())
+  organizationId    String
+
+  modelVersion      String
+  domainKey         String?
+  method            String         // isotonic | platt | beta
+  paramsJson        Json
+  effectiveFrom     DateTime
+  effectiveTo       DateTime?
+
+  createdAt         DateTime       @default(now())
+
+  organization      Organization   @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, modelVersion, effectiveFrom(sort: Desc)])
+  @@index([organizationId, domainKey, effectiveFrom(sort: Desc)])
+}
+
+model PredictionActionLink {
+  id                String         @id @default(uuid())
+  organizationId    String
+  predictionRunId   String
+  actionItemId      String
+
+  linkReason        String?
+  createdAt         DateTime       @default(now())
+
+  organization      Organization   @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  predictionRun     PredictionRun  @relation(fields: [predictionRunId], references: [id], onDelete: Cascade)
+  actionItem        ActionItem     @relation(fields: [actionItemId], references: [id], onDelete: Cascade)
+
+  @@unique([predictionRunId, actionItemId])
+  @@index([organizationId, createdAt(sort: Desc)])
+  @@index([actionItemId])
+}

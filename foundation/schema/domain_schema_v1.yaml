@@ -1,0 +1,5 @@
+# Deprecated path (kept for backward compatibility)
+# Canonical file: foundation/ontology/domain_schema/v1/domain_schema_v1.yaml
+
+include: ../ontology/domain_schema/v1/domain_schema_v1.yaml
+version: v1
