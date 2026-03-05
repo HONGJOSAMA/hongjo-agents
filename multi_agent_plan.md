@@ -751,3 +751,6 @@ hongjo/
 - 2026-03-06 10:45 KST [착수]: Phase 2 pipeline draft 추가 및 data quality report 자동 생성 연결
 - 2026-03-06 10:52 KST [진행]: Phase 2 connector skeleton 3종(API/문서/CSV) 추가
 - 2026-03-06 10:55 KST [검증]: pipeline draft 실행(raw 25/20/20, normalized 65, ingest 100%, missing 0%, duplicate 0%)
+- 2026-03-06 11:00 KST [진행]: 품질게이트 + 격리큐 + 요약 JSON 추가 (`run_phase2_pipeline_draft.mjs`)
+- 2026-03-06 11:03 KST [검증]: 게이트 실패조건 주입 시 `exit code 1` 확인
+- 2026-03-06 11:05 KST [자동화]: 일일 cron 워크플로우 추가 (`.github/workflows/phase2-pipeline-daily.yml`)

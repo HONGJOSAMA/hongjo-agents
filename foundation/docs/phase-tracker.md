@@ -49,3 +49,7 @@
 - 2026-03-06: 정규화 샘플 생성 (`foundation/data/normalized/phase2-normalized-sample.jsonl`)
 - 2026-03-06: 품질 리포트 자동생성 (`foundation/evaluation/metrics/data_quality_report.md`)
 - 2026-03-06: 품질지표 확인 (raw 25/20/20, normalized 65, ingest 100%, missing 0%, duplicate 0%)
+- 2026-03-06: 품질 요약 JSON 추가 (`foundation/evaluation/metrics/data_quality_summary.json`)
+- 2026-03-06: 격리 큐 추가 (`foundation/data/quarantine/phase2-quarantine-latest.jsonl`)
+- 2026-03-06: 품질게이트 실패 시 `exit code 1` 동작 검증
+- 2026-03-06: 일일 자동실행 워크플로우 추가 (`.github/workflows/phase2-pipeline-daily.yml`)
