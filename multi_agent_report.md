@@ -469,3 +469,27 @@
 ### 판단 근거
 - meta-agent는 지금 단계에서 정교한 모델보다 “역할 분리된 출력 계약”이 우선이다.
 - 3종 실행기를 먼저 고정하면 나중에 모델 교체가 들어와도 상위 파이프라인은 그대로 유지할 수 있다.
+
+---
+
+## 20단계. Phase 5 evidence pack 초안 착수
+
+### 발견한 점
+- Phase 4까지는 예측/보정/메타 결과가 각각 분리되어 있었고, 운영자가 한 번에 읽을 Evidence Pack이 아직 없었다.
+- `specialforce` prediction summary API 명세도 실제 응답을 만들 read model이 필요했다.
+
+### 수정 사항
+- 파일: `foundation/evidence/evidence_pack_contract_v1.json`
+  - Evidence Pack 공통 계약 정의
+- 파일: `foundation/evidence/build_evidence_pack_v1.mjs`
+  - orchestrator/calibration/meta-agent 결과를 단일 pack으로 통합
+- 파일: `foundation/evidence/build_prediction_summary_view_v1.mjs`
+  - API 응답에 바로 쓰일 summary view 생성
+- 파일: `.github/workflows/phase5-evidence-pack-smoke.yml`
+  - upstream orchestration 결과 생성 후 evidence pack smoke 실행
+- 파일: `foundation/docs/phase-reports/phase-05-report.md`
+  - Phase 5 진행 리포트 신규 추가
+
+### 판단 근거
+- Evidence Pack은 단순 문서가 아니라, 운영자가 최종 판단에 쓰는 읽기 모델이어야 한다.
+- summary API와 evidence pack을 같은 소스에서 만들면 UI/API/평가 간 드리프트가 줄어든다.

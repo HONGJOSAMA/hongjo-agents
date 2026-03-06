@@ -4,7 +4,7 @@
 - Context: foundation/data/specialforce/specialforce-context-sample.json
 - Adapted Normalized: foundation/data/normalized/phase3-specialforce-adapter.jsonl
 - Output Dir: foundation/evaluation/agents/specialforce_context
-- Evaluated At: 2026-03-06T05:31:53.840Z
+- Evaluated At: 2026-03-06T05:42:08.519Z
 
 ## Results
 - macroeconomy: pass (foundation/evaluation/agents/specialforce_context/macroeconomy-agent-output.json)

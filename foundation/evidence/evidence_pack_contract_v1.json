@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "phase5-evidence-pack/v1",
+  "requiredTopLevel": [
+    "schemaVersion",
+    "organizationId",
+    "context",
+    "summary",
+    "items",
+    "dissentHighlights"
+  ],
+  "requiredContextFields": [
+    "trainingSessionId",
+    "aarReportId",
+    "selectedPolicyRule"
+  ],
+  "requiredSummaryFields": [
+    "finalProbability",
+    "finalConfidence",
+    "calibratedProbability",
+    "riskLevel"
+  ],
+  "requiredItemFields": [
+    "domainKey",
+    "evidenceId",
+    "sourceTitle",
+    "trustScore",
+    "excerpt",
+    "citationLabel"
+  ],
+  "requiredDissentFields": [
+    "domainKey",
+    "reason",
+    "severity"
+  ]
+}

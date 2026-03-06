@@ -1,168 +1,126 @@
 {
-  "schemaVersion": "phase4-orchestrator-input/v1",
+  "schemaVersion": "phase5-evidence-pack/v1",
   "organizationId": "org-demo-001",
   "context": {
     "trainingSessionId": "session-01",
     "aarReportId": "aar-01",
-    "actionItemIds": [
-      "action-001",
-      "action-002",
-      "action-003",
-      "action-004",
-      "action-005"
-    ],
-    "sourceContext": "foundation/data/specialforce/specialforce-context-sample.json"
-  },
-  "aggregate": {
-    "domainCount": 5,
-    "averageProbability": 0.72,
-    "maxRiskLevel": "high",
     "selectedPolicyRule": "minimax_regret"
   },
-  "domainRuns": [
-    {
-      "domainKey": "cyber_information",
-      "agentId": "cyber-information-agent-v1",
-      "probability": 0.72,
-      "confidence": 0.72,
-      "riskLevel": "high",
-      "evidenceCount": 3,
-      "outputPath": "foundation/evaluation/agents/specialforce_context/cyber_information-agent-output.json"
-    },
-    {
-      "domainKey": "geopolitics_security",
-      "agentId": "geopolitics-security-agent-v1",
-      "probability": 0.72,
-      "confidence": 0.72,
-      "riskLevel": "high",
-      "evidenceCount": 3,
-      "outputPath": "foundation/evaluation/agents/specialforce_context/geopolitics_security-agent-output.json"
-    },
-    {
-      "domainKey": "macroeconomy",
-      "agentId": "macroeconomy-agent-v1",
-      "probability": 0.72,
-      "confidence": 0.72,
-      "riskLevel": "high",
-      "evidenceCount": 3,
-      "outputPath": "foundation/evaluation/agents/specialforce_context/macroeconomy-agent-output.json"
-    },
-    {
-      "domainKey": "policy_politics",
-      "agentId": "policy-politics-agent-v1",
-      "probability": 0.72,
-      "confidence": 0.72,
-      "riskLevel": "high",
-      "evidenceCount": 3,
-      "outputPath": "foundation/evaluation/agents/specialforce_context/policy_politics-agent-output.json"
-    },
-    {
-      "domainKey": "supply_chain_trade",
-      "agentId": "supply-chain-trade-agent-v1",
-      "probability": 0.72,
-      "confidence": 0.72,
-      "riskLevel": "high",
-      "evidenceCount": 3,
-      "outputPath": "foundation/evaluation/agents/specialforce_context/supply_chain_trade-agent-output.json"
-    }
-  ],
-  "evidencePack": [
+  "summary": {
+    "finalProbability": 0.72,
+    "finalConfidence": 0.72,
+    "calibratedProbability": 0.687,
+    "riskLevel": "high",
+    "uncertaintySeverity": "medium",
+    "policyActionPriority": "review_now"
+  },
+  "items": [
     {
       "domainKey": "cyber_information",
       "evidenceId": "cyber_information-prediction-1772775728517-evidence-1",
       "sourceTitle": "source-5",
       "trustScore": 0.72,
-      "excerpt": "signal-25"
+      "excerpt": "signal-25",
+      "citationLabel": "E01"
     },
     {
       "domainKey": "cyber_information",
       "evidenceId": "cyber_information-prediction-1772775728517-evidence-2",
       "sourceTitle": "source-5",
       "trustScore": 0.72,
-      "excerpt": "signal-15"
+      "excerpt": "signal-15",
+      "citationLabel": "E02"
     },
     {
       "domainKey": "geopolitics_security",
       "evidenceId": "geopolitics_security-prediction-1772775728424-evidence-1",
       "sourceTitle": "source-3",
       "trustScore": 0.72,
-      "excerpt": "signal-23"
+      "excerpt": "signal-23",
+      "citationLabel": "E03"
     },
     {
       "domainKey": "geopolitics_security",
       "evidenceId": "geopolitics_security-prediction-1772775728424-evidence-2",
       "sourceTitle": "source-3",
       "trustScore": 0.72,
-      "excerpt": "signal-18"
+      "excerpt": "signal-18",
+      "citationLabel": "E04"
     },
     {
       "domainKey": "macroeconomy",
       "evidenceId": "macroeconomy-prediction-1772775728333-evidence-1",
       "sourceTitle": "source-1",
       "trustScore": 0.72,
-      "excerpt": "signal-21"
+      "excerpt": "signal-21",
+      "citationLabel": "E05"
     },
     {
       "domainKey": "macroeconomy",
       "evidenceId": "macroeconomy-prediction-1772775728333-evidence-2",
       "sourceTitle": "source-1",
       "trustScore": 0.72,
-      "excerpt": "signal-11"
+      "excerpt": "signal-11",
+      "citationLabel": "E06"
     },
     {
       "domainKey": "policy_politics",
       "evidenceId": "policy_politics-prediction-1772775728377-evidence-1",
       "sourceTitle": "source-2",
       "trustScore": 0.72,
-      "excerpt": "signal-22"
+      "excerpt": "signal-22",
+      "citationLabel": "E07"
     },
     {
       "domainKey": "policy_politics",
       "evidenceId": "policy_politics-prediction-1772775728377-evidence-2",
       "sourceTitle": "source-2",
       "trustScore": 0.72,
-      "excerpt": "signal-12"
+      "excerpt": "signal-12",
+      "citationLabel": "E08"
     },
     {
       "domainKey": "supply_chain_trade",
       "evidenceId": "supply_chain_trade-prediction-1772775728471-evidence-1",
       "sourceTitle": "source-4",
       "trustScore": 0.72,
-      "excerpt": "signal-24"
+      "excerpt": "signal-24",
+      "citationLabel": "E09"
     },
     {
       "domainKey": "supply_chain_trade",
       "evidenceId": "supply_chain_trade-prediction-1772775728471-evidence-2",
       "sourceTitle": "source-4",
       "trustScore": 0.72,
-      "excerpt": "signal-19"
+      "excerpt": "signal-19",
+      "citationLabel": "E10"
     }
   ],
-  "dissentLog": [
+  "dissentHighlights": [
     {
       "domainKey": "cyber_information",
       "reason": "high-risk but sub-critical confidence",
-      "probability": 0.72
+      "severity": "low"
     },
     {
       "domainKey": "geopolitics_security",
       "reason": "high-risk but sub-critical confidence",
-      "probability": 0.72
+      "severity": "low"
     },
     {
       "domainKey": "macroeconomy",
       "reason": "high-risk but sub-critical confidence",
-      "probability": 0.72
+      "severity": "low"
     },
     {
       "domainKey": "policy_politics",
       "reason": "high-risk but sub-critical confidence",
-      "probability": 0.72
+      "severity": "low"
     },
     {
       "domainKey": "supply_chain_trade",
       "reason": "high-risk but sub-critical confidence",
-      "probability": 0.72
+      "severity": "low"
     }
   ]
 }
