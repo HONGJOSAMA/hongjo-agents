@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 const SAMPLE_INPUT = "foundation/tests/schema-validation/phase1-sample-100.jsonl";
+const DEFAULT_MAPPING_FILE = "foundation/ops/pipelines/connectors/connector-mapping.json";
 
 export function getDefaultOrganizationId() {
   return process.env.PIPELINE_ORGANIZATION_ID || "org-demo-001";
@@ -71,5 +72,30 @@ export function scanFilesRecursively(baseDir, allowedExtensions) {
   }
 
   return entries.sort();
+}
+
+export function loadConnectorMapping() {
+  const mappingPath = path.resolve(
+    process.cwd(),
+    process.env.CONNECTOR_MAPPING_FILE || DEFAULT_MAPPING_FILE,
+  );
+  if (!fs.existsSync(mappingPath)) {
+    return {};
+  }
+  return JSON.parse(fs.readFileSync(mappingPath, "utf8"));
+}
+
+export function pickField(obj, candidates, fallback = undefined) {
+  const keys = Array.isArray(candidates) ? candidates : [candidates];
+  for (const key of keys) {
+    if (!key) {
+      continue;
+    }
+    const value = obj?.[key];
+    if (value !== undefined && value !== null && value !== "") {
+      return value;
+    }
+  }
+  return fallback;
 }
 

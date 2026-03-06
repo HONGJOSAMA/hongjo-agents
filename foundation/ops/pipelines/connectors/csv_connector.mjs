@@ -1,8 +1,19 @@
 import fs from "node:fs";
 import path from "node:path";
-import { getDefaultDomainKey, getDefaultOrganizationId, loadSampleByEntity, scanFilesRecursively, toIsoTime, toNumberOrNull } from "./common.mjs";
+import {
+  getDefaultDomainKey,
+  getDefaultOrganizationId,
+  loadConnectorMapping,
+  loadSampleByEntity,
+  pickField,
+  scanFilesRecursively,
+  toIsoTime,
+  toNumberOrNull,
+} from "./common.mjs";
 
 const DEFAULT_CSV_DIR = "foundation/data/input/csv";
+const mapping = loadConnectorMapping();
+const csvFields = mapping?.csv?.fields || {};
 
 function parseCsvLine(line) {
   const out = [];
@@ -29,23 +40,23 @@ function parseCsvLine(line) {
 }
 
 function csvRowToPrediction(row, index) {
-  const organizationId = row.organizationId || getDefaultOrganizationId();
-  const domainKey = row.domainKey || getDefaultDomainKey();
+  const organizationId = pickField(row, csvFields.organizationId, getDefaultOrganizationId());
+  const domainKey = pickField(row, csvFields.domainKey, getDefaultDomainKey());
 
   return {
     connector: "csv",
     entityType: "Prediction",
-    id: row.id || `csv-pred-${String(index + 1).padStart(4, "0")}`,
+    id: pickField(row, csvFields.id, `csv-pred-${String(index + 1).padStart(4, "0")}`),
     organizationId,
-    runKey: row.runKey || `csv-run-${String(index + 1).padStart(4, "0")}`,
+    runKey: pickField(row, csvFields.runKey, `csv-run-${String(index + 1).padStart(4, "0")}`),
     domainKey,
-    horizonValue: Number(row.horizonValue || 7),
-    horizonUnit: row.horizonUnit || "DAY",
-    probability: toNumberOrNull(row.probability, 0.5),
-    modelVersion: row.modelVersion || "v1.0.0",
-    promptHash: row.promptHash || `csv-hash-${String(index + 1).padStart(4, "0")}`,
-    createdAt: toIsoTime(row.createdAt || row.observedAt),
-    confidence: toNumberOrNull(row.confidence, 0.7),
+    horizonValue: Number(pickField(row, csvFields.horizonValue, 7)),
+    horizonUnit: pickField(row, csvFields.horizonUnit, "DAY"),
+    probability: toNumberOrNull(pickField(row, csvFields.probability, 0.5), 0.5),
+    modelVersion: pickField(row, csvFields.modelVersion, "v1.0.0"),
+    promptHash: pickField(row, csvFields.promptHash, `csv-hash-${String(index + 1).padStart(4, "0")}`),
+    createdAt: toIsoTime(pickField(row, csvFields.createdAt, row.observedAt)),
+    confidence: toNumberOrNull(pickField(row, csvFields.confidence, 0.7), 0.7),
   };
 }
 

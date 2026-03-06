@@ -20,6 +20,8 @@ jobs:
       API_TOKEN: ${{ secrets.API_TOKEN }}
       DOC_INPUT_DIR: ${{ vars.DOC_INPUT_DIR || 'foundation/data/input/documents' }}
       CSV_INPUT_DIR: ${{ vars.CSV_INPUT_DIR || 'foundation/data/input/csv' }}
+      CONNECTOR_MAPPING_FILE: "foundation/ops/pipelines/connectors/connector-mapping.json"
+      PIPELINE_ALERT_WEBHOOK: ${{ secrets.PIPELINE_ALERT_WEBHOOK }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -35,6 +37,17 @@ jobs:
       - name: Run phase2 pipeline draft
         run: node foundation/ops/pipelines/run_phase2_pipeline_draft.mjs
 
+      - name: Replay quarantined rows
+        if: always()
+        continue-on-error: true
+        run: node foundation/ops/pipelines/replay_quarantine.mjs
+
+      - name: Notify on quality gate failure
+        if: ${{ failure() && env.PIPELINE_ALERT_WEBHOOK != '' }}
+        run: |
+          node -e 'const fs=require("fs");let s={};try{s=JSON.parse(fs.readFileSync("foundation/evaluation/metrics/data_quality_summary.json","utf8"));}catch{};const txt=`[phase2-pipeline-daily] quality gate failed\nrun=${s.runId||"n/a"} ingest=${s.ingestSuccessRate??"n/a"}% missing=${s.missingRate??"n/a"}% duplicate=${s.duplicateRate??"n/a"}%`;console.log(txt);fs.writeFileSync("/tmp/p2-alert.json",JSON.stringify({text:txt}));'
+          curl -sS -X POST -H "Content-Type: application/json" --data @/tmp/p2-alert.json "$PIPELINE_ALERT_WEBHOOK"
+
       - name: Upload pipeline artifacts
         if: always()
         uses: actions/upload-artifact@v4
@@ -46,5 +59,7 @@ jobs:
             foundation/data/raw/csv/phase2-csv-sample.jsonl
             foundation/data/normalized/phase2-normalized-sample.jsonl
             foundation/data/quarantine/phase2-quarantine-latest.jsonl
+            foundation/data/quarantine/phase2-replay-output.jsonl
             foundation/evaluation/metrics/data_quality_report.md
             foundation/evaluation/metrics/data_quality_summary.json
+            foundation/evaluation/metrics/quarantine-replay-report.md

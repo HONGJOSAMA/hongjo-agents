@@ -3,12 +3,16 @@ import path from "node:path";
 import {
   getDefaultDomainKey,
   getDefaultOrganizationId,
+  loadConnectorMapping,
   loadSampleByEntity,
+  pickField,
   scanFilesRecursively,
   toIsoTime,
 } from "./common.mjs";
 
 const DEFAULT_DOC_DIR = "foundation/data/input/documents";
+const mapping = loadConnectorMapping();
+const docFields = mapping?.document?.fields || {};
 
 function fileToHypothesis(filePath, index) {
   const stat = fs.statSync(filePath);
@@ -32,13 +36,17 @@ function jsonToHypothesis(obj, index) {
   return {
     connector: "document",
     entityType: "Hypothesis",
-    id: obj.id || `doc-json-hyp-${String(index + 1).padStart(4, "0")}`,
-    organizationId: obj.organizationId || getDefaultOrganizationId(),
-    domainKey: obj.domainKey || getDefaultDomainKey(),
-    claim: obj.claim || obj.text || `document-json-claim-${index + 1}`,
-    assumptions: Array.isArray(obj.assumptions) ? obj.assumptions : ["document-json-source"],
-    createdAt: toIsoTime(obj.createdAt || obj.observedAt),
-    confidence: typeof obj.confidence === "number" ? obj.confidence : 0.65,
+    id: pickField(obj, docFields.id, `doc-json-hyp-${String(index + 1).padStart(4, "0")}`),
+    organizationId: pickField(obj, docFields.organizationId, getDefaultOrganizationId()),
+    domainKey: pickField(obj, docFields.domainKey, getDefaultDomainKey()),
+    claim: pickField(obj, docFields.claim, `document-json-claim-${index + 1}`),
+    assumptions: Array.isArray(pickField(obj, docFields.assumptions, null))
+      ? pickField(obj, docFields.assumptions, null)
+      : ["document-json-source"],
+    createdAt: toIsoTime(pickField(obj, docFields.createdAt, undefined)),
+    confidence: typeof pickField(obj, docFields.confidence, null) === "number"
+      ? pickField(obj, docFields.confidence, null)
+      : 0.65,
   };
 }
 

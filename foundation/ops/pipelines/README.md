@@ -13,6 +13,7 @@ node foundation/ops/pipelines/check_phase2_env.mjs
 PIPELINE_MODE=live node foundation/ops/pipelines/check_phase2_env.mjs
 
 node foundation/ops/pipelines/run_phase2_pipeline_draft.mjs
+node foundation/ops/pipelines/replay_quarantine.mjs
 ```
 
 품질 게이트 임계치(환경변수):
@@ -41,6 +42,7 @@ node foundation/ops/pipelines/run_phase2_pipeline_draft.mjs
 동작 방식:
 - 실데이터 입력 경로/API 응답이 있으면 실데이터 우선 사용
 - 입력이 비어 있으면 샘플 데이터로 폴백하여 파이프라인을 지속 실행
+- 공급자별 필드 차이는 `connectors/connector-mapping.json`으로 매핑
 
 ## 산출물
 - `foundation/data/raw/api/phase2-api-sample.jsonl`
@@ -48,8 +50,10 @@ node foundation/ops/pipelines/run_phase2_pipeline_draft.mjs
 - `foundation/data/raw/csv/phase2-csv-sample.jsonl`
 - `foundation/data/normalized/phase2-normalized-sample.jsonl`
 - `foundation/data/quarantine/phase2-quarantine-latest.jsonl`
+- `foundation/data/quarantine/phase2-replay-output.jsonl`
 - `foundation/evaluation/metrics/data_quality_report.md`
 - `foundation/evaluation/metrics/data_quality_summary.json`
+- `foundation/evaluation/metrics/quarantine-replay-report.md`
 
 ## 자동화
 - GitHub Actions: `.github/workflows/phase2-pipeline-daily.yml`

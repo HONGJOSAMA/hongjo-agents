@@ -74,6 +74,7 @@ function buildQualityReport(records) {
         id: row.raw?.id ?? null,
         entityType: row.entityType,
         organizationId: row.organizationId,
+        raw: row.raw ?? null,
       });
     }
 
@@ -87,6 +88,7 @@ function buildQualityReport(records) {
           id,
           entityType: row.entityType,
           organizationId: row.organizationId,
+          raw: row.raw ?? null,
         });
       }
       idSeen.add(id);

@@ -1,24 +1,35 @@
-import { getDefaultDomainKey, getDefaultOrganizationId, loadSampleByEntity, toIsoTime, toNumberOrNull } from "./common.mjs";
+import {
+  getDefaultDomainKey,
+  getDefaultOrganizationId,
+  loadConnectorMapping,
+  loadSampleByEntity,
+  pickField,
+  toIsoTime,
+  toNumberOrNull,
+} from "./common.mjs";
+
+const mapping = loadConnectorMapping();
+const apiFields = mapping?.api?.fields || {};
 
 function toObservationRecord(row, index) {
-  const organizationId = row.organizationId || getDefaultOrganizationId();
-  const domainKey = row.domainKey || getDefaultDomainKey();
-  const id = row.id || `api-obs-${String(index + 1).padStart(4, "0")}`;
+  const organizationId = pickField(row, apiFields.organizationId, getDefaultOrganizationId());
+  const domainKey = pickField(row, apiFields.domainKey, getDefaultDomainKey());
+  const id = pickField(row, apiFields.id, `api-obs-${String(index + 1).padStart(4, "0")}`);
 
   return {
     connector: "api",
     entityType: "Observation",
     id,
     organizationId,
-    sourceType: row.sourceType || "api",
-    sourceKey: row.sourceKey || "external_api",
-    observedAt: toIsoTime(row.observedAt || row.createdAt || row.timestamp),
+    sourceType: pickField(row, apiFields.sourceType, "api"),
+    sourceKey: pickField(row, apiFields.sourceKey, "external_api"),
+    observedAt: toIsoTime(pickField(row, apiFields.observedAt, undefined)),
     domainKey,
-    signalType: row.signalType || row.metric || "api_signal",
-    signalValue: row.signalValue ?? row.value ?? row.payload ?? "",
-    confidence: toNumberOrNull(row.confidence, 0.7),
+    signalType: pickField(row, apiFields.signalType, "api_signal"),
+    signalValue: pickField(row, apiFields.signalValue, ""),
+    confidence: toNumberOrNull(pickField(row, apiFields.confidence, 0.7), 0.7),
     tags: Array.isArray(row.tags) ? row.tags : ["api-ingest"],
-    piiFlag: Boolean(row.piiFlag),
+    piiFlag: Boolean(pickField(row, apiFields.piiFlag, false)),
   };
 }
 
