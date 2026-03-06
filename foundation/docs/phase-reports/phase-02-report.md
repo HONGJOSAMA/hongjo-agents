@@ -50,6 +50,9 @@
 - 운영 런북 문서화
   - `foundation/docs/runbooks/phase2-quarantine-replay-runbook.md`
   - `foundation/docs/runbooks/phase2-live-shadow-cutover-checklist.md`
+- PR 자동머지 워크플로우 추가 및 머지 완료
+  - `.github/workflows/pr-auto-merge.yml`
+  - PR #8 merge 완료 (`ef78027`)
 
 ## 검증 결과
 - pipeline draft 실행 성공
@@ -70,6 +73,12 @@
   - replay 0건 기준 reinject 0건, duplicate skip 동작 확인
 - sample readiness 스크립트 검증
   - 연속 성공 streak 계산 및 readiness 리포트 출력 확인
+- `specialforce_v1` 매핑 프로필 검증
+  - `CONNECTOR_MAPPING_PROFILE=specialforce_v1` 실행 기준 quality gate pass(ingest 100%, missing 0%, duplicate 0%)
+- 최신 점검 반영
+  - 품질검사: schema validate 100/100, pipeline quality gate pass
+  - 오류처리: 게이트 실패 시 `exit code 1`, quarantine replay/reinject 경로 유지
+  - 보안: 하드코딩 secret/token 패턴 미검출, same-repo PR만 auto-merge 대상
 
 ## 리스크/이슈
 - API 응답 스키마가 공급자별로 다를 수 있어 field mapping 표준화 추가 필요
@@ -78,7 +87,7 @@
 ## 다음 작업
 - 웹훅 알림 채널 운영(실제 secret 등록 및 수신 검증)
 - sample mode 3회 연속 성공 달성 후 readiness `ready=true` 확인
-- specialforce 실제 응답 샘플로 `specialforce_v1` profile 검증
+- specialforce 실제 응답 샘플로 `specialforce_v1` profile 검증 범위를 실데이터 shadow 모드까지 확장
 
 ## 실데이터 착수 기준(고정)
 아래 4개 준비조건 충족 즉시 실데이터 shadow mode를 시작한다.

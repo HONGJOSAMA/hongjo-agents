@@ -134,3 +134,33 @@
 - 사용자 요구인 “plan 기반 모니터링”을 충족하려면 작업 결과(코드/문서/검증)가 동기화되어야 한다.
 - 온톨로지는 향후 도메인 에이전트/오케스트레이터의 공통 계약이므로 경로 단일화가 필수다.
 - 초기 cross-impact graph는 휴리스틱 값으로 시작하고, 이후 실측 데이터로 재보정하는 방식이 현실적이다.
+
+---
+
+## 6단계. Phase 2 자동머지/검증 안정화
+
+### 발견한 점
+- PR 자동머지 워크플로우가 체크 진행 중(`unstable status`) 타이밍에서 실패할 수 있었다.
+- 사용자 요청 기준으로 품질/오류처리/보안 상태를 plan/report에 최신화할 필요가 있었다.
+
+### 수정 사항
+- 파일: `.github/workflows/pr-auto-merge.yml`
+  - `check_suite.completed` 이벤트 추가
+  - unstable status를 경고로 처리하고 후속 이벤트에서 재시도하도록 보강
+  - same-repo PR만 자동머지 대상으로 제한 유지
+- 파일: `multi_agent_plan.md`
+  - PR #8 머지 완료, 품질/오류처리/보안 최신 점검, `specialforce_v1` 검증 착수 로그 반영
+- 파일: `foundation/docs/phase-tracker.md`
+  - PR #8 반영 완료 및 최신 검증/보안 점검 증거 반영
+- 파일: `foundation/docs/phase-reports/phase-02-report.md`
+  - 자동머지 본선 반영, `specialforce_v1` 검증 pass, 최신 점검결과 반영
+
+### 검증 결과
+- `CONNECTOR_MAPPING_PROFILE=specialforce_v1 node foundation/ops/pipelines/run_phase2_pipeline_draft.mjs`
+  - ingest 100%, missing 0%, duplicate 0%, quality gate pass
+- schema validation
+  - valid 100/100, error_count 0
+
+### 판단 근거
+- 보호 브랜치 정책(PR 경유 머지 + required check)과 자동화의 충돌을 줄이려면 체크 완료 이벤트 기반 재시도가 필요하다.
+- 실데이터 전환 전 단계에서는 문서/증거 동기화가 운영 안정성(재현성, 추적성)의 핵심이다.

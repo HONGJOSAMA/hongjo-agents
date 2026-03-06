@@ -788,3 +788,8 @@ hongjo/
 - 2026-03-06 12:48 KST [진행]: connector mapping profile 분리(`default`, `specialforce_v1`) 및 env 선택 지원
 - 2026-03-06 12:52 KST [진행]: replay 결과 normalized 재투입 스크립트/워크플로우 경로 추가
 - 2026-03-06 13:10 KST [자동화]: `main` 대상 PR 자동머지 워크플로우 추가 (`.github/workflows/pr-auto-merge.yml`, same-repo PR 한정)
+- 2026-03-06 13:18 KST [완료]: PR #8 머지 및 브랜치 정리 완료(자동머지 워크플로우 본선 반영)
+- 2026-03-06 13:22 KST [품질]: schema validate 100/100, phase2 quality gate pass 재확인
+- 2026-03-06 13:24 KST [오류처리]: unstable-status 에러를 경고+재시도(`check_suite.completed`)로 처리 반영
+- 2026-03-06 13:28 KST [보안]: same-repo PR 한정 자동머지 유지, 토큰/시크릿 하드코딩 패턴 미검출 재확인
+- 2026-03-06 13:32 KST [착수]: `CONNECTOR_MAPPING_PROFILE=specialforce_v1` 검증 실행, quality gate pass 확인
