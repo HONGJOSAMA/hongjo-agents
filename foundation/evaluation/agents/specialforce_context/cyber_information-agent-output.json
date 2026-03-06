@@ -4,7 +4,7 @@
   "agentId": "cyber-information-agent-v1",
   "domainKey": "cyber_information",
   "displayName": "Cyber & Information Agent",
-  "generatedAt": "2026-03-06T05:26:33.280Z",
+  "generatedAt": "2026-03-06T05:31:53.838Z",
   "status": "ok",
   "input": {
     "normalizedSource": "foundation/data/normalized/phase3-specialforce-adapter.jsonl",
@@ -54,7 +54,7 @@
     "return at least 3 evidence records"
   ],
   "hypothesis": {
-    "id": "cyber_information-hypothesis-1772774793279",
+    "id": "cyber_information-hypothesis-1772775113837",
     "organizationId": "org-demo-001",
     "domainKey": "cyber_information",
     "claim": "Cyber and information-domain signals suggest short-horizon signal integrity risk.",
@@ -63,7 +63,7 @@
       "sample ingestion quality stays above threshold",
       "no contradictory high-trust signal dominates the domain stream"
     ],
-    "createdAt": "2026-03-06T05:26:33.279Z",
+    "createdAt": "2026-03-06T05:31:53.837Z",
     "confidence": 0.72,
     "linkedObservationIds": [
       "obs-025",
@@ -72,10 +72,10 @@
     ]
   },
   "prediction": {
-    "id": "cyber_information-prediction-1772774793280",
+    "id": "cyber_information-prediction-1772775113837",
     "organizationId": "org-demo-001",
     "domainKey": "cyber_information",
-    "runKey": "cyber_information-run-1772774793280",
+    "runKey": "cyber_information-run-1772775113837",
     "horizonValue": 7,
     "horizonUnit": "day",
     "probability": 0.72,
@@ -83,41 +83,41 @@
     "modelVersion": "phase3-domain-v1",
     "promptHash": "cyber-information-phase3-v1",
     "riskLevel": "high",
-    "createdAt": "2026-03-06T05:26:33.280Z"
+    "createdAt": "2026-03-06T05:31:53.838Z"
   },
   "evidence": [
     {
-      "id": "cyber_information-prediction-1772774793280-evidence-1",
+      "id": "cyber_information-prediction-1772775113837-evidence-1",
       "organizationId": "org-demo-001",
-      "predictionId": "cyber_information-prediction-1772774793280",
+      "predictionId": "cyber_information-prediction-1772775113837",
       "sourceUrl": "urn:observation:obs-025",
       "sourceTitle": "source-5",
       "trustScore": 0.72,
       "freshness": "fresh",
       "excerpt": "signal-25",
-      "createdAt": "2026-03-06T05:26:33.280Z"
+      "createdAt": "2026-03-06T05:31:53.838Z"
     },
     {
-      "id": "cyber_information-prediction-1772774793280-evidence-2",
+      "id": "cyber_information-prediction-1772775113837-evidence-2",
       "organizationId": "org-demo-001",
-      "predictionId": "cyber_information-prediction-1772774793280",
+      "predictionId": "cyber_information-prediction-1772775113837",
       "sourceUrl": "urn:observation:obs-015",
       "sourceTitle": "source-5",
       "trustScore": 0.72,
       "freshness": "fresh",
       "excerpt": "signal-15",
-      "createdAt": "2026-03-06T05:26:33.280Z"
+      "createdAt": "2026-03-06T05:31:53.838Z"
     },
     {
-      "id": "cyber_information-prediction-1772774793280-evidence-3",
+      "id": "cyber_information-prediction-1772775113837-evidence-3",
       "organizationId": "org-demo-001",
-      "predictionId": "cyber_information-prediction-1772774793280",
+      "predictionId": "cyber_information-prediction-1772775113837",
       "sourceUrl": "urn:observation:obs-005",
       "sourceTitle": "source-5",
       "trustScore": 0.72,
       "freshness": "fresh",
       "excerpt": "signal-5",
-      "createdAt": "2026-03-06T05:26:33.280Z"
+      "createdAt": "2026-03-06T05:31:53.838Z"
     }
   ]
 }

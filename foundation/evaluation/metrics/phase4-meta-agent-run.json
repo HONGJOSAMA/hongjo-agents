@@ -1,0 +1,11 @@
+{
+  "pass": true,
+  "schemaVersion": "phase4-meta-agent-output/v1",
+  "evaluatedAt": "2026-03-06T05:31:54.059Z",
+  "outputs": {
+    "uncertaintySeverity": "medium",
+    "adversarialTargetDomain": "cyber_information",
+    "policyActionPriority": "review_now"
+  },
+  "failures": []
+}

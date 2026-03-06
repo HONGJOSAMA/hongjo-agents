@@ -445,3 +445,27 @@
 ### 판단 근거
 - calibration은 지금 단계에서 고급 모델보다 “계약과 지표가 고정되는 것”이 더 중요하다.
 - API 명세와 meta-agent 입력을 먼저 고정해 두면, 이후 실행체를 추가할 때 프런트/백/평가가 같은 계약을 보게 된다.
+
+---
+
+## 19단계. meta-agent 3종 실행기 추가
+
+### 발견한 점
+- meta-agent 입력 계약만으로는 운영 행동이 정의되지 않는다.
+- 특히 `Uncertainty`, `Adversarial`, `Policy`는 각기 다른 출력 형태가 필요해서, 최소 실행기를 먼저 고정해야 다음 Phase 5/7과 연결이 단순해진다.
+
+### 수정 사항
+- 파일: `foundation/orchestrator/meta_agents/uncertainty_agent_v1.mjs`
+  - ECE/confidence/dissent count 기반 불확실성 점수 계산
+- 파일: `foundation/orchestrator/meta_agents/adversarial_agent_v1.mjs`
+  - 최고 리스크 도메인에 대한 challenge score 및 추천 생성
+- 파일: `foundation/orchestrator/meta_agents/policy_agent_v1.mjs`
+  - fallback/actionItem 기반 운영 모드 및 우선순위 결정
+- 파일: `foundation/orchestrator/meta_agents/run_meta_agents_v1.mjs`
+  - 3종 실행 및 output/report 생성
+- 파일: `.github/workflows/phase4-orchestrator-smoke.yml`
+  - meta-agent run 단계와 artifact 업로드 추가
+
+### 판단 근거
+- meta-agent는 지금 단계에서 정교한 모델보다 “역할 분리된 출력 계약”이 우선이다.
+- 3종 실행기를 먼저 고정하면 나중에 모델 교체가 들어와도 상위 파이프라인은 그대로 유지할 수 있다.
