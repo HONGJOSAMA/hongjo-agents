@@ -82,7 +82,12 @@ export function loadConnectorMapping() {
   if (!fs.existsSync(mappingPath)) {
     return {};
   }
-  return JSON.parse(fs.readFileSync(mappingPath, "utf8"));
+  const parsed = JSON.parse(fs.readFileSync(mappingPath, "utf8"));
+  const profile = process.env.CONNECTOR_MAPPING_PROFILE || "default";
+  if (parsed?.profiles && typeof parsed.profiles === "object") {
+    return parsed.profiles[profile] || parsed.profiles.default || {};
+  }
+  return parsed;
 }
 
 export function pickField(obj, candidates, fallback = undefined) {
@@ -98,4 +103,3 @@ export function pickField(obj, candidates, fallback = undefined) {
   }
   return fallback;
 }
-

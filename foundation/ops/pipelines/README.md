@@ -14,6 +14,7 @@ PIPELINE_MODE=live node foundation/ops/pipelines/check_phase2_env.mjs
 
 node foundation/ops/pipelines/run_phase2_pipeline_draft.mjs
 node foundation/ops/pipelines/replay_quarantine.mjs
+node foundation/ops/pipelines/reinject_replay_output.mjs
 node foundation/ops/pipelines/calc_sample_streak.mjs
 ```
 
@@ -25,6 +26,9 @@ node foundation/ops/pipelines/calc_sample_streak.mjs
 실데이터 입력 환경변수:
 - 실행 모드:
   - `PIPELINE_MODE` (`sample` 또는 `live`, 기본 `sample`)
+- 매핑:
+  - `CONNECTOR_MAPPING_FILE` (기본 `foundation/ops/pipelines/connectors/connector-mapping.json`)
+  - `CONNECTOR_MAPPING_PROFILE` (기본 `default`, 예: `specialforce_v1`)
 - 공통:
   - `PIPELINE_ORGANIZATION_ID` (기본 `org-demo-001`)
   - `PIPELINE_DEFAULT_DOMAIN_KEY` (기본 `cyber_information`)
@@ -44,6 +48,7 @@ node foundation/ops/pipelines/calc_sample_streak.mjs
 - 실데이터 입력 경로/API 응답이 있으면 실데이터 우선 사용
 - 입력이 비어 있으면 샘플 데이터로 폴백하여 파이프라인을 지속 실행
 - 공급자별 필드 차이는 `connectors/connector-mapping.json`으로 매핑
+- replay 결과는 `reinject_replay_output.mjs`로 normalized stream에 재투입 가능
 
 ## 산출물
 - `foundation/data/raw/api/phase2-api-sample.jsonl`
@@ -55,6 +60,7 @@ node foundation/ops/pipelines/calc_sample_streak.mjs
 - `foundation/evaluation/metrics/data_quality_report.md`
 - `foundation/evaluation/metrics/data_quality_summary.json`
 - `foundation/evaluation/metrics/quarantine-replay-report.md`
+- `foundation/evaluation/metrics/reinject-replay-report.md`
 - `foundation/evaluation/metrics/sample-mode-readiness.md`
 - `foundation/evaluation/metrics/sample-mode-readiness.json`
 

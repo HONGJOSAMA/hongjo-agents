@@ -60,3 +60,5 @@
 - 2026-03-06: 품질게이트 실패 웹훅 알림 경로 추가 (`PIPELINE_ALERT_WEBHOOK`)
 - 2026-03-06: 샘플모드 연속성 판정 스크립트/워크플로우 추가 (`calc_sample_streak.mjs`, `phase2-sample-readiness.yml`)
 - 2026-03-06: replay/컷오버 런북 문서화 완료 (`docs/runbooks/*`)
+- 2026-03-06: mapping profile 분리(`default`, `specialforce_v1`) 및 profile 선택 env(`CONNECTOR_MAPPING_PROFILE`) 추가
+- 2026-03-06: replay 결과 normalized 재투입 자동경로 추가 (`reinject_replay_output.mjs`)

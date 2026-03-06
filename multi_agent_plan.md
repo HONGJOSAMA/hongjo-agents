@@ -700,6 +700,19 @@ hongjo/
 6. 모델 교체/버전 업/가중치 정책 변경
 - 핵심 모델 변경, calibration 전략 변경, 오케스트레이션 정책 변경
 
+## 10.2 PR Merge 운영 정책
+
+기본:
+- `main` 보호 브랜치 정책을 유지하고 PR 경유 머지를 기본으로 한다.
+
+현재 운영:
+- `validate` required check 통과 전 머지 금지
+- 승인 요구(`Require approvals`)를 켠 경우 수동 머지 필요
+
+운영 최적화 옵션:
+- 승인 요구를 해제하면(체크 통과만 요구) 단일 운영자 환경에서 수동 개입을 줄일 수 있다.
+- GitHub Auto-merge를 활성화하면, 체크 통과 시 자동 머지로 전환할 수 있다.
+
 ## 11. Compliance Gate (출처/권리/보안)
 
 모든 데이터 소스는 아래 4개를 통과해야 ingest 허용:
@@ -772,3 +785,5 @@ hongjo/
 - 2026-03-06 12:25 KST [자동화]: phase2 daily workflow에 품질게이트 실패 웹훅 알림(`PIPELINE_ALERT_WEBHOOK`) 추가
 - 2026-03-06 12:35 KST [자동화]: 샘플모드 연속성 판정 워크플로우/스크립트 추가 (`phase2-sample-readiness.yml`, `calc_sample_streak.mjs`)
 - 2026-03-06 12:38 KST [문서화]: quarantine replay runbook + live shadow cutover checklist 추가
+- 2026-03-06 12:48 KST [진행]: connector mapping profile 분리(`default`, `specialforce_v1`) 및 env 선택 지원
+- 2026-03-06 12:52 KST [진행]: replay 결과 normalized 재투입 스크립트/워크플로우 경로 추가
