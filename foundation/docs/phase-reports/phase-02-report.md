@@ -25,6 +25,12 @@
   - `foundation/data/quarantine/phase2-quarantine-latest.jsonl`
 - 일일 자동 실행 워크플로우 추가
   - `.github/workflows/phase2-pipeline-daily.yml`
+- 커넥터 실입력 모드 전환(환경변수 기반)
+  - `foundation/ops/pipelines/connectors/common.mjs`
+  - `foundation/ops/pipelines/connectors/api_connector.mjs`
+  - `foundation/ops/pipelines/connectors/document_connector.mjs`
+  - `foundation/ops/pipelines/connectors/csv_connector.mjs`
+  - `foundation/ops/pipelines/README.md`
 
 ## 검증 결과
 - pipeline draft 실행 성공
@@ -36,13 +42,16 @@
   - quality gate: pass
 - 게이트 실패 동작 검증
   - `PIPELINE_MIN_INGEST_SUCCESS_RATE=101`로 실행 시 `exit code 1` 확인
+- 실입력 모드 검증
+  - API 실연결 미설정 시 샘플 폴백 동작 확인
+  - 문서/CSV 입력 경로 존재 시 실파일 우선 ingestion 동작 확인
 
 ## 리스크/이슈
-- 현재는 커넥터 3종(API/문서/CSV) 실구현 전 단계
+- API 응답 스키마가 공급자별로 다를 수 있어 field mapping 표준화 추가 필요
 - 외부 알림(Slack/Email/Webhook)은 아직 미연결
 
 ## 다음 작업
-- API/문서/CSV 커넥터를 실데이터 입력으로 교체
+- API 응답 필드 매핑 설정 파일(`connector-mapping.json`) 도입
 - 격리 큐 재처리 경로(replay) 스크립트 추가
 - 품질게이트 실패 시 알림 채널(Webhook) 연결
 

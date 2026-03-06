@@ -144,67 +144,71 @@ function toReportMarkdown(summary) {
 `;
 }
 
-const apiRows = runApiConnector();
-const docRows = runDocumentConnector();
-const csvRows = runCsvConnector();
-const sourceRecords = [...apiRows, ...docRows, ...csvRows];
+async function main() {
+  const apiRows = await runApiConnector();
+  const docRows = runDocumentConnector();
+  const csvRows = runCsvConnector();
+  const sourceRecords = [...apiRows, ...docRows, ...csvRows];
 
-const normalizedRecords = sourceRecords.map(normalizeRecord);
-const summary = buildQualityReport(normalizedRecords);
+  const normalizedRecords = sourceRecords.map(normalizeRecord);
+  const summary = buildQualityReport(normalizedRecords);
 
-fs.mkdirSync(path.dirname(normalizedPath), { recursive: true });
-fs.mkdirSync(path.dirname(rawApiPath), { recursive: true });
-fs.mkdirSync(path.dirname(rawDocPath), { recursive: true });
-fs.mkdirSync(path.dirname(rawCsvPath), { recursive: true });
-fs.mkdirSync(path.dirname(reportPath), { recursive: true });
-fs.mkdirSync(path.dirname(quarantinePath), { recursive: true });
+  fs.mkdirSync(path.dirname(normalizedPath), { recursive: true });
+  fs.mkdirSync(path.dirname(rawApiPath), { recursive: true });
+  fs.mkdirSync(path.dirname(rawDocPath), { recursive: true });
+  fs.mkdirSync(path.dirname(rawCsvPath), { recursive: true });
+  fs.mkdirSync(path.dirname(reportPath), { recursive: true });
+  fs.mkdirSync(path.dirname(quarantinePath), { recursive: true });
 
-fs.writeFileSync(rawApiPath, `${apiRows.map((row) => JSON.stringify(row)).join("\n")}\n`, "utf8");
-fs.writeFileSync(rawDocPath, `${docRows.map((row) => JSON.stringify(row)).join("\n")}\n`, "utf8");
-fs.writeFileSync(rawCsvPath, `${csvRows.map((row) => JSON.stringify(row)).join("\n")}\n`, "utf8");
-const normalizedBody = `${normalizedRecords.map((row) => JSON.stringify(row)).join("\n")}\n`;
-fs.writeFileSync(normalizedPath, normalizedBody, "utf8");
-fs.writeFileSync(reportPath, toReportMarkdown(summary), "utf8");
-const quarantineBody = `${summary.failures.map((row) => JSON.stringify(row)).join("\n")}\n`;
-fs.writeFileSync(quarantinePath, quarantineBody, "utf8");
+  fs.writeFileSync(rawApiPath, `${apiRows.map((row) => JSON.stringify(row)).join("\n")}\n`, "utf8");
+  fs.writeFileSync(rawDocPath, `${docRows.map((row) => JSON.stringify(row)).join("\n")}\n`, "utf8");
+  fs.writeFileSync(rawCsvPath, `${csvRows.map((row) => JSON.stringify(row)).join("\n")}\n`, "utf8");
+  const normalizedBody = `${normalizedRecords.map((row) => JSON.stringify(row)).join("\n")}\n`;
+  fs.writeFileSync(normalizedPath, normalizedBody, "utf8");
+  fs.writeFileSync(reportPath, toReportMarkdown(summary), "utf8");
+  const quarantineBody = `${summary.failures.map((row) => JSON.stringify(row)).join("\n")}\n`;
+  fs.writeFileSync(quarantinePath, quarantineBody, "utf8");
 
-const qualitySummary = {
-  runId: RUN_ID,
-  total: summary.total,
-  ingestSuccessRate: summary.ingestSuccessRate,
-  missingRate: summary.missingRate,
-  duplicateRate: summary.duplicateRate,
-  piiRate: summary.piiRate,
-  quarantineRows: summary.failures.length,
-  thresholds: {
-    minIngestSuccessRate: Number(process.env.PIPELINE_MIN_INGEST_SUCCESS_RATE || 95),
-    maxMissingRate: Number(process.env.PIPELINE_MAX_MISSING_RATE || 5),
-    maxDuplicateRate: Number(process.env.PIPELINE_MAX_DUPLICATE_RATE || 2),
-  },
-};
-fs.writeFileSync(qualitySummaryPath, `${JSON.stringify(qualitySummary, null, 2)}\n`, "utf8");
+  const qualitySummary = {
+    runId: RUN_ID,
+    total: summary.total,
+    ingestSuccessRate: summary.ingestSuccessRate,
+    missingRate: summary.missingRate,
+    duplicateRate: summary.duplicateRate,
+    piiRate: summary.piiRate,
+    quarantineRows: summary.failures.length,
+    thresholds: {
+      minIngestSuccessRate: Number(process.env.PIPELINE_MIN_INGEST_SUCCESS_RATE || 95),
+      maxMissingRate: Number(process.env.PIPELINE_MAX_MISSING_RATE || 5),
+      maxDuplicateRate: Number(process.env.PIPELINE_MAX_DUPLICATE_RATE || 2),
+    },
+  };
+  fs.writeFileSync(qualitySummaryPath, `${JSON.stringify(qualitySummary, null, 2)}\n`, "utf8");
 
-const passIngest =
-  summary.ingestSuccessRate >= Number(process.env.PIPELINE_MIN_INGEST_SUCCESS_RATE || 95);
-const passMissing =
-  summary.missingRate <= Number(process.env.PIPELINE_MAX_MISSING_RATE || 5);
-const passDuplicate =
-  summary.duplicateRate <= Number(process.env.PIPELINE_MAX_DUPLICATE_RATE || 2);
-const qualityGatePassed = passIngest && passMissing && passDuplicate;
+  const passIngest =
+    summary.ingestSuccessRate >= Number(process.env.PIPELINE_MIN_INGEST_SUCCESS_RATE || 95);
+  const passMissing =
+    summary.missingRate <= Number(process.env.PIPELINE_MAX_MISSING_RATE || 5);
+  const passDuplicate =
+    summary.duplicateRate <= Number(process.env.PIPELINE_MAX_DUPLICATE_RATE || 2);
+  const qualityGatePassed = passIngest && passMissing && passDuplicate;
 
-console.log(`normalized_records=${normalizedRecords.length}`);
-console.log(`raw_api_records=${apiRows.length}`);
-console.log(`raw_document_records=${docRows.length}`);
-console.log(`raw_csv_records=${csvRows.length}`);
-console.log(`ingest_success_rate=${summary.ingestSuccessRate}%`);
-console.log(`missing_rate=${summary.missingRate}%`);
-console.log(`duplicate_rate=${summary.duplicateRate}%`);
-console.log(`quarantine_rows=${summary.failures.length}`);
-console.log(`quality_gate_passed=${qualityGatePassed}`);
-console.log(`quarantine=foundation/data/quarantine/phase2-quarantine-latest.jsonl`);
-console.log(`summary=foundation/evaluation/metrics/data_quality_summary.json`);
-console.log(`report=foundation/evaluation/metrics/data_quality_report.md`);
+  console.log(`normalized_records=${normalizedRecords.length}`);
+  console.log(`raw_api_records=${apiRows.length}`);
+  console.log(`raw_document_records=${docRows.length}`);
+  console.log(`raw_csv_records=${csvRows.length}`);
+  console.log(`ingest_success_rate=${summary.ingestSuccessRate}%`);
+  console.log(`missing_rate=${summary.missingRate}%`);
+  console.log(`duplicate_rate=${summary.duplicateRate}%`);
+  console.log(`quarantine_rows=${summary.failures.length}`);
+  console.log(`quality_gate_passed=${qualityGatePassed}`);
+  console.log(`quarantine=foundation/data/quarantine/phase2-quarantine-latest.jsonl`);
+  console.log(`summary=foundation/evaluation/metrics/data_quality_summary.json`);
+  console.log(`report=foundation/evaluation/metrics/data_quality_report.md`);
 
-if (!qualityGatePassed) {
-  process.exitCode = 1;
+  if (!qualityGatePassed) {
+    process.exitCode = 1;
+  }
 }
+
+await main();
