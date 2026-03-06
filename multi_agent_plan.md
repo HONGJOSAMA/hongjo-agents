@@ -794,3 +794,5 @@ hongjo/
 - 2026-03-06 13:28 KST [보안]: same-repo PR 한정 자동머지 유지, 토큰/시크릿 하드코딩 패턴 미검출 재확인
 - 2026-03-06 13:32 KST [착수]: `CONNECTOR_MAPPING_PROFILE=specialforce_v1` 검증 실행, quality gate pass 확인
 - 2026-03-06 13:48 KST [자동화]: `specialforce_v1` 회귀검증 워크플로우 추가 (`.github/workflows/phase2-specialforce-profile-validation.yml`)
+- 2026-03-06 14:02 KST [보완]: PR auto-merge 보조 체크 실패 무해화(`continue-on-error`, 비차단 경고 처리)
+- 2026-03-06 14:08 KST [자동화]: readiness snapshot 워크플로우/스크립트 추가 (`phase2-readiness-snapshot.yml`, `generate_phase2_readiness_snapshot.mjs`)

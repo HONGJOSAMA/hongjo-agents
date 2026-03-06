@@ -1,0 +1,61 @@
+name: phase2-readiness-snapshot
+
+on:
+  schedule:
+    - cron: "30 1 * * *"
+  workflow_dispatch:
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      PIPELINE_MODE: "sample"
+      PIPELINE_MIN_INGEST_SUCCESS_RATE: "95"
+      PIPELINE_MAX_MISSING_RATE: "5"
+      PIPELINE_MAX_DUPLICATE_RATE: "2"
+      PIPELINE_ORGANIZATION_ID: ${{ vars.PIPELINE_ORGANIZATION_ID || 'org-demo-001' }}
+      PIPELINE_DEFAULT_DOMAIN_KEY: ${{ vars.PIPELINE_DEFAULT_DOMAIN_KEY || 'cyber_information' }}
+      CONNECTOR_MAPPING_PROFILE: ${{ vars.CONNECTOR_MAPPING_PROFILE || 'specialforce_v1' }}
+      SAMPLE_STREAK_TARGET: "3"
+      READINESS_WORKFLOW_FILE: "phase2-sample-readiness.yml"
+      INCLUDE_CURRENT_SUCCESS: "1"
+      READINESS_API_SOURCE_CONFIRMED: ${{ vars.READINESS_API_SOURCE_CONFIRMED || 'false' }}
+      READINESS_MAPPING_DRAFT_DONE: ${{ vars.READINESS_MAPPING_DRAFT_DONE || 'false' }}
+      READINESS_FAILURE_RESPONSE_READY: ${{ vars.READINESS_FAILURE_RESPONSE_READY || 'true' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Generate sample input
+        run: node foundation/tests/schema-validation/generate_phase1_samples.mjs
+
+      - name: Run phase2 pipeline draft
+        run: node foundation/ops/pipelines/run_phase2_pipeline_draft.mjs
+
+      - name: Calculate sample mode streak
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node foundation/ops/pipelines/calc_sample_streak.mjs
+
+      - name: Generate readiness snapshot
+        run: node foundation/ops/pipelines/generate_phase2_readiness_snapshot.mjs
+
+      - name: Upload snapshot artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase2-readiness-snapshot-artifacts
+          path: |
+            foundation/evaluation/metrics/data_quality_report.md
+            foundation/evaluation/metrics/data_quality_summary.json
+            foundation/evaluation/metrics/sample-mode-readiness.md
+            foundation/evaluation/metrics/sample-mode-readiness.json
+            foundation/evaluation/metrics/phase2-readiness-snapshot.md
+            foundation/evaluation/metrics/phase2-readiness-snapshot.json

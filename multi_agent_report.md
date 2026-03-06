@@ -182,3 +182,32 @@
 
 ### 판단 근거
 - 프로필 매핑 회귀를 PR 단계에서 차단해야 실데이터 전환 시 리스크를 낮출 수 있다.
+
+---
+
+## 8단계. 보완 반영 + readiness snapshot 착수
+
+### 발견한 점
+- PR 화면에서 `pr-auto-merge` 보조 체크가 간헐적으로 실패 표시를 남겨 운영 신호를 혼란시킬 수 있었다.
+- 실데이터 전환 준비상태를 한 번에 확인할 스냅샷 산출물이 없었다.
+
+### 수정 사항
+- 파일: `.github/workflows/pr-auto-merge.yml`
+  - `continue-on-error: true` 적용
+  - GraphQL 에러 케이스를 비차단 경고로 처리 확대
+- 파일: `foundation/ops/pipelines/generate_phase2_readiness_snapshot.mjs`
+  - 품질 요약/샘플 readiness/준비 플래그를 종합해 snapshot md/json 생성
+- 파일: `.github/workflows/phase2-readiness-snapshot.yml`
+  - 일일/수동 실행으로 readiness snapshot 자동 생성 및 artifact 업로드
+- 파일: `foundation/ops/pipelines/README.md` + plan/tracker/phase report
+  - 신규 자동화/환경변수/산출물 경로 반영
+
+### 검증 결과
+- `CONNECTOR_MAPPING_PROFILE=specialforce_v1 node foundation/ops/pipelines/run_phase2_pipeline_draft.mjs`
+  - quality gate pass (ingest 100, missing 0, duplicate 0)
+- `node foundation/ops/pipelines/generate_phase2_readiness_snapshot.mjs`
+  - snapshot md/json 생성 확인
+
+### 판단 근거
+- 보조 자동화 실패가 머지 여부와 무관할 때는 non-blocking으로 처리해 운영 신호를 단순화하는 것이 맞다.
+- readiness snapshot은 실데이터 착수 4조건 상태를 한 번에 확인하게 해 전환 판단 실수를 줄인다.

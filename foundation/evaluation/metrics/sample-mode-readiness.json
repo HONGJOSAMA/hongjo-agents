@@ -2,7 +2,7 @@
   "workflow": "phase2-sample-readiness.yml",
   "source": "local-fallback",
   "targetStreak": 3,
-  "streak": 1,
+  "streak": 0,
   "ready": false,
-  "evaluatedAt": "2026-03-06T01:04:55.763Z"
+  "evaluatedAt": "2026-03-06T01:58:55.006Z"
 }

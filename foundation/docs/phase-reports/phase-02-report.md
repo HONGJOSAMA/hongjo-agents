@@ -55,6 +55,11 @@
   - PR #8 merge 완료 (`ef78027`)
 - `specialforce_v1` 매핑 프로필 회귀 검증 워크플로우 추가
   - `.github/workflows/phase2-specialforce-profile-validation.yml`
+- readiness 스냅샷 자동화 워크플로우 추가
+  - `.github/workflows/phase2-readiness-snapshot.yml`
+  - `foundation/ops/pipelines/generate_phase2_readiness_snapshot.mjs`
+- PR auto-merge 보조 체크 안정화
+  - `.github/workflows/pr-auto-merge.yml` (`continue-on-error`, 비차단 경고 처리 강화)
 
 ## 검증 결과
 - pipeline draft 실행 성공
@@ -77,6 +82,8 @@
   - 연속 성공 streak 계산 및 readiness 리포트 출력 확인
 - `specialforce_v1` 매핑 프로필 검증
   - `CONNECTOR_MAPPING_PROFILE=specialforce_v1` 실행 기준 quality gate pass(ingest 100%, missing 0%, duplicate 0%)
+- readiness 스냅샷 생성 검증
+  - 로컬 실행 기준 스냅샷 md/json 생성 확인
 - 최신 점검 반영
   - 품질검사: schema validate 100/100, pipeline quality gate pass
   - 오류처리: 게이트 실패 시 `exit code 1`, quarantine replay/reinject 경로 유지

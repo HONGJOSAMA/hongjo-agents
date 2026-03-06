@@ -1,0 +1,32 @@
+{
+  "conditions": {
+    "apiSourceConfirmed": false,
+    "mappingDraftDone": false,
+    "sampleModeStreakReady": false,
+    "failureResponseReady": true
+  },
+  "allReady": false,
+  "qualitySummary": {
+    "runId": "phase2-2026-03-06T01-58-55-002Z",
+    "total": 65,
+    "ingestSuccessRate": 100,
+    "missingRate": 0,
+    "duplicateRate": 0,
+    "piiRate": 0,
+    "quarantineRows": 0,
+    "thresholds": {
+      "minIngestSuccessRate": 95,
+      "maxMissingRate": 5,
+      "maxDuplicateRate": 2
+    }
+  },
+  "sampleReadiness": {
+    "workflow": "phase2-sample-readiness.yml",
+    "source": "local-fallback",
+    "targetStreak": 3,
+    "streak": 0,
+    "ready": false,
+    "evaluatedAt": "2026-03-06T01:58:55.006Z"
+  },
+  "evaluatedAt": "2026-03-06T01:58:55.047Z"
+}
