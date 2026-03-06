@@ -6,7 +6,12 @@
 
 ## 실행
 ```bash
+# 샘플 모드(기본): API_BASE_URL 없어도 통과
 node foundation/ops/pipelines/check_phase2_env.mjs
+
+# 라이브 모드: API_BASE_URL 필수
+PIPELINE_MODE=live node foundation/ops/pipelines/check_phase2_env.mjs
+
 node foundation/ops/pipelines/run_phase2_pipeline_draft.mjs
 ```
 
@@ -16,6 +21,8 @@ node foundation/ops/pipelines/run_phase2_pipeline_draft.mjs
 - `PIPELINE_MAX_DUPLICATE_RATE` (기본 2)
 
 실데이터 입력 환경변수:
+- 실행 모드:
+  - `PIPELINE_MODE` (`sample` 또는 `live`, 기본 `sample`)
 - 공통:
   - `PIPELINE_ORGANIZATION_ID` (기본 `org-demo-001`)
   - `PIPELINE_DEFAULT_DOMAIN_KEY` (기본 `cyber_information`)

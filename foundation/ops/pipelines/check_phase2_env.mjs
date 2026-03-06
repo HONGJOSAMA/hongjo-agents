@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
-const requiredForLive = [
-  "API_BASE_URL",
-];
+const modeRaw = (process.env.PIPELINE_MODE || "sample").toLowerCase();
+const mode = modeRaw === "live" ? "live" : "sample";
+
+const requiredForLive = ["API_BASE_URL"];
 
 const optional = [
   "API_TOKEN",
@@ -16,9 +17,12 @@ const optional = [
   "PIPELINE_MAX_DUPLICATE_RATE",
 ];
 
-const missingRequired = requiredForLive.filter((key) => !process.env[key]);
+const missingRequired = mode === "live"
+  ? requiredForLive.filter((key) => !process.env[key])
+  : [];
 
 console.log("# Phase2 Env Check");
+console.log(`mode=${mode}`);
 console.log(`required_missing=${missingRequired.length}`);
 if (missingRequired.length > 0) {
   console.log(`missing_required=${missingRequired.join(",")}`);
