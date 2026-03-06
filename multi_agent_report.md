@@ -233,3 +233,24 @@
 
 ### 판단 근거
 - 실데이터 전환은 "보이기"가 아니라 "막기"가 필요하므로, 실패 시 명시적으로 non-zero 종료하는 게이트가 필요하다.
+
+---
+
+## 10단계. live gate 리포트 가시성 보강
+
+### 발견한 점
+- gate 결과가 콘솔 로그 중심이라 실행 후 상태를 재검토하기 불편했다.
+- 경로 출력에 절대경로가 포함되어 문서/로그 노출 관점에서 불필요했다.
+
+### 수정 사항
+- 파일: `foundation/ops/pipelines/check_phase2_live_gate.mjs`
+  - gate 실행 결과를 `phase2-live-gate-report.md/json`으로 저장
+  - snapshot/report 경로 출력값을 상대경로로 변경
+- 파일: `.github/workflows/phase2-live-preflight-gate.yml`
+  - live gate report md/json 아티팩트 업로드 경로 추가
+- 파일: `foundation/ops/pipelines/README.md` + plan/tracker/phase report
+  - 신규 산출물 및 검증 증거 반영
+
+### 검증 결과
+- strict 모드 실행 시 `gate_exit=1` 유지
+- `phase2-live-gate-report.md/json` 생성 및 실패 사유 3개 기록 확인

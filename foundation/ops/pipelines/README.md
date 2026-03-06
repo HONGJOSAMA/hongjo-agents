@@ -67,6 +67,8 @@ node foundation/ops/pipelines/check_phase2_live_gate.mjs
 - `foundation/evaluation/metrics/sample-mode-readiness.json`
 - `foundation/evaluation/metrics/phase2-readiness-snapshot.md`
 - `foundation/evaluation/metrics/phase2-readiness-snapshot.json`
+- `foundation/evaluation/metrics/phase2-live-gate-report.md`
+- `foundation/evaluation/metrics/phase2-live-gate-report.json`
 
 ## 자동화
 - GitHub Actions: `.github/workflows/phase2-pipeline-daily.yml`
