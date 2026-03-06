@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "phase3-domain-agent-output/v1",
+  "contractVersion": "1.0.0",
+  "requiredTopLevel": [
+    "schemaVersion",
+    "contractVersion",
+    "agentId",
+    "domainKey",
+    "displayName",
+    "generatedAt",
+    "status",
+    "input",
+    "scoring",
+    "trace",
+    "validation",
+    "rules",
+    "hypothesis",
+    "prediction",
+    "evidence"
+  ],
+  "requiredInputFields": [
+    "normalizedSource",
+    "rowCount",
+    "filteredRowCount",
+    "entityTypeBreakdown",
+    "sourceTypeBreakdown",
+    "signalTypeBreakdown",
+    "selectionPolicy",
+    "selectedObservationIds"
+  ],
+  "requiredScoringFields": [
+    "confidence",
+    "signalStrength",
+    "evidenceStrength",
+    "riskLevel"
+  ],
+  "requiredTraceFields": [
+    "selectedRuleIds",
+    "fallbackUsed",
+    "notes"
+  ],
+  "requiredValidationFields": [
+    "minimumEvidence",
+    "requiredFieldMissingCount",
+    "schemaCheckPassed"
+  ],
+  "requiredHypothesisFields": [
+    "id",
+    "domainKey",
+    "claim",
+    "assumptions",
+    "confidence",
+    "linkedObservationIds"
+  ],
+  "requiredPredictionFields": [
+    "id",
+    "domainKey",
+    "horizonValue",
+    "horizonUnit",
+    "probability",
+    "confidence",
+    "modelVersion",
+    "promptHash",
+    "riskLevel"
+  ],
+  "requiredEvidenceFields": [
+    "id",
+    "predictionId",
+    "sourceUrl",
+    "sourceTitle",
+    "trustScore",
+    "freshness",
+    "excerpt"
+  ],
+  "statusEnum": ["ok", "error"],
+  "riskLevelEnum": ["low", "medium", "high"]
+}

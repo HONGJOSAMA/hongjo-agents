@@ -4,9 +4,21 @@ import { runDomainAgent, writeAgentOutput } from "../common/base_agent.mjs";
 
 export async function runAgent() {
   const result = await runDomainAgent({
+    schemaVersion: "phase3-domain-agent-output/v1",
+    contractVersion: "1.0.0",
     agentId: "policy-politics-agent-v1",
     displayName: "Policy & Politics Agent",
     domainKey: "policy_politics",
+    requiredFields: ["organizationId", "domainKey", "eventTime", "raw.id", "quality.confidence"],
+    minimumEvidence: 3,
+    focusRuleId: "policy_politics_focus",
+    inputFilter: {
+      entityTypes: ["Observation", "Prediction"],
+      preferredSourceTypes: ["document", "api", "csv"],
+      preferredSignalTypes: ["event_signal"],
+      minimumConfidence: 0.7,
+      selectionLimit: 5,
+    },
     horizonValue: 14,
     horizonUnit: "day",
     modelVersion: "phase3-domain-v1",

@@ -1,0 +1,60 @@
+{
+  "pass": true,
+  "schemaVersion": "phase3-domain-agent-output/v1",
+  "contractVersion": "1.0.0",
+  "evaluatedAt": "2026-03-06T04:46:03.387Z",
+  "totalAgents": 5,
+  "failures": [],
+  "results": [
+    {
+      "domainKey": "macroeconomy",
+      "pass": true,
+      "evidenceCount": 3,
+      "filteredRowCount": 5,
+      "confidence": 0.73,
+      "signalStrength": 1,
+      "riskLevel": "high",
+      "failures": []
+    },
+    {
+      "domainKey": "policy_politics",
+      "pass": true,
+      "evidenceCount": 3,
+      "filteredRowCount": 5,
+      "confidence": 0.73,
+      "signalStrength": 1,
+      "riskLevel": "high",
+      "failures": []
+    },
+    {
+      "domainKey": "geopolitics_security",
+      "pass": true,
+      "evidenceCount": 3,
+      "filteredRowCount": 5,
+      "confidence": 0.72,
+      "signalStrength": 1,
+      "riskLevel": "high",
+      "failures": []
+    },
+    {
+      "domainKey": "supply_chain_trade",
+      "pass": true,
+      "evidenceCount": 3,
+      "filteredRowCount": 5,
+      "confidence": 0.72,
+      "signalStrength": 1,
+      "riskLevel": "high",
+      "failures": []
+    },
+    {
+      "domainKey": "cyber_information",
+      "pass": true,
+      "evidenceCount": 3,
+      "filteredRowCount": 5,
+      "confidence": 0.73,
+      "signalStrength": 1,
+      "riskLevel": "high",
+      "failures": []
+    }
+  ]
+}

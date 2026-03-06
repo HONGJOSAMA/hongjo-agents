@@ -4,9 +4,21 @@ import { runDomainAgent, writeAgentOutput } from "../common/base_agent.mjs";
 
 export async function runAgent() {
   const result = await runDomainAgent({
+    schemaVersion: "phase3-domain-agent-output/v1",
+    contractVersion: "1.0.0",
     agentId: "geopolitics-security-agent-v1",
     displayName: "Geopolitics & Security Agent",
     domainKey: "geopolitics_security",
+    requiredFields: ["organizationId", "domainKey", "eventTime", "raw.id", "quality.confidence"],
+    minimumEvidence: 3,
+    focusRuleId: "geopolitics_security_focus",
+    inputFilter: {
+      entityTypes: ["Observation", "Prediction"],
+      preferredSourceTypes: ["api", "document"],
+      preferredSignalTypes: ["event_signal", "rate_signal"],
+      minimumConfidence: 0.7,
+      selectionLimit: 5,
+    },
     horizonValue: 21,
     horizonUnit: "day",
     modelVersion: "phase3-domain-v1",
