@@ -15,13 +15,23 @@ const gateReportJsonPath = path.resolve(
   process.cwd(),
   process.env.PHASE2_LIVE_GATE_REPORT_JSON || "foundation/evaluation/metrics/phase2-live-gate-report.json",
 );
-const snapshotPathRelative = path.relative(process.cwd(), snapshotPath);
-const gateReportMdRelative = path.relative(process.cwd(), gateReportMdPath);
-const gateReportJsonRelative = path.relative(process.cwd(), gateReportJsonPath);
+const projectRoot = process.cwd();
+
+function toProjectRelative(targetPath) {
+  const relative = path.relative(projectRoot, targetPath);
+  if (relative && !relative.startsWith("..") && !path.isAbsolute(relative)) {
+    return relative;
+  }
+  return path.basename(targetPath);
+}
+
+const snapshotPathRelative = toProjectRelative(snapshotPath);
+const gateReportMdRelative = toProjectRelative(gateReportMdPath);
+const gateReportJsonRelative = toProjectRelative(gateReportJsonPath);
 
 function readJson(filePath) {
   if (!fs.existsSync(filePath)) {
-    throw new Error(`snapshot_missing:${filePath}`);
+    throw new Error(`snapshot_missing:${toProjectRelative(filePath)}`);
   }
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
 }

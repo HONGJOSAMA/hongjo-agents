@@ -254,3 +254,6 @@
 ### 검증 결과
 - strict 모드 실행 시 `gate_exit=1` 유지
 - `phase2-live-gate-report.md/json` 생성 및 실패 사유 3개 기록 확인
+
+### 추가 보완
+- snapshot 파일 누락 오류(`snapshot_missing`)에서도 절대경로 대신 상대경로만 기록하도록 hardening 적용
