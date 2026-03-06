@@ -2,7 +2,7 @@
 
 - Status: fail
 - Strict Mode: true
-- Evaluated At: 2026-03-06T02:22:13.070Z
+- Evaluated At: 2026-03-06T02:28:46.263Z
 - Snapshot: `foundation/evaluation/metrics/phase2-readiness-snapshot.json`
 
 ## Thresholds
