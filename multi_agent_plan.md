@@ -801,3 +801,4 @@ hongjo/
 - 2026-03-06 14:28 KST [보안보완]: snapshot 누락 에러 메시지 포함 모든 live gate 경로를 상대경로로 고정
 - 2026-03-06 14:36 KST [자동화]: phase2 보안 스캔 스크립트 추가 및 daily/readiness/live-preflight/specialforce-validation 워크플로우 연결
 - 2026-03-06 14:42 KST [자동화]: phase2 shadow health 요약 스크립트/워크플로우 추가 (`generate_phase2_shadow_health.mjs`, `phase2-shadow-health.yml`)
+- 2026-03-06 14:49 KST [자동화]: phase2 domain health 스크립트 추가 및 daily/shadow-health 워크플로우 연결

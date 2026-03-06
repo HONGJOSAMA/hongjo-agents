@@ -54,6 +54,12 @@ jobs:
           PHASE2_SECURITY_SCAN_STRICT: "0"
         run: node foundation/ops/pipelines/run_phase2_security_scan.mjs
 
+      - name: Generate domain health (non-blocking)
+        if: always()
+        env:
+          PHASE2_DOMAIN_HEALTH_STRICT: "0"
+        run: node foundation/ops/pipelines/generate_phase2_domain_health.mjs
+
       - name: Notify on quality gate failure
         if: ${{ failure() && env.PIPELINE_ALERT_WEBHOOK != '' }}
         run: |
@@ -78,3 +84,5 @@ jobs:
             foundation/evaluation/metrics/reinject-replay-report.md
             foundation/evaluation/metrics/phase2-security-scan-report.md
             foundation/evaluation/metrics/phase2-security-scan-report.json
+            foundation/evaluation/metrics/phase2-domain-health.md
+            foundation/evaluation/metrics/phase2-domain-health.json

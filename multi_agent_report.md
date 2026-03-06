@@ -301,3 +301,27 @@
 
 ### 검증 결과
 - 로컬 실행 기준 `phase2-shadow-health.md/json` 생성 및 status 출력 확인
+
+---
+
+## 13단계. phase2 domain health 자동화
+
+### 발견한 점
+- shadow health는 종합 상태는 보여주지만, 어떤 도메인이 비거나 과편중됐는지 직접 계산해주지는 않았다.
+
+### 수정 사항
+- 파일: `foundation/ops/pipelines/generate_phase2_domain_health.mjs`
+  - expected 5도메인 커버리지, 도메인별 최소 레코드 수, 최대 점유율(max share) 계산
+  - `phase2-domain-health.md/json` 생성
+- 워크플로우 연결:
+  - `.github/workflows/phase2-pipeline-daily.yml`
+  - `.github/workflows/phase2-shadow-health.yml`
+- 파일: `foundation/ops/pipelines/generate_phase2_shadow_health.mjs`
+  - domainHealthPass / maxShare / missingDomains 연동
+- 문서 반영:
+  - README + phase report/tracker + plan 동기화
+
+### 검증 결과
+- 로컬 샘플 기준 5도메인 각 13건
+- `phase2-domain-health` pass
+- max share 20%, missing domains 0 확인

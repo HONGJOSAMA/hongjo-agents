@@ -1,0 +1,51 @@
+{
+  "pass": true,
+  "total": 65,
+  "expectedDomains": [
+    "macroeconomy",
+    "policy_politics",
+    "geopolitics_security",
+    "supply_chain_trade",
+    "cyber_information"
+  ],
+  "minRecordsPerDomain": 1,
+  "concentrationLimit": 60,
+  "counts": {
+    "macroeconomy": 13,
+    "policy_politics": 13,
+    "geopolitics_security": 13,
+    "supply_chain_trade": 13,
+    "cyber_information": 13
+  },
+  "missingDomains": [],
+  "maxShare": 20,
+  "domainShares": [
+    {
+      "domain": "macroeconomy",
+      "count": 13,
+      "share": 20
+    },
+    {
+      "domain": "policy_politics",
+      "count": 13,
+      "share": 20
+    },
+    {
+      "domain": "geopolitics_security",
+      "count": 13,
+      "share": 20
+    },
+    {
+      "domain": "supply_chain_trade",
+      "count": 13,
+      "share": 20
+    },
+    {
+      "domain": "cyber_information",
+      "count": 13,
+      "share": 20
+    }
+  ],
+  "source": "foundation/data/normalized/phase2-normalized-sample.jsonl",
+  "evaluatedAt": "2026-03-06T04:19:32.208Z"
+}

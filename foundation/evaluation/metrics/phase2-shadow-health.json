@@ -4,6 +4,7 @@
     "qualityPass": true,
     "securityPass": true,
     "liveGatePass": false,
+    "domainHealthPass": true,
     "readinessAllReady": false
   },
   "metrics": {
@@ -12,13 +13,16 @@
     "duplicateRate": 0,
     "quarantineRows": 0,
     "securityFindings": 0,
-    "liveGateFailures": 3
+    "liveGateFailures": 3,
+    "domainHealthMissing": 0,
+    "domainHealthMaxShare": 20
   },
   "inputs": {
     "quality": "foundation/evaluation/metrics/data_quality_summary.json",
     "security": "foundation/evaluation/metrics/phase2-security-scan-report.json",
     "liveGate": "foundation/evaluation/metrics/phase2-live-gate-report.json",
+    "domainHealth": "foundation/evaluation/metrics/phase2-domain-health.json",
     "readiness": "foundation/evaluation/metrics/phase2-readiness-snapshot.json"
   },
-  "evaluatedAt": "2026-03-06T04:01:42.990Z"
+  "evaluatedAt": "2026-03-06T04:19:32.253Z"
 }

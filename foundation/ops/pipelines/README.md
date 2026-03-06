@@ -20,6 +20,7 @@ node foundation/ops/pipelines/generate_phase2_readiness_snapshot.mjs
 node foundation/ops/pipelines/check_phase2_live_gate.mjs
 node foundation/ops/pipelines/run_phase2_security_scan.mjs
 node foundation/ops/pipelines/generate_phase2_shadow_health.mjs
+node foundation/ops/pipelines/generate_phase2_domain_health.mjs
 ```
 
 품질 게이트 임계치(환경변수):
@@ -73,6 +74,8 @@ node foundation/ops/pipelines/generate_phase2_shadow_health.mjs
 - `foundation/evaluation/metrics/phase2-live-gate-report.json`
 - `foundation/evaluation/metrics/phase2-security-scan-report.md`
 - `foundation/evaluation/metrics/phase2-security-scan-report.json`
+- `foundation/evaluation/metrics/phase2-domain-health.md`
+- `foundation/evaluation/metrics/phase2-domain-health.json`
 - `foundation/evaluation/metrics/phase2-shadow-health.md`
 - `foundation/evaluation/metrics/phase2-shadow-health.json`
 
