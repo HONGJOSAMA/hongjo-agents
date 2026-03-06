@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "phase4-calibrated-output/v1",
+  "calibrationVersion": "phase4-calibration-v1",
+  "sourceOutputPath": "foundation/evaluation/orchestrator/phase4-orchestrator-output-v1.json",
+  "metrics": {
+    "brierScore": 0.2544,
+    "ece": 0.12,
+    "calibrationFactor": 0.85,
+    "confidenceCap": 0.78
+  },
+  "calibratedPrediction": {
+    "probability": 0.687,
+    "confidence": 0.72,
+    "riskLevel": "high",
+    "scenarioLabel": "high_consensus_outlook"
+  },
+  "sampleCount": 5,
+  "evaluatedAt": "2026-03-06T05:26:33.413Z"
+}

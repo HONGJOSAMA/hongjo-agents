@@ -36,6 +36,12 @@ jobs:
       - name: Run orchestrator
         run: node foundation/orchestrator/run_orchestrator_v1.mjs
 
+      - name: Run calibration draft
+        run: node foundation/orchestrator/calibration/run_calibration_v1.mjs
+
+      - name: Build meta-agent input draft
+        run: node foundation/orchestrator/meta_agents/build_meta_agent_input_v1.mjs
+
       - name: Upload orchestrator artifacts
         if: always()
         uses: actions/upload-artifact@v4
@@ -44,7 +50,13 @@ jobs:
           path: |
             foundation/evaluation/orchestrator/phase4-orchestrator-input-v1.json
             foundation/evaluation/orchestrator/phase4-orchestrator-output-v1.json
+            foundation/evaluation/orchestrator/phase4-calibrated-output-v1.json
+            foundation/evaluation/orchestrator/phase4-meta-agent-input-v1.json
             foundation/evaluation/metrics/phase4-orchestrator-input-smoke.md
             foundation/evaluation/metrics/phase4-orchestrator-input-smoke.json
             foundation/evaluation/metrics/phase4-orchestrator-run.md
             foundation/evaluation/metrics/phase4-orchestrator-run.json
+            foundation/evaluation/metrics/phase4-calibration-report.md
+            foundation/evaluation/metrics/phase4-calibration-report.json
+            foundation/evaluation/metrics/phase4-meta-agent-input-smoke.md
+            foundation/evaluation/metrics/phase4-meta-agent-input-smoke.json

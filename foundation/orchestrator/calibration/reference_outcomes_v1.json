@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "phase4-calibration-reference/v1",
+  "domainOutcomes": {
+    "macroeconomy": 1,
+    "policy_politics": 0,
+    "geopolitics_security": 1,
+    "supply_chain_trade": 1,
+    "cyber_information": 0
+  }
+}
