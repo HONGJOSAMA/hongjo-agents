@@ -31,6 +31,13 @@
   - `foundation/ops/pipelines/connectors/document_connector.mjs`
   - `foundation/ops/pipelines/connectors/csv_connector.mjs`
   - `foundation/ops/pipelines/README.md`
+- 공급자 필드 매핑 설정 파일 추가
+  - `foundation/ops/pipelines/connectors/connector-mapping.json`
+- 격리 큐 재처리(replay) 스크립트 추가
+  - `foundation/ops/pipelines/replay_quarantine.mjs`
+  - `foundation/evaluation/metrics/quarantine-replay-report.md`
+- 품질게이트 실패 웹훅 알림 연결
+  - `.github/workflows/phase2-pipeline-daily.yml` (`PIPELINE_ALERT_WEBHOOK`)
 
 ## 검증 결과
 - pipeline draft 실행 성공
@@ -45,15 +52,17 @@
 - 실입력 모드 검증
   - API 실연결 미설정 시 샘플 폴백 동작 확인
   - 문서/CSV 입력 경로 존재 시 실파일 우선 ingestion 동작 확인
+- replay 스크립트 검증
+  - quarantine 입력 0건 기준 replay 결과 0건, unresolved 0건 확인
 
 ## 리스크/이슈
 - API 응답 스키마가 공급자별로 다를 수 있어 field mapping 표준화 추가 필요
-- 외부 알림(Slack/Email/Webhook)은 아직 미연결
+- 웹훅 알림 코드는 연결되었으나 `PIPELINE_ALERT_WEBHOOK` secret 미등록 시 미동작
 
 ## 다음 작업
-- API 응답 필드 매핑 설정 파일(`connector-mapping.json`) 도입
-- 격리 큐 재처리 경로(replay) 스크립트 추가
-- 품질게이트 실패 시 알림 채널(Webhook) 연결
+- 실 API 계약 확정 후 `connector-mapping.json` 공급자별 profile 분리
+- replay 결과를 normalized ingest로 재투입하는 자동경로 추가
+- 웹훅 알림 채널 운영(실제 secret 등록 및 수신 검증)
 
 ## 실데이터 착수 기준(고정)
 아래 4개 준비조건 충족 즉시 실데이터 shadow mode를 시작한다.

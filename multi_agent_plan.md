@@ -767,3 +767,6 @@ hongjo/
 - 2026-03-06 11:35 KST [진행]: API/문서/CSV 커넥터를 실입력(env) 모드로 전환, 샘플 폴백 유지
 - 2026-03-06 11:38 KST [검증]: 실입력 경로 사용/폴백 경로 모두에서 파이프라인 게이트 통과 확인
 - 2026-03-06 12:05 KST [정책]: Phase 2 실데이터 착수 게이트(준비조건 4개) 반영, 충족 즉시 shadow mode 전환 원칙 고정
+- 2026-03-06 12:18 KST [진행]: connector field mapping 파일(`connector-mapping.json`) 도입
+- 2026-03-06 12:22 KST [진행]: quarantine replay 스크립트 추가 및 리포트 경로 연결
+- 2026-03-06 12:25 KST [자동화]: phase2 daily workflow에 품질게이트 실패 웹훅 알림(`PIPELINE_ALERT_WEBHOOK`) 추가

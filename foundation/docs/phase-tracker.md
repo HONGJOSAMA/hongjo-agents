@@ -55,3 +55,6 @@
 - 2026-03-06: 일일 자동실행 워크플로우 추가 (`.github/workflows/phase2-pipeline-daily.yml`)
 - 2026-03-06: 커넥터 실입력 모드 전환 (API/DOC/CSV env 기반, 입력 없을 때 샘플 폴백)
 - 2026-03-06: 실데이터 착수 게이트(준비조건 4개) 고정, 충족 즉시 shadow mode 시작 원칙 반영
+- 2026-03-06: `connector-mapping.json` 추가(공급자 필드 매핑)
+- 2026-03-06: quarantine replay 스크립트 추가 (`foundation/ops/pipelines/replay_quarantine.mjs`)
+- 2026-03-06: 품질게이트 실패 웹훅 알림 경로 추가 (`PIPELINE_ALERT_WEBHOOK`)

@@ -1,0 +1,42 @@
+{
+  "api": {
+    "fields": {
+      "id": ["id", "event_id", "eventId"],
+      "organizationId": ["organizationId", "organization_id", "orgId"],
+      "domainKey": ["domainKey", "domain_key", "domain"],
+      "sourceType": ["sourceType", "source_type"],
+      "sourceKey": ["sourceKey", "source_key"],
+      "observedAt": ["observedAt", "createdAt", "timestamp", "event_time"],
+      "signalType": ["signalType", "metric", "type"],
+      "signalValue": ["signalValue", "value", "payload", "signal"],
+      "confidence": ["confidence", "score", "probability"],
+      "piiFlag": ["piiFlag", "contains_pii"]
+    }
+  },
+  "document": {
+    "fields": {
+      "id": ["id", "docId"],
+      "organizationId": ["organizationId", "organization_id", "orgId"],
+      "domainKey": ["domainKey", "domain_key", "domain"],
+      "claim": ["claim", "text", "summary"],
+      "assumptions": ["assumptions", "assumption_list"],
+      "createdAt": ["createdAt", "observedAt", "timestamp"],
+      "confidence": ["confidence", "score"]
+    }
+  },
+  "csv": {
+    "fields": {
+      "id": "id",
+      "organizationId": "organizationId",
+      "domainKey": "domainKey",
+      "runKey": "runKey",
+      "horizonValue": "horizonValue",
+      "horizonUnit": "horizonUnit",
+      "probability": "probability",
+      "modelVersion": "modelVersion",
+      "promptHash": "promptHash",
+      "createdAt": "createdAt",
+      "confidence": "confidence"
+    }
+  }
+}
