@@ -1,11 +1,12 @@
 {
   "pass": true,
-  "strict": true,
+  "strict": false,
   "filesScanned": [
     ".github/workflows/phase2-live-preflight-gate.yml",
     ".github/workflows/phase2-pipeline-daily.yml",
     ".github/workflows/phase2-readiness-snapshot.yml",
     ".github/workflows/phase2-sample-readiness.yml",
+    ".github/workflows/phase2-shadow-health.yml",
     ".github/workflows/phase2-specialforce-profile-validation.yml",
     ".github/workflows/pr-auto-merge.yml",
     ".github/workflows/schema-validation-phase1.yml",
@@ -19,6 +20,7 @@
     "foundation/ops/pipelines/connectors/csv_connector.mjs",
     "foundation/ops/pipelines/connectors/document_connector.mjs",
     "foundation/ops/pipelines/generate_phase2_readiness_snapshot.mjs",
+    "foundation/ops/pipelines/generate_phase2_shadow_health.mjs",
     "foundation/ops/pipelines/reinject_replay_output.mjs",
     "foundation/ops/pipelines/replay_quarantine.mjs",
     "foundation/ops/pipelines/run_phase2_pipeline_draft.mjs",
@@ -46,5 +48,5 @@
   ],
   "findingCount": 0,
   "findings": [],
-  "evaluatedAt": "2026-03-06T02:36:58.278Z"
+  "evaluatedAt": "2026-03-06T04:01:42.905Z"
 }

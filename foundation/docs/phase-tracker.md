@@ -73,3 +73,4 @@
 - 2026-03-06: live gate 결과 리포트 자동생성 추가 (`phase2-live-gate-report.{md,json}`)
 - 2026-03-06: live gate 에러/로그 경로 상대화(절대경로 비노출) 반영
 - 2026-03-06: phase2 보안 스캔 자동화 추가 (`run_phase2_security_scan.mjs`, `phase2-security-scan-report.{md,json}`)
+- 2026-03-06: phase2 shadow health 요약 자동화 추가 (`generate_phase2_shadow_health.mjs`, `phase2-shadow-health.yml`)

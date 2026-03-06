@@ -1,8 +1,8 @@
 # Phase 2 Live Gate Report
 
 - Status: fail
-- Strict Mode: true
-- Evaluated At: 2026-03-06T02:28:46.263Z
+- Strict Mode: false
+- Evaluated At: 2026-03-06T04:01:42.948Z
 - Snapshot: `foundation/evaluation/metrics/phase2-readiness-snapshot.json`
 
 ## Thresholds
