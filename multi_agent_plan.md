@@ -770,3 +770,5 @@ hongjo/
 - 2026-03-06 12:18 KST [진행]: connector field mapping 파일(`connector-mapping.json`) 도입
 - 2026-03-06 12:22 KST [진행]: quarantine replay 스크립트 추가 및 리포트 경로 연결
 - 2026-03-06 12:25 KST [자동화]: phase2 daily workflow에 품질게이트 실패 웹훅 알림(`PIPELINE_ALERT_WEBHOOK`) 추가
+- 2026-03-06 12:35 KST [자동화]: 샘플모드 연속성 판정 워크플로우/스크립트 추가 (`phase2-sample-readiness.yml`, `calc_sample_streak.mjs`)
+- 2026-03-06 12:38 KST [문서화]: quarantine replay runbook + live shadow cutover checklist 추가

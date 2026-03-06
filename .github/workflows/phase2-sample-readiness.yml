@@ -1,0 +1,65 @@
+name: phase2-sample-readiness
+
+on:
+  schedule:
+    - cron: "0 1 * * *"
+  workflow_dispatch:
+
+jobs:
+  readiness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      PIPELINE_MODE: "sample"
+      PIPELINE_MIN_INGEST_SUCCESS_RATE: "95"
+      PIPELINE_MAX_MISSING_RATE: "5"
+      PIPELINE_MAX_DUPLICATE_RATE: "2"
+      PIPELINE_ORGANIZATION_ID: ${{ vars.PIPELINE_ORGANIZATION_ID || 'org-demo-001' }}
+      PIPELINE_DEFAULT_DOMAIN_KEY: ${{ vars.PIPELINE_DEFAULT_DOMAIN_KEY || 'cyber_information' }}
+      API_ENDPOINT: ${{ vars.API_ENDPOINT || '/observations' }}
+      DOC_INPUT_DIR: ${{ vars.DOC_INPUT_DIR || 'foundation/data/input/documents' }}
+      CSV_INPUT_DIR: ${{ vars.CSV_INPUT_DIR || 'foundation/data/input/csv' }}
+      CONNECTOR_MAPPING_FILE: "foundation/ops/pipelines/connectors/connector-mapping.json"
+      SAMPLE_STREAK_TARGET: "3"
+      READINESS_WORKFLOW_FILE: "phase2-sample-readiness.yml"
+      INCLUDE_CURRENT_SUCCESS: "1"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Generate phase1 sample input
+        run: node foundation/tests/schema-validation/generate_phase1_samples.mjs
+
+      - name: Run pipeline in sample mode
+        env:
+          API_BASE_URL: ""
+          API_TOKEN: ""
+        run: node foundation/ops/pipelines/run_phase2_pipeline_draft.mjs
+
+      - name: Replay quarantined rows
+        if: always()
+        continue-on-error: true
+        run: node foundation/ops/pipelines/replay_quarantine.mjs
+
+      - name: Calculate sample success streak
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node foundation/ops/pipelines/calc_sample_streak.mjs
+
+      - name: Upload readiness artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase2-sample-readiness-artifacts
+          path: |
+            foundation/evaluation/metrics/data_quality_report.md
+            foundation/evaluation/metrics/data_quality_summary.json
+            foundation/evaluation/metrics/quarantine-replay-report.md
+            foundation/evaluation/metrics/sample-mode-readiness.md
+            foundation/evaluation/metrics/sample-mode-readiness.json

@@ -58,3 +58,5 @@
 - 2026-03-06: `connector-mapping.json` 추가(공급자 필드 매핑)
 - 2026-03-06: quarantine replay 스크립트 추가 (`foundation/ops/pipelines/replay_quarantine.mjs`)
 - 2026-03-06: 품질게이트 실패 웹훅 알림 경로 추가 (`PIPELINE_ALERT_WEBHOOK`)
+- 2026-03-06: 샘플모드 연속성 판정 스크립트/워크플로우 추가 (`calc_sample_streak.mjs`, `phase2-sample-readiness.yml`)
+- 2026-03-06: replay/컷오버 런북 문서화 완료 (`docs/runbooks/*`)
