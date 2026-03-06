@@ -2,15 +2,7 @@ name: phase1-schema-validation
 
 on:
   push:
-    paths:
-      - "foundation/ontology/domain_schema/v1/domain_schema_v1.yaml"
-      - "foundation/tests/schema-validation/**"
-      - ".github/workflows/schema-validation-phase1.yml"
   pull_request:
-    paths:
-      - "foundation/ontology/domain_schema/v1/domain_schema_v1.yaml"
-      - "foundation/tests/schema-validation/**"
-      - ".github/workflows/schema-validation-phase1.yml"
   workflow_dispatch:
 
 jobs:
@@ -31,4 +23,3 @@ jobs:
 
       - name: Validate schema v1
         run: node foundation/tests/schema-validation/validate_schema_v1.mjs
-

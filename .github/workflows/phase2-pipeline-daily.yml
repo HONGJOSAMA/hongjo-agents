@@ -1,0 +1,44 @@
+name: phase2-pipeline-daily
+
+on:
+  schedule:
+    - cron: "15 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      PIPELINE_MIN_INGEST_SUCCESS_RATE: "95"
+      PIPELINE_MAX_MISSING_RATE: "5"
+      PIPELINE_MAX_DUPLICATE_RATE: "2"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Generate phase1 sample input
+        run: node foundation/tests/schema-validation/generate_phase1_samples.mjs
+
+      - name: Run phase2 pipeline draft
+        run: node foundation/ops/pipelines/run_phase2_pipeline_draft.mjs
+
+      - name: Upload pipeline artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase2-pipeline-artifacts
+          path: |
+            foundation/data/raw/api/phase2-api-sample.jsonl
+            foundation/data/raw/documents/phase2-doc-sample.jsonl
+            foundation/data/raw/csv/phase2-csv-sample.jsonl
+            foundation/data/normalized/phase2-normalized-sample.jsonl
+            foundation/data/quarantine/phase2-quarantine-latest.jsonl
+            foundation/evaluation/metrics/data_quality_report.md
+            foundation/evaluation/metrics/data_quality_summary.json
+

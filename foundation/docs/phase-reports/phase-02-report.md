@@ -19,6 +19,12 @@
   - `foundation/data/normalized/phase2-normalized-sample.jsonl`
 - 데이터 품질 리포트 자동 생성
   - `foundation/evaluation/metrics/data_quality_report.md`
+- 품질 요약 JSON 자동 생성
+  - `foundation/evaluation/metrics/data_quality_summary.json`
+- 품질 실패 데이터 격리 큐 추가
+  - `foundation/data/quarantine/phase2-quarantine-latest.jsonl`
+- 일일 자동 실행 워크플로우 추가
+  - `.github/workflows/phase2-pipeline-daily.yml`
 
 ## 검증 결과
 - pipeline draft 실행 성공
@@ -27,15 +33,18 @@
   - ingest success rate: 100%
   - missing rate: 0%
   - duplicate rate: 0%
+  - quality gate: pass
+- 게이트 실패 동작 검증
+  - `PIPELINE_MIN_INGEST_SUCCESS_RATE=101`로 실행 시 `exit code 1` 확인
 
 ## 리스크/이슈
 - 현재는 커넥터 3종(API/문서/CSV) 실구현 전 단계
-- 스케줄링/알림/격리 재처리 경로는 미연결
+- 외부 알림(Slack/Email/Webhook)은 아직 미연결
 
 ## 다음 작업
-- `ops/pipelines/*` 커넥터 3종 skeleton 추가
-- 품질 경보 임계치 초과 시 격리 큐(write-ahead) 초안 구현
-- 일일 자동 실행(cron/worker) 연결
+- API/문서/CSV 커넥터를 실데이터 입력으로 교체
+- 격리 큐 재처리 경로(replay) 스크립트 추가
+- 품질게이트 실패 시 알림 채널(Webhook) 연결
 
 ## 사용자 판단 필요 항목
 - 없음(계속 진행 가능)

@@ -1,5 +1,6 @@
 # Data Quality Report (Phase 2 Draft)
 
+- Run ID: `phase2-2026-03-05T23-50-37-021Z`
 - Source:
   - `foundation/data/raw/api/phase2-api-sample.jsonl`
   - `foundation/data/raw/documents/phase2-doc-sample.jsonl`
@@ -12,6 +13,7 @@
 - Missing Critical Fields: 0 (0%)
 - Duplicate IDs: 0 (0%)
 - PII Flagged Rows: 0 (0%)
+- Quarantine Rows: 0
 
 ## Threshold Check (Phase 2 target)
 - ingest success >= 95%: pass
