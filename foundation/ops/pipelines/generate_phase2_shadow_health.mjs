@@ -18,6 +18,10 @@ const paths = {
     rootDir,
     process.env.PHASE2_LIVE_GATE_REPORT || "foundation/evaluation/metrics/phase2-live-gate-report.json",
   ),
+  domainHealth: path.resolve(
+    rootDir,
+    process.env.PHASE2_DOMAIN_HEALTH_REPORT || "foundation/evaluation/metrics/phase2-domain-health.json",
+  ),
   readiness: path.resolve(
     rootDir,
     process.env.PHASE2_READINESS_REPORT || "foundation/evaluation/metrics/phase2-readiness-snapshot.json",
@@ -54,6 +58,7 @@ function readJsonOrNull(filePath) {
 const quality = readJsonOrNull(paths.quality);
 const security = readJsonOrNull(paths.security);
 const liveGate = readJsonOrNull(paths.liveGate);
+const domainHealth = readJsonOrNull(paths.domainHealth);
 const readiness = readJsonOrNull(paths.readiness);
 
 const minIngest = Number(process.env.PIPELINE_MIN_INGEST_SUCCESS_RATE || 95);
@@ -72,9 +77,10 @@ const qualityPass = Boolean(
 
 const securityPass = Boolean(security?.pass === true);
 const liveGatePass = Boolean(liveGate?.passed === true);
+const domainHealthPass = Boolean(domainHealth?.pass === true);
 const readinessAllReady = Boolean(readiness?.allReady === true);
 
-const status = qualityPass && securityPass && liveGatePass ? "green" : "yellow";
+const status = qualityPass && securityPass && liveGatePass && domainHealthPass ? "green" : "yellow";
 const evaluatedAt = new Date().toISOString();
 
 const summary = {
@@ -83,6 +89,7 @@ const summary = {
     qualityPass,
     securityPass,
     liveGatePass,
+    domainHealthPass,
     readinessAllReady,
   },
   metrics: {
@@ -92,11 +99,14 @@ const summary = {
     quarantineRows: quality?.quarantineRows ?? null,
     securityFindings: security?.findingCount ?? null,
     liveGateFailures: Array.isArray(liveGate?.failures) ? liveGate.failures.length : null,
+    domainHealthMissing: Array.isArray(domainHealth?.missingDomains) ? domainHealth.missingDomains.length : null,
+    domainHealthMaxShare: domainHealth?.maxShare ?? null,
   },
   inputs: {
     quality: rel(paths.quality),
     security: rel(paths.security),
     liveGate: rel(paths.liveGate),
+    domainHealth: rel(paths.domainHealth),
     readiness: rel(paths.readiness),
   },
   evaluatedAt,
@@ -111,6 +121,7 @@ const md = `# Phase 2 Shadow Health
 - qualityPass: ${qualityPass ? "yes" : "no"}
 - securityPass: ${securityPass ? "yes" : "no"}
 - liveGatePass: ${liveGatePass ? "yes" : "no"}
+- domainHealthPass: ${domainHealthPass ? "yes" : "no"}
 - readinessAllReady: ${readinessAllReady ? "yes" : "no"}
 
 ## Metrics
@@ -120,11 +131,14 @@ const md = `# Phase 2 Shadow Health
 - quarantineRows: ${summary.metrics.quarantineRows ?? "n/a"}
 - securityFindings: ${summary.metrics.securityFindings ?? "n/a"}
 - liveGateFailures: ${summary.metrics.liveGateFailures ?? "n/a"}
+- domainHealthMissing: ${summary.metrics.domainHealthMissing ?? "n/a"}
+- domainHealthMaxShare: ${summary.metrics.domainHealthMaxShare ?? "n/a"}
 
 ## Source Files
 - quality: \`${summary.inputs.quality}\`
 - security: \`${summary.inputs.security}\`
 - liveGate: \`${summary.inputs.liveGate}\`
+- domainHealth: \`${summary.inputs.domainHealth}\`
 - readiness: \`${summary.inputs.readiness}\`
 `;
 
@@ -135,4 +149,3 @@ fs.writeFileSync(paths.outputJson, `${JSON.stringify(summary, null, 2)}\n`, "utf
 console.log(`phase2_shadow_health_status=${status}`);
 console.log(`phase2_shadow_health_md=${rel(paths.outputMd)}`);
 console.log(`phase2_shadow_health_json=${rel(paths.outputJson)}`);
-
