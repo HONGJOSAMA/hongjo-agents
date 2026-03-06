@@ -6,6 +6,7 @@
 
 ## 실행
 ```bash
+node foundation/ops/pipelines/check_phase2_env.mjs
 node foundation/ops/pipelines/run_phase2_pipeline_draft.mjs
 ```
 
@@ -46,6 +47,17 @@ node foundation/ops/pipelines/run_phase2_pipeline_draft.mjs
 ## 자동화
 - GitHub Actions: `.github/workflows/phase2-pipeline-daily.yml`
 - 매일 UTC 00:15 실행 + 수동 실행(`workflow_dispatch`) 지원
+
+## GitHub Secrets/Variables 설정
+- Secrets:
+  - `API_BASE_URL`
+  - `API_TOKEN` (선택)
+- Variables:
+  - `API_ENDPOINT` (기본 `/observations`)
+  - `DOC_INPUT_DIR` (기본 `foundation/data/input/documents`)
+  - `CSV_INPUT_DIR` (기본 `foundation/data/input/csv`)
+  - `PIPELINE_ORGANIZATION_ID`
+  - `PIPELINE_DEFAULT_DOMAIN_KEY`
 
 ## 현재 범위
 - 커넥터 실구현 전 단계
