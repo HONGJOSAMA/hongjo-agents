@@ -399,6 +399,16 @@ hongjo/
 - 결측률 ≤ 5%, 중복률 ≤ 2%
 - `specialforce` 샘플 데이터 1회 ingest 성공
 
+실데이터 착수 게이트(준비조건 4개):
+1. API 소스 1개 이상 확정(`API_BASE_URL`/토큰 발급 가능)
+2. 필드 매핑표 초안 완료(최소 `id`, `organizationId`, `domainKey`, `observedAt/createdAt`)
+3. 샘플 모드 일일 실행 3회 연속 성공
+4. 실패 대응 준비 완료(quarantine 확인 + 재실행 절차 문서화)
+
+실행 규칙:
+- 위 4개 준비조건 충족 즉시 실데이터 shadow mode 착수
+- shadow mode 3~5일 동안 품질 기준 유지 시 운영 모드 전환
+
 ## Phase 3: Domain Agents V1
 
 목표:
@@ -756,3 +766,4 @@ hongjo/
 - 2026-03-06 11:05 KST [자동화]: 일일 cron 워크플로우 추가 (`.github/workflows/phase2-pipeline-daily.yml`)
 - 2026-03-06 11:35 KST [진행]: API/문서/CSV 커넥터를 실입력(env) 모드로 전환, 샘플 폴백 유지
 - 2026-03-06 11:38 KST [검증]: 실입력 경로 사용/폴백 경로 모두에서 파이프라인 게이트 통과 확인
+- 2026-03-06 12:05 KST [정책]: Phase 2 실데이터 착수 게이트(준비조건 4개) 반영, 충족 즉시 shadow mode 전환 원칙 고정
