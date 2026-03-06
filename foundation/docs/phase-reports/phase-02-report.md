@@ -53,6 +53,8 @@
 - PR 자동머지 워크플로우 추가 및 머지 완료
   - `.github/workflows/pr-auto-merge.yml`
   - PR #8 merge 완료 (`ef78027`)
+- `specialforce_v1` 매핑 프로필 회귀 검증 워크플로우 추가
+  - `.github/workflows/phase2-specialforce-profile-validation.yml`
 
 ## 검증 결과
 - pipeline draft 실행 성공

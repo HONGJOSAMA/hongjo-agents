@@ -793,3 +793,4 @@ hongjo/
 - 2026-03-06 13:24 KST [오류처리]: unstable-status 에러를 경고+재시도(`check_suite.completed`)로 처리 반영
 - 2026-03-06 13:28 KST [보안]: same-repo PR 한정 자동머지 유지, 토큰/시크릿 하드코딩 패턴 미검출 재확인
 - 2026-03-06 13:32 KST [착수]: `CONNECTOR_MAPPING_PROFILE=specialforce_v1` 검증 실행, quality gate pass 확인
+- 2026-03-06 13:48 KST [자동화]: `specialforce_v1` 회귀검증 워크플로우 추가 (`.github/workflows/phase2-specialforce-profile-validation.yml`)
