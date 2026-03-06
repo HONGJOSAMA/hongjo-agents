@@ -55,5 +55,14 @@
 - 격리 큐 재처리 경로(replay) 스크립트 추가
 - 품질게이트 실패 시 알림 채널(Webhook) 연결
 
+## 실데이터 착수 기준(고정)
+아래 4개 준비조건 충족 즉시 실데이터 shadow mode를 시작한다.
+1. API 소스 1개 이상 확정(`API_BASE_URL`/토큰 발급 가능)
+2. 필드 매핑표 초안 완료(최소 `id`, `organizationId`, `domainKey`, `observedAt/createdAt`)
+3. 샘플 모드 일일 실행 3회 연속 성공
+4. 실패 대응 준비 완료(quarantine 확인 + 재실행 절차 문서화)
+
+shadow mode 3~5일 동안 품질 기준 유지 시 운영 모드로 전환한다.
+
 ## 사용자 판단 필요 항목
 - 없음(계속 진행 가능)
