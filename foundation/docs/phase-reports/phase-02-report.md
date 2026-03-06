@@ -38,6 +38,13 @@
   - `foundation/evaluation/metrics/quarantine-replay-report.md`
 - 품질게이트 실패 웹훅 알림 연결
   - `.github/workflows/phase2-pipeline-daily.yml` (`PIPELINE_ALERT_WEBHOOK`)
+- 샘플모드 연속 성공 판정 자동화
+  - `.github/workflows/phase2-sample-readiness.yml`
+  - `foundation/ops/pipelines/calc_sample_streak.mjs`
+  - `foundation/evaluation/metrics/sample-mode-readiness.{md,json}`
+- 운영 런북 문서화
+  - `foundation/docs/runbooks/phase2-quarantine-replay-runbook.md`
+  - `foundation/docs/runbooks/phase2-live-shadow-cutover-checklist.md`
 
 ## 검증 결과
 - pipeline draft 실행 성공
@@ -54,6 +61,8 @@
   - 문서/CSV 입력 경로 존재 시 실파일 우선 ingestion 동작 확인
 - replay 스크립트 검증
   - quarantine 입력 0건 기준 replay 결과 0건, unresolved 0건 확인
+- sample readiness 스크립트 검증
+  - 연속 성공 streak 계산 및 readiness 리포트 출력 확인
 
 ## 리스크/이슈
 - API 응답 스키마가 공급자별로 다를 수 있어 field mapping 표준화 추가 필요

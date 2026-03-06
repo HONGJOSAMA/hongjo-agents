@@ -14,6 +14,7 @@ PIPELINE_MODE=live node foundation/ops/pipelines/check_phase2_env.mjs
 
 node foundation/ops/pipelines/run_phase2_pipeline_draft.mjs
 node foundation/ops/pipelines/replay_quarantine.mjs
+node foundation/ops/pipelines/calc_sample_streak.mjs
 ```
 
 품질 게이트 임계치(환경변수):
@@ -54,10 +55,13 @@ node foundation/ops/pipelines/replay_quarantine.mjs
 - `foundation/evaluation/metrics/data_quality_report.md`
 - `foundation/evaluation/metrics/data_quality_summary.json`
 - `foundation/evaluation/metrics/quarantine-replay-report.md`
+- `foundation/evaluation/metrics/sample-mode-readiness.md`
+- `foundation/evaluation/metrics/sample-mode-readiness.json`
 
 ## 자동화
 - GitHub Actions: `.github/workflows/phase2-pipeline-daily.yml`
 - 매일 UTC 00:15 실행 + 수동 실행(`workflow_dispatch`) 지원
+- 샘플 연속성 체크: `.github/workflows/phase2-sample-readiness.yml`
 
 ## GitHub Secrets/Variables 설정
 - Secrets:
@@ -71,5 +75,5 @@ node foundation/ops/pipelines/replay_quarantine.mjs
   - `PIPELINE_DEFAULT_DOMAIN_KEY`
 
 ## 현재 범위
-- 커넥터 실구현 전 단계
-- schema-validation 샘플을 기반으로 정규화/품질계산만 수행
+- API/문서/CSV 실입력 모드 기본 구현 완료(입력 부재 시 샘플 폴백)
+- shadow mode 진입 전 준비조건(연속성/재처리/컷오버 체크리스트) 운영 중
