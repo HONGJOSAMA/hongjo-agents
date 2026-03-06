@@ -1,0 +1,42 @@
+name: phase3-domain-agents-smoke
+
+on:
+  pull_request:
+    paths:
+      - "agents/**"
+      - "foundation/data/normalized/**"
+      - "foundation/ontology/**"
+      - "multi_agent_plan.md"
+  push:
+    branches:
+      - main
+    paths:
+      - "agents/**"
+      - "foundation/data/normalized/**"
+      - "foundation/ontology/**"
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run domain agent smoke
+        run: node agents/run_all_domain_agents.mjs
+
+      - name: Upload domain agent artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase3-domain-agent-artifacts
+          path: |
+            foundation/evaluation/agents
+            foundation/evaluation/metrics/phase3-domain-agent-smoke.md
+            foundation/evaluation/metrics/phase3-domain-agent-smoke.json

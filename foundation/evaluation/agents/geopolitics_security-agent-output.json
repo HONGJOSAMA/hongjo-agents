@@ -1,0 +1,86 @@
+{
+  "agentId": "geopolitics-security-agent-v1",
+  "domainKey": "geopolitics_security",
+  "displayName": "Geopolitics & Security Agent",
+  "generatedAt": "2026-03-06T04:31:03.446Z",
+  "input": {
+    "normalizedSource": "foundation/data/normalized/phase2-normalized-sample.jsonl",
+    "rowCount": 13,
+    "entityTypeBreakdown": {
+      "Observation": 5,
+      "Hypothesis": 4,
+      "Prediction": 4
+    }
+  },
+  "rules": [
+    "prioritize escalation and posture-change signals",
+    "treat conflicting low-trust signals as cautionary evidence",
+    "return at least 3 evidence records"
+  ],
+  "hypothesis": {
+    "id": "geopolitics_security-hypothesis-1772771463446",
+    "organizationId": "org-demo-001",
+    "domainKey": "geopolitics_security",
+    "claim": "Geopolitical and security signals indicate elevated near-term disruption risk.",
+    "assumptions": [
+      "normalized observations remain directionally consistent",
+      "sample ingestion quality stays above threshold",
+      "no contradictory high-trust signal dominates the domain stream"
+    ],
+    "createdAt": "2026-03-06T04:31:03.446Z",
+    "confidence": 0.72,
+    "linkedObservationIds": [
+      "obs-003",
+      "obs-008",
+      "obs-013"
+    ]
+  },
+  "prediction": {
+    "id": "geopolitics_security-prediction-1772771463446",
+    "organizationId": "org-demo-001",
+    "domainKey": "geopolitics_security",
+    "runKey": "geopolitics_security-run-1772771463446",
+    "horizonValue": 21,
+    "horizonUnit": "day",
+    "probability": 0.72,
+    "confidence": 0.72,
+    "modelVersion": "phase3-domain-v1",
+    "promptHash": "geopolitics-security-phase3-v1",
+    "createdAt": "2026-03-06T04:31:03.446Z"
+  },
+  "evidence": [
+    {
+      "id": "geopolitics_security-prediction-1772771463446-evidence-1",
+      "organizationId": "org-demo-001",
+      "predictionId": "geopolitics_security-prediction-1772771463446",
+      "sourceUrl": "urn:observation:obs-003",
+      "sourceTitle": "source-3",
+      "trustScore": 0.5,
+      "freshness": "fresh",
+      "excerpt": "signal-3",
+      "createdAt": "2026-03-06T04:31:03.446Z"
+    },
+    {
+      "id": "geopolitics_security-prediction-1772771463446-evidence-2",
+      "organizationId": "org-demo-001",
+      "predictionId": "geopolitics_security-prediction-1772771463446",
+      "sourceUrl": "urn:observation:obs-008",
+      "sourceTitle": "source-3",
+      "trustScore": 0.5,
+      "freshness": "fresh",
+      "excerpt": "signal-8",
+      "createdAt": "2026-03-06T04:31:03.446Z"
+    },
+    {
+      "id": "geopolitics_security-prediction-1772771463446-evidence-3",
+      "organizationId": "org-demo-001",
+      "predictionId": "geopolitics_security-prediction-1772771463446",
+      "sourceUrl": "urn:observation:obs-013",
+      "sourceTitle": "source-3",
+      "trustScore": 0.5,
+      "freshness": "fresh",
+      "excerpt": "signal-13",
+      "createdAt": "2026-03-06T04:31:03.446Z"
+    }
+  ]
+}
