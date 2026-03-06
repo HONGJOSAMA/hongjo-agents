@@ -421,3 +421,27 @@
 ### 판단 근거
 - 지금 필요한 것은 완전한 ML 오케스트레이터가 아니라, Phase 5/6/7이 기대할 수 있는 안정된 실행 출력이다.
 - weighting/dissent/fallback을 먼저 고정하면 이후 calibration과 UI 연결이 훨씬 단순해진다.
+
+---
+
+## 18단계. calibration/API/meta-agent draft 추가
+
+### 발견한 점
+- Phase 4 실행은 가능해졌지만 calibration 계층, `specialforce` summary API 규격, meta-agent 입력 접점이 아직 비어 있었다.
+- 이 셋이 없으면 Phase 5 설명가능성, Phase 6 평가, `specialforce` UI 연결이 각각 따로 흔들릴 가능성이 높았다.
+
+### 수정 사항
+- 파일: `foundation/orchestrator/calibration/run_calibration_v1.mjs`
+  - brier/ECE 계산 및 calibrated probability/confidence 출력 추가
+- 파일: `foundation/orchestrator/meta_agents/input_contract_v1.json`
+  - `Uncertainty`, `Adversarial`, `Policy` 입력 계약 초안 추가
+- 파일: `foundation/orchestrator/meta_agents/build_meta_agent_input_v1.mjs`
+  - orchestrator output + calibration output을 meta-agent 입력으로 변환
+- 파일: `foundation/docs/specialforce-prediction-summary-api-v1.md`
+  - AAR 화면 prediction summary 카드용 API 명세 초안 추가
+- 파일: `.github/workflows/phase4-orchestrator-smoke.yml`
+  - calibration/meta-agent smoke까지 확장
+
+### 판단 근거
+- calibration은 지금 단계에서 고급 모델보다 “계약과 지표가 고정되는 것”이 더 중요하다.
+- API 명세와 meta-agent 입력을 먼저 고정해 두면, 이후 실행체를 추가할 때 프런트/백/평가가 같은 계약을 보게 된다.

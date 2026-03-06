@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "phase4-meta-agent-input/v1",
+  "organizationId": "org-demo-001",
+  "context": {
+    "trainingSessionId": "session-01",
+    "aarReportId": "aar-01",
+    "selectedPolicyRule": "minimax_regret"
+  },
+  "uncertaintyAgent": {
+    "finalProbability": 0.72,
+    "finalConfidence": 0.72,
+    "calibratedProbability": 0.687,
+    "ece": 0.12,
+    "brierScore": 0.2544,
+    "dissentCount": 5
+  },
+  "adversarialAgent": {
+    "highestRiskDomain": "cyber_information",
+    "highestRiskProbability": 0.6796,
+    "topEvidencePack": [
+      "high-risk but sub-critical confidence"
+    ]
+  },
+  "policyAgent": {
+    "actionItemIds": [
+      "action-001",
+      "action-002",
+      "action-003",
+      "action-004",
+      "action-005"
+    ],
+    "fallbackActivated": false,
+    "recommendedMode": "standard_monitoring"
+  }
+}

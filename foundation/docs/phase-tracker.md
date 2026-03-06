@@ -94,3 +94,6 @@
 - 2026-03-06: orchestrator dissent log 생성기 추가 (`foundation/orchestrator/dissent/generate_dissent_log_v1.mjs`)
 - 2026-03-06: orchestrator run/output 계약 추가 (`run_orchestrator_v1.mjs`, `output_contract_v1.json`)
 - 2026-03-06: Phase 4 smoke 워크플로우 추가 (`.github/workflows/phase4-orchestrator-smoke.yml`)
+- 2026-03-06: calibration draft 추가 (`foundation/orchestrator/calibration/*`)
+- 2026-03-06: meta-agent input contract draft 추가 (`foundation/orchestrator/meta_agents/*`)
+- 2026-03-06: `specialforce` prediction summary API 명세 초안 추가 (`foundation/docs/specialforce-prediction-summary-api-v1.md`)
