@@ -8,7 +8,7 @@
 | Phase 0 | 홍승현 / Codex | 2026-03-05 | 2026-03-06 | done | - | 2026-03-05 |
 | Phase 1 | 홍승현 / Codex | 2026-03-05 | 2026-03-07 | done | - | 2026-03-06 |
 | Phase 2 | 홍승현 / Codex | 2026-03-06 | 2026-03-09 | in_progress | - | 2026-03-06 |
-| Phase 3 | 홍승현 / Codex | TBD | TBD | pending | - | 2026-03-05 |
+| Phase 3 | 홍승현 / Codex | 2026-03-06 | 2026-03-10 | in_progress | - | 2026-03-06 |
 | Phase 4 | 홍승현 / Codex | TBD | TBD | pending | - | 2026-03-05 |
 | Phase 5 | 홍승현 / Codex | TBD | TBD | pending | - | 2026-03-05 |
 | Phase 6 | 홍승현 / Codex | TBD | TBD | pending | - | 2026-03-05 |
@@ -75,3 +75,10 @@
 - 2026-03-06: phase2 보안 스캔 자동화 추가 (`run_phase2_security_scan.mjs`, `phase2-security-scan-report.{md,json}`)
 - 2026-03-06: phase2 shadow health 요약 자동화 추가 (`generate_phase2_shadow_health.mjs`, `phase2-shadow-health.yml`)
 - 2026-03-06: phase2 domain health 자동화 추가 (`generate_phase2_domain_health.mjs`, `phase2-domain-health.{md,json}`)
+
+## Phase 3 Evidence (실행 추적)
+
+- 2026-03-06: 5도메인 에이전트 골격 추가 (`agents/*/agent.mjs`)
+- 2026-03-06: 도메인 계약 파일 추가 (`agents/*/contract.json`)
+- 2026-03-06: 공통 실행 베이스 및 smoke 러너 추가 (`agents/common/base_agent.mjs`, `agents/run_all_domain_agents.mjs`)
+- 2026-03-06: Phase 3 smoke 워크플로우 추가 (`.github/workflows/phase3-domain-agents-smoke.yml`)

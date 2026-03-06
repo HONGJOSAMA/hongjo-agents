@@ -1,0 +1,17 @@
+{
+  "agentId": "geopolitics-security-agent-v1",
+  "domainKey": "geopolitics_security",
+  "input": {
+    "source": "foundation/data/normalized/phase2-normalized-sample.jsonl",
+    "requiredFields": ["organizationId", "domainKey", "eventTime", "raw.id", "quality.confidence"]
+  },
+  "output": {
+    "required": ["hypothesis", "prediction", "evidence"],
+    "minimumEvidence": 3
+  },
+  "rules": [
+    "focus on geopolitics_security observations only",
+    "prediction probability must be between 0 and 1",
+    "return traceable evidence ids"
+  ]
+}

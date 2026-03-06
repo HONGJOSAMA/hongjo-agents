@@ -1,0 +1,17 @@
+{
+  "agentId": "macroeconomy-agent-v1",
+  "domainKey": "macroeconomy",
+  "input": {
+    "source": "foundation/data/normalized/phase2-normalized-sample.jsonl",
+    "requiredFields": ["organizationId", "domainKey", "eventTime", "raw.id", "quality.confidence"]
+  },
+  "output": {
+    "required": ["hypothesis", "prediction", "evidence"],
+    "minimumEvidence": 3
+  },
+  "rules": [
+    "focus on macroeconomic observations only",
+    "prediction probability must be between 0 and 1",
+    "return traceable evidence ids"
+  ]
+}

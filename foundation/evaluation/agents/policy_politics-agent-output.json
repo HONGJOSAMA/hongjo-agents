@@ -1,0 +1,86 @@
+{
+  "agentId": "policy-politics-agent-v1",
+  "domainKey": "policy_politics",
+  "displayName": "Policy & Politics Agent",
+  "generatedAt": "2026-03-06T04:31:03.446Z",
+  "input": {
+    "normalizedSource": "foundation/data/normalized/phase2-normalized-sample.jsonl",
+    "rowCount": 13,
+    "entityTypeBreakdown": {
+      "Observation": 5,
+      "Hypothesis": 4,
+      "Prediction": 4
+    }
+  },
+  "rules": [
+    "prioritize rule/policy/regulatory signals",
+    "surface policy timing risk before confidence uplift",
+    "return at least 3 evidence records"
+  ],
+  "hypothesis": {
+    "id": "policy_politics-hypothesis-1772771463446",
+    "organizationId": "org-demo-001",
+    "domainKey": "policy_politics",
+    "claim": "Policy and political signals point to short-cycle rule or sentiment shifts.",
+    "assumptions": [
+      "normalized observations remain directionally consistent",
+      "sample ingestion quality stays above threshold",
+      "no contradictory high-trust signal dominates the domain stream"
+    ],
+    "createdAt": "2026-03-06T04:31:03.446Z",
+    "confidence": 0.72,
+    "linkedObservationIds": [
+      "obs-002",
+      "obs-007",
+      "obs-012"
+    ]
+  },
+  "prediction": {
+    "id": "policy_politics-prediction-1772771463446",
+    "organizationId": "org-demo-001",
+    "domainKey": "policy_politics",
+    "runKey": "policy_politics-run-1772771463446",
+    "horizonValue": 14,
+    "horizonUnit": "day",
+    "probability": 0.72,
+    "confidence": 0.72,
+    "modelVersion": "phase3-domain-v1",
+    "promptHash": "policy-politics-phase3-v1",
+    "createdAt": "2026-03-06T04:31:03.446Z"
+  },
+  "evidence": [
+    {
+      "id": "policy_politics-prediction-1772771463446-evidence-1",
+      "organizationId": "org-demo-001",
+      "predictionId": "policy_politics-prediction-1772771463446",
+      "sourceUrl": "urn:observation:obs-002",
+      "sourceTitle": "source-2",
+      "trustScore": 0.5,
+      "freshness": "fresh",
+      "excerpt": "signal-2",
+      "createdAt": "2026-03-06T04:31:03.446Z"
+    },
+    {
+      "id": "policy_politics-prediction-1772771463446-evidence-2",
+      "organizationId": "org-demo-001",
+      "predictionId": "policy_politics-prediction-1772771463446",
+      "sourceUrl": "urn:observation:obs-007",
+      "sourceTitle": "source-2",
+      "trustScore": 0.5,
+      "freshness": "fresh",
+      "excerpt": "signal-7",
+      "createdAt": "2026-03-06T04:31:03.446Z"
+    },
+    {
+      "id": "policy_politics-prediction-1772771463446-evidence-3",
+      "organizationId": "org-demo-001",
+      "predictionId": "policy_politics-prediction-1772771463446",
+      "sourceUrl": "urn:observation:obs-012",
+      "sourceTitle": "source-2",
+      "trustScore": 0.5,
+      "freshness": "fresh",
+      "excerpt": "signal-12",
+      "createdAt": "2026-03-06T04:31:03.446Z"
+    }
+  ]
+}

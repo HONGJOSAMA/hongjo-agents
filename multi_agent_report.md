@@ -325,3 +325,23 @@
 - 로컬 샘플 기준 5도메인 각 13건
 - `phase2-domain-health` pass
 - max share 20%, missing domains 0 확인
+
+---
+
+## 14단계. Phase 3 domain agents v1 착수
+
+### 발견한 점
+- 저장소에는 아직 실제 `agents/` 실행 구조가 없어서 Phase 3가 문서 상태에 머물러 있었다.
+
+### 수정 사항
+- 경로: `agents/`
+  - 5도메인 에이전트 골격 추가
+  - 도메인별 `contract.json` 추가
+  - 공통 베이스/러너 추가
+- 경로: `.github/workflows/phase3-domain-agents-smoke.yml`
+  - PR/main push 시 domain agent smoke 실행
+- 경로: `foundation/docs/phase-reports/phase-03-report.md`
+  - Phase 3 진행 리포트 신규 생성
+
+### 판단 근거
+- Phase 3 완료조건의 첫 번째는 “각 도메인 독립 실행”이므로, 최소 실행형 에이전트 골격을 먼저 고정하는 것이 맞다.

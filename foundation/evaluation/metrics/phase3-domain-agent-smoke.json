@@ -1,0 +1,39 @@
+{
+  "pass": true,
+  "successRate": 100,
+  "totalAgents": 5,
+  "failures": [],
+  "results": [
+    {
+      "domainKey": "macroeconomy",
+      "valid": true,
+      "evidenceCount": 3,
+      "outputPath": "foundation/evaluation/agents/macroeconomy-agent-output.json"
+    },
+    {
+      "domainKey": "policy_politics",
+      "valid": true,
+      "evidenceCount": 3,
+      "outputPath": "foundation/evaluation/agents/policy_politics-agent-output.json"
+    },
+    {
+      "domainKey": "geopolitics_security",
+      "valid": true,
+      "evidenceCount": 3,
+      "outputPath": "foundation/evaluation/agents/geopolitics_security-agent-output.json"
+    },
+    {
+      "domainKey": "supply_chain_trade",
+      "valid": true,
+      "evidenceCount": 3,
+      "outputPath": "foundation/evaluation/agents/supply_chain_trade-agent-output.json"
+    },
+    {
+      "domainKey": "cyber_information",
+      "valid": true,
+      "evidenceCount": 3,
+      "outputPath": "foundation/evaluation/agents/cyber_information-agent-output.json"
+    }
+  ],
+  "evaluatedAt": "2026-03-06T04:31:03.447Z"
+}

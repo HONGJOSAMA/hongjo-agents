@@ -30,7 +30,7 @@
 | Phase 0 | 홍승현 / Codex | 2026-03-05 | 2026-03-06 | done | - | 2026-03-05 |
 | Phase 1 | 홍승현 / Codex | 2026-03-05 | 2026-03-07 | done | - | 2026-03-06 |
 | Phase 2 | 홍승현 / Codex | 2026-03-06 | 2026-03-09 | in_progress | - | 2026-03-06 |
-| Phase 3 | TBD | TBD | TBD | pending | - | 2026-03-05 |
+| Phase 3 | 홍승현 / Codex | 2026-03-06 | 2026-03-10 | in_progress | - | 2026-03-06 |
 | Phase 4 | TBD | TBD | TBD | pending | - | 2026-03-05 |
 | Phase 5 | TBD | TBD | TBD | pending | - | 2026-03-05 |
 | Phase 6 | TBD | TBD | TBD | pending | - | 2026-03-05 |
@@ -802,3 +802,4 @@ hongjo/
 - 2026-03-06 14:36 KST [자동화]: phase2 보안 스캔 스크립트 추가 및 daily/readiness/live-preflight/specialforce-validation 워크플로우 연결
 - 2026-03-06 14:42 KST [자동화]: phase2 shadow health 요약 스크립트/워크플로우 추가 (`generate_phase2_shadow_health.mjs`, `phase2-shadow-health.yml`)
 - 2026-03-06 14:49 KST [자동화]: phase2 domain health 스크립트 추가 및 daily/shadow-health 워크플로우 연결
+- 2026-03-06 15:05 KST [착수]: Phase 3 Domain Agents V1 시작, 5도메인 에이전트 골격/계약/공통 러너 추가
