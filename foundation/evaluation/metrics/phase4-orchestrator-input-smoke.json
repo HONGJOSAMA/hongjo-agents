@@ -1,0 +1,24 @@
+{
+  "pass": true,
+  "schemaVersion": "phase4-orchestrator-input/v1",
+  "evaluatedAt": "2026-03-06T04:58:45.324Z",
+  "failures": [],
+  "aggregate": {
+    "domainCount": 5,
+    "averageProbability": 0.72,
+    "maxRiskLevel": "high",
+    "selectedPolicyRule": "minimax_regret"
+  },
+  "context": {
+    "trainingSessionId": "session-01",
+    "aarReportId": "aar-01",
+    "actionItemIds": [
+      "action-001",
+      "action-002",
+      "action-003",
+      "action-004",
+      "action-005"
+    ],
+    "sourceContext": "foundation/data/specialforce/specialforce-context-sample.json"
+  }
+}

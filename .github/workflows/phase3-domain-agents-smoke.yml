@@ -34,6 +34,12 @@ jobs:
       - name: Run domain agent evaluation
         run: node agents/evaluate_domain_agents.mjs
 
+      - name: Run specialforce context adapter smoke
+        run: node agents/run_domain_agents_from_specialforce_context.mjs
+
+      - name: Build orchestrator input draft
+        run: node foundation/orchestrator/build_orchestrator_input_v1.mjs
+
       - name: Upload domain agent artifacts
         if: always()
         uses: actions/upload-artifact@v4
@@ -45,3 +51,10 @@ jobs:
             foundation/evaluation/metrics/phase3-domain-agent-smoke.json
             foundation/evaluation/metrics/phase3-domain-agent-eval.md
             foundation/evaluation/metrics/phase3-domain-agent-eval.json
+            foundation/evaluation/metrics/phase3-specialforce-adapter-smoke.md
+            foundation/evaluation/metrics/phase3-specialforce-adapter-smoke.json
+            foundation/evaluation/metrics/phase4-orchestrator-input-smoke.md
+            foundation/evaluation/metrics/phase4-orchestrator-input-smoke.json
+            foundation/evaluation/orchestrator/phase4-orchestrator-input-v1.json
+            foundation/data/specialforce/specialforce-context-sample.json
+            foundation/data/normalized/phase3-specialforce-adapter.jsonl

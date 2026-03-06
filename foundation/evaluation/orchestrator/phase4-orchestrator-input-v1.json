@@ -1,0 +1,168 @@
+{
+  "schemaVersion": "phase4-orchestrator-input/v1",
+  "organizationId": "org-demo-001",
+  "context": {
+    "trainingSessionId": "session-01",
+    "aarReportId": "aar-01",
+    "actionItemIds": [
+      "action-001",
+      "action-002",
+      "action-003",
+      "action-004",
+      "action-005"
+    ],
+    "sourceContext": "foundation/data/specialforce/specialforce-context-sample.json"
+  },
+  "aggregate": {
+    "domainCount": 5,
+    "averageProbability": 0.72,
+    "maxRiskLevel": "high",
+    "selectedPolicyRule": "minimax_regret"
+  },
+  "domainRuns": [
+    {
+      "domainKey": "cyber_information",
+      "agentId": "cyber-information-agent-v1",
+      "probability": 0.72,
+      "confidence": 0.72,
+      "riskLevel": "high",
+      "evidenceCount": 3,
+      "outputPath": "foundation/evaluation/agents/specialforce_context/cyber_information-agent-output.json"
+    },
+    {
+      "domainKey": "geopolitics_security",
+      "agentId": "geopolitics-security-agent-v1",
+      "probability": 0.72,
+      "confidence": 0.72,
+      "riskLevel": "high",
+      "evidenceCount": 3,
+      "outputPath": "foundation/evaluation/agents/specialforce_context/geopolitics_security-agent-output.json"
+    },
+    {
+      "domainKey": "macroeconomy",
+      "agentId": "macroeconomy-agent-v1",
+      "probability": 0.72,
+      "confidence": 0.72,
+      "riskLevel": "high",
+      "evidenceCount": 3,
+      "outputPath": "foundation/evaluation/agents/specialforce_context/macroeconomy-agent-output.json"
+    },
+    {
+      "domainKey": "policy_politics",
+      "agentId": "policy-politics-agent-v1",
+      "probability": 0.72,
+      "confidence": 0.72,
+      "riskLevel": "high",
+      "evidenceCount": 3,
+      "outputPath": "foundation/evaluation/agents/specialforce_context/policy_politics-agent-output.json"
+    },
+    {
+      "domainKey": "supply_chain_trade",
+      "agentId": "supply-chain-trade-agent-v1",
+      "probability": 0.72,
+      "confidence": 0.72,
+      "riskLevel": "high",
+      "evidenceCount": 3,
+      "outputPath": "foundation/evaluation/agents/specialforce_context/supply_chain_trade-agent-output.json"
+    }
+  ],
+  "evidencePack": [
+    {
+      "domainKey": "cyber_information",
+      "evidenceId": "cyber_information-prediction-1772773125279-evidence-1",
+      "sourceTitle": "source-5",
+      "trustScore": 0.72,
+      "excerpt": "signal-25"
+    },
+    {
+      "domainKey": "cyber_information",
+      "evidenceId": "cyber_information-prediction-1772773125279-evidence-2",
+      "sourceTitle": "source-5",
+      "trustScore": 0.72,
+      "excerpt": "signal-15"
+    },
+    {
+      "domainKey": "geopolitics_security",
+      "evidenceId": "geopolitics_security-prediction-1772773125192-evidence-1",
+      "sourceTitle": "source-3",
+      "trustScore": 0.72,
+      "excerpt": "signal-23"
+    },
+    {
+      "domainKey": "geopolitics_security",
+      "evidenceId": "geopolitics_security-prediction-1772773125192-evidence-2",
+      "sourceTitle": "source-3",
+      "trustScore": 0.72,
+      "excerpt": "signal-18"
+    },
+    {
+      "domainKey": "macroeconomy",
+      "evidenceId": "macroeconomy-prediction-1772773125105-evidence-1",
+      "sourceTitle": "source-1",
+      "trustScore": 0.72,
+      "excerpt": "signal-21"
+    },
+    {
+      "domainKey": "macroeconomy",
+      "evidenceId": "macroeconomy-prediction-1772773125105-evidence-2",
+      "sourceTitle": "source-1",
+      "trustScore": 0.72,
+      "excerpt": "signal-11"
+    },
+    {
+      "domainKey": "policy_politics",
+      "evidenceId": "policy_politics-prediction-1772773125149-evidence-1",
+      "sourceTitle": "source-2",
+      "trustScore": 0.72,
+      "excerpt": "signal-22"
+    },
+    {
+      "domainKey": "policy_politics",
+      "evidenceId": "policy_politics-prediction-1772773125149-evidence-2",
+      "sourceTitle": "source-2",
+      "trustScore": 0.72,
+      "excerpt": "signal-12"
+    },
+    {
+      "domainKey": "supply_chain_trade",
+      "evidenceId": "supply_chain_trade-prediction-1772773125235-evidence-1",
+      "sourceTitle": "source-4",
+      "trustScore": 0.72,
+      "excerpt": "signal-24"
+    },
+    {
+      "domainKey": "supply_chain_trade",
+      "evidenceId": "supply_chain_trade-prediction-1772773125235-evidence-2",
+      "sourceTitle": "source-4",
+      "trustScore": 0.72,
+      "excerpt": "signal-19"
+    }
+  ],
+  "dissentLog": [
+    {
+      "domainKey": "cyber_information",
+      "reason": "high-risk but sub-critical confidence",
+      "probability": 0.72
+    },
+    {
+      "domainKey": "geopolitics_security",
+      "reason": "high-risk but sub-critical confidence",
+      "probability": 0.72
+    },
+    {
+      "domainKey": "macroeconomy",
+      "reason": "high-risk but sub-critical confidence",
+      "probability": 0.72
+    },
+    {
+      "domainKey": "policy_politics",
+      "reason": "high-risk but sub-critical confidence",
+      "probability": 0.72
+    },
+    {
+      "domainKey": "supply_chain_trade",
+      "reason": "high-risk but sub-critical confidence",
+      "probability": 0.72
+    }
+  ]
+}
