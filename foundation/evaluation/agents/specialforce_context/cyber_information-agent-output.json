@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "phase3-domain-agent-output/v1",
+  "contractVersion": "1.0.0",
+  "agentId": "cyber-information-agent-v1",
+  "domainKey": "cyber_information",
+  "displayName": "Cyber & Information Agent",
+  "generatedAt": "2026-03-06T04:58:45.280Z",
+  "status": "ok",
+  "input": {
+    "normalizedSource": "foundation/data/normalized/phase3-specialforce-adapter.jsonl",
+    "rowCount": 8,
+    "filteredRowCount": 3,
+    "entityTypeBreakdown": {
+      "Observation": 3
+    },
+    "sourceTypeBreakdown": {
+      "api": 3
+    },
+    "signalTypeBreakdown": {
+      "rate_signal": 3
+    },
+    "selectionPolicy": "strict_filter_only",
+    "selectedObservationIds": [
+      "obs-025",
+      "obs-015",
+      "obs-005"
+    ]
+  },
+  "scoring": {
+    "confidence": 0.72,
+    "signalStrength": 0.6,
+    "evidenceStrength": 0.72,
+    "riskLevel": "high"
+  },
+  "trace": {
+    "selectedRuleIds": [
+      "domain_filter",
+      "quality_sort",
+      "cyber_information_focus"
+    ],
+    "fallbackUsed": false,
+    "notes": [
+      "strict domain filter satisfied minimum evidence rows"
+    ]
+  },
+  "validation": {
+    "minimumEvidence": 3,
+    "requiredFieldMissingCount": 0,
+    "schemaCheckPassed": true
+  },
+  "rules": [
+    "prioritize cyber/information integrity observations",
+    "bias toward recent confidence-weighted signals",
+    "return at least 3 evidence records"
+  ],
+  "hypothesis": {
+    "id": "cyber_information-hypothesis-1772773125279",
+    "organizationId": "org-demo-001",
+    "domainKey": "cyber_information",
+    "claim": "Cyber and information-domain signals suggest short-horizon signal integrity risk.",
+    "assumptions": [
+      "normalized observations remain directionally consistent",
+      "sample ingestion quality stays above threshold",
+      "no contradictory high-trust signal dominates the domain stream"
+    ],
+    "createdAt": "2026-03-06T04:58:45.279Z",
+    "confidence": 0.72,
+    "linkedObservationIds": [
+      "obs-025",
+      "obs-015",
+      "obs-005"
+    ]
+  },
+  "prediction": {
+    "id": "cyber_information-prediction-1772773125279",
+    "organizationId": "org-demo-001",
+    "domainKey": "cyber_information",
+    "runKey": "cyber_information-run-1772773125279",
+    "horizonValue": 7,
+    "horizonUnit": "day",
+    "probability": 0.72,
+    "confidence": 0.72,
+    "modelVersion": "phase3-domain-v1",
+    "promptHash": "cyber-information-phase3-v1",
+    "riskLevel": "high",
+    "createdAt": "2026-03-06T04:58:45.280Z"
+  },
+  "evidence": [
+    {
+      "id": "cyber_information-prediction-1772773125279-evidence-1",
+      "organizationId": "org-demo-001",
+      "predictionId": "cyber_information-prediction-1772773125279",
+      "sourceUrl": "urn:observation:obs-025",
+      "sourceTitle": "source-5",
+      "trustScore": 0.72,
+      "freshness": "fresh",
+      "excerpt": "signal-25",
+      "createdAt": "2026-03-06T04:58:45.280Z"
+    },
+    {
+      "id": "cyber_information-prediction-1772773125279-evidence-2",
+      "organizationId": "org-demo-001",
+      "predictionId": "cyber_information-prediction-1772773125279",
+      "sourceUrl": "urn:observation:obs-015",
+      "sourceTitle": "source-5",
+      "trustScore": 0.72,
+      "freshness": "fresh",
+      "excerpt": "signal-15",
+      "createdAt": "2026-03-06T04:58:45.280Z"
+    },
+    {
+      "id": "cyber_information-prediction-1772773125279-evidence-3",
+      "organizationId": "org-demo-001",
+      "predictionId": "cyber_information-prediction-1772773125279",
+      "sourceUrl": "urn:observation:obs-005",
+      "sourceTitle": "source-5",
+      "trustScore": 0.72,
+      "freshness": "fresh",
+      "excerpt": "signal-5",
+      "createdAt": "2026-03-06T04:58:45.280Z"
+    }
+  ]
+}

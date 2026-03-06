@@ -369,3 +369,29 @@
 ### 판단 근거
 - 에이전트가 다음 단계에서 오케스트레이터 입력으로 들어가려면, 출력 스키마와 계약 버전이 먼저 고정돼야 한다.
 - 평가 기준은 “문서 선언”이 아니라 실행 스크립트로 고정해야 회귀 차단이 가능하다.
+
+---
+
+## 16단계. specialforce context adapter + orchestrator input draft
+
+### 발견한 점
+- Phase 3 에이전트는 독립 실행은 가능했지만, 실제 `specialforce` 세션/AAR 문맥이 들어오는 경로와 다음 Phase 4 입력 계약이 비어 있었다.
+- 이 상태로는 Phase 4 착수 시 다시 출력/입력 접점을 재설계해야 해서 드리프트 위험이 있었다.
+
+### 수정 사항
+- 파일: `agents/adapters/generate_specialforce_context_sample.mjs`
+  - normalized sample에서 Session/AAR 기반 sample context 생성
+- 파일: `agents/adapters/adapt_specialforce_context_to_normalized.mjs`
+  - specialforce context를 domain-agent 입력용 normalized jsonl로 변환
+- 파일: `agents/run_domain_agents_from_specialforce_context.mjs`
+  - context adapter -> domain agents -> adapter smoke report까지 일괄 실행
+- 파일: `foundation/orchestrator/input_contract_v1.json`
+  - Phase 4 오케스트레이터 입력 계약 초안 작성
+- 파일: `foundation/orchestrator/build_orchestrator_input_v1.mjs`
+  - domain outputs를 aggregate/domainRuns/evidencePack/dissentLog 형태로 변환
+- 파일: `.github/workflows/phase3-domain-agents-smoke.yml`
+  - adapter smoke + orchestrator input draft 생성까지 확장
+
+### 판단 근거
+- 지금 접점을 고정해두면 Phase 4는 weighting/dissent 실행 로직에만 집중할 수 있다.
+- `specialforce` 실 API 연동 전에도 sample context로 end-to-end 계약 검증을 계속 돌릴 수 있다.

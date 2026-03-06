@@ -1,0 +1,45 @@
+{
+  "pass": true,
+  "contextPath": "foundation/data/specialforce/specialforce-context-sample.json",
+  "normalizedPath": "foundation/data/normalized/phase3-specialforce-adapter.jsonl",
+  "outputDir": "foundation/evaluation/agents/specialforce_context",
+  "evaluatedAt": "2026-03-06T04:58:45.282Z",
+  "results": [
+    {
+      "domainKey": "macroeconomy",
+      "pass": true,
+      "outputPath": "foundation/evaluation/agents/specialforce_context/macroeconomy-agent-output.json",
+      "trainingSessionId": "session-01",
+      "aarReportId": "aar-01"
+    },
+    {
+      "domainKey": "policy_politics",
+      "pass": true,
+      "outputPath": "foundation/evaluation/agents/specialforce_context/policy_politics-agent-output.json",
+      "trainingSessionId": "session-01",
+      "aarReportId": "aar-01"
+    },
+    {
+      "domainKey": "geopolitics_security",
+      "pass": true,
+      "outputPath": "foundation/evaluation/agents/specialforce_context/geopolitics_security-agent-output.json",
+      "trainingSessionId": "session-01",
+      "aarReportId": "aar-01"
+    },
+    {
+      "domainKey": "supply_chain_trade",
+      "pass": true,
+      "outputPath": "foundation/evaluation/agents/specialforce_context/supply_chain_trade-agent-output.json",
+      "trainingSessionId": "session-01",
+      "aarReportId": "aar-01"
+    },
+    {
+      "domainKey": "cyber_information",
+      "pass": true,
+      "outputPath": "foundation/evaluation/agents/specialforce_context/cyber_information-agent-output.json",
+      "trainingSessionId": "session-01",
+      "aarReportId": "aar-01"
+    }
+  ],
+  "failures": []
+}

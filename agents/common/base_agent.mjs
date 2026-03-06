@@ -5,6 +5,7 @@ import path from "node:path";
 
 const ROOT_DIR = process.cwd();
 const DEFAULT_INPUT = "foundation/data/normalized/phase2-normalized-sample.jsonl";
+const DEFAULT_OUTPUT_DIR = "foundation/evaluation/agents";
 const OUTPUT_SCHEMA_VERSION = "phase3-domain-agent-output/v1";
 const CONTRACT_VERSION = "1.0.0";
 
@@ -270,7 +271,7 @@ export async function runDomainAgent(config) {
 }
 
 export function writeAgentOutput(result) {
-  const outputDir = path.resolve(ROOT_DIR, "foundation/evaluation/agents");
+  const outputDir = path.resolve(ROOT_DIR, process.env.DOMAIN_AGENT_OUTPUT_DIR || DEFAULT_OUTPUT_DIR);
   fs.mkdirSync(outputDir, { recursive: true });
   const outputPath = path.resolve(outputDir, `${result.domainKey}-agent-output.json`);
   fs.writeFileSync(outputPath, `${JSON.stringify(result, null, 2)}\n`, "utf8");

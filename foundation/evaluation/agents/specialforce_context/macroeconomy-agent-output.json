@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "phase3-domain-agent-output/v1",
+  "contractVersion": "1.0.0",
+  "agentId": "macroeconomy-agent-v1",
+  "domainKey": "macroeconomy",
+  "displayName": "Macroeconomy Agent",
+  "generatedAt": "2026-03-06T04:58:45.105Z",
+  "status": "ok",
+  "input": {
+    "normalizedSource": "foundation/data/normalized/phase3-specialforce-adapter.jsonl",
+    "rowCount": 8,
+    "filteredRowCount": 3,
+    "entityTypeBreakdown": {
+      "Observation": 3
+    },
+    "sourceTypeBreakdown": {
+      "api": 3
+    },
+    "signalTypeBreakdown": {
+      "rate_signal": 3
+    },
+    "selectionPolicy": "strict_filter_only",
+    "selectedObservationIds": [
+      "obs-021",
+      "obs-011",
+      "obs-001"
+    ]
+  },
+  "scoring": {
+    "confidence": 0.72,
+    "signalStrength": 0.6,
+    "evidenceStrength": 0.72,
+    "riskLevel": "high"
+  },
+  "trace": {
+    "selectedRuleIds": [
+      "domain_filter",
+      "quality_sort",
+      "macroeconomy_focus"
+    ],
+    "fallbackUsed": false,
+    "notes": [
+      "strict domain filter satisfied minimum evidence rows"
+    ]
+  },
+  "validation": {
+    "minimumEvidence": 3,
+    "requiredFieldMissingCount": 0,
+    "schemaCheckPassed": true
+  },
+  "rules": [
+    "prioritize rate/inflation/growth signals",
+    "treat low-confidence signals as supporting only",
+    "return at least 3 evidence records"
+  ],
+  "hypothesis": {
+    "id": "macroeconomy-hypothesis-1772773125104",
+    "organizationId": "org-demo-001",
+    "domainKey": "macroeconomy",
+    "claim": "Macroeconomic signals imply short-horizon pressure on operating conditions.",
+    "assumptions": [
+      "normalized observations remain directionally consistent",
+      "sample ingestion quality stays above threshold",
+      "no contradictory high-trust signal dominates the domain stream"
+    ],
+    "createdAt": "2026-03-06T04:58:45.104Z",
+    "confidence": 0.72,
+    "linkedObservationIds": [
+      "obs-021",
+      "obs-011",
+      "obs-001"
+    ]
+  },
+  "prediction": {
+    "id": "macroeconomy-prediction-1772773125105",
+    "organizationId": "org-demo-001",
+    "domainKey": "macroeconomy",
+    "runKey": "macroeconomy-run-1772773125105",
+    "horizonValue": 30,
+    "horizonUnit": "day",
+    "probability": 0.72,
+    "confidence": 0.72,
+    "modelVersion": "phase3-domain-v1",
+    "promptHash": "macroeconomy-phase3-v1",
+    "riskLevel": "high",
+    "createdAt": "2026-03-06T04:58:45.105Z"
+  },
+  "evidence": [
+    {
+      "id": "macroeconomy-prediction-1772773125105-evidence-1",
+      "organizationId": "org-demo-001",
+      "predictionId": "macroeconomy-prediction-1772773125105",
+      "sourceUrl": "urn:observation:obs-021",
+      "sourceTitle": "source-1",
+      "trustScore": 0.72,
+      "freshness": "fresh",
+      "excerpt": "signal-21",
+      "createdAt": "2026-03-06T04:58:45.105Z"
+    },
+    {
+      "id": "macroeconomy-prediction-1772773125105-evidence-2",
+      "organizationId": "org-demo-001",
+      "predictionId": "macroeconomy-prediction-1772773125105",
+      "sourceUrl": "urn:observation:obs-011",
+      "sourceTitle": "source-1",
+      "trustScore": 0.72,
+      "freshness": "fresh",
+      "excerpt": "signal-11",
+      "createdAt": "2026-03-06T04:58:45.105Z"
+    },
+    {
+      "id": "macroeconomy-prediction-1772773125105-evidence-3",
+      "organizationId": "org-demo-001",
+      "predictionId": "macroeconomy-prediction-1772773125105",
+      "sourceUrl": "urn:observation:obs-001",
+      "sourceTitle": "source-1",
+      "trustScore": 0.72,
+      "freshness": "fresh",
+      "excerpt": "signal-1",
+      "createdAt": "2026-03-06T04:58:45.105Z"
+    }
+  ]
+}

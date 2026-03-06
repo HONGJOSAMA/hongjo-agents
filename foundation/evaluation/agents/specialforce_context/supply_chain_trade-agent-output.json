@@ -1,0 +1,127 @@
+{
+  "schemaVersion": "phase3-domain-agent-output/v1",
+  "contractVersion": "1.0.0",
+  "agentId": "supply-chain-trade-agent-v1",
+  "domainKey": "supply_chain_trade",
+  "displayName": "Supply Chain & Trade Agent",
+  "generatedAt": "2026-03-06T04:58:45.235Z",
+  "status": "ok",
+  "input": {
+    "normalizedSource": "foundation/data/normalized/phase3-specialforce-adapter.jsonl",
+    "rowCount": 8,
+    "filteredRowCount": 5,
+    "entityTypeBreakdown": {
+      "Observation": 5
+    },
+    "sourceTypeBreakdown": {
+      "document": 3,
+      "api": 2
+    },
+    "signalTypeBreakdown": {
+      "event_signal": 3,
+      "rate_signal": 2
+    },
+    "selectionPolicy": "strict_filter_only",
+    "selectedObservationIds": [
+      "obs-024",
+      "obs-019",
+      "obs-014",
+      "obs-009",
+      "obs-004"
+    ]
+  },
+  "scoring": {
+    "confidence": 0.72,
+    "signalStrength": 1,
+    "evidenceStrength": 0.72,
+    "riskLevel": "high"
+  },
+  "trace": {
+    "selectedRuleIds": [
+      "domain_filter",
+      "quality_sort",
+      "supply_chain_trade_focus"
+    ],
+    "fallbackUsed": false,
+    "notes": [
+      "strict domain filter satisfied minimum evidence rows"
+    ]
+  },
+  "validation": {
+    "minimumEvidence": 3,
+    "requiredFieldMissingCount": 0,
+    "schemaCheckPassed": true
+  },
+  "rules": [
+    "prioritize logistics and trade friction signals",
+    "prefer source recency when evidence counts tie",
+    "return at least 3 evidence records"
+  ],
+  "hypothesis": {
+    "id": "supply_chain_trade-hypothesis-1772773125235",
+    "organizationId": "org-demo-001",
+    "domainKey": "supply_chain_trade",
+    "claim": "Trade and logistics signals imply near-term movement in supply reliability.",
+    "assumptions": [
+      "normalized observations remain directionally consistent",
+      "sample ingestion quality stays above threshold",
+      "no contradictory high-trust signal dominates the domain stream"
+    ],
+    "createdAt": "2026-03-06T04:58:45.235Z",
+    "confidence": 0.72,
+    "linkedObservationIds": [
+      "obs-024",
+      "obs-019",
+      "obs-014"
+    ]
+  },
+  "prediction": {
+    "id": "supply_chain_trade-prediction-1772773125235",
+    "organizationId": "org-demo-001",
+    "domainKey": "supply_chain_trade",
+    "runKey": "supply_chain_trade-run-1772773125235",
+    "horizonValue": 21,
+    "horizonUnit": "day",
+    "probability": 0.72,
+    "confidence": 0.72,
+    "modelVersion": "phase3-domain-v1",
+    "promptHash": "supply-chain-trade-phase3-v1",
+    "riskLevel": "high",
+    "createdAt": "2026-03-06T04:58:45.235Z"
+  },
+  "evidence": [
+    {
+      "id": "supply_chain_trade-prediction-1772773125235-evidence-1",
+      "organizationId": "org-demo-001",
+      "predictionId": "supply_chain_trade-prediction-1772773125235",
+      "sourceUrl": "urn:observation:obs-024",
+      "sourceTitle": "source-4",
+      "trustScore": 0.72,
+      "freshness": "fresh",
+      "excerpt": "signal-24",
+      "createdAt": "2026-03-06T04:58:45.235Z"
+    },
+    {
+      "id": "supply_chain_trade-prediction-1772773125235-evidence-2",
+      "organizationId": "org-demo-001",
+      "predictionId": "supply_chain_trade-prediction-1772773125235",
+      "sourceUrl": "urn:observation:obs-019",
+      "sourceTitle": "source-4",
+      "trustScore": 0.72,
+      "freshness": "fresh",
+      "excerpt": "signal-19",
+      "createdAt": "2026-03-06T04:58:45.235Z"
+    },
+    {
+      "id": "supply_chain_trade-prediction-1772773125235-evidence-3",
+      "organizationId": "org-demo-001",
+      "predictionId": "supply_chain_trade-prediction-1772773125235",
+      "sourceUrl": "urn:observation:obs-014",
+      "sourceTitle": "source-4",
+      "trustScore": 0.72,
+      "freshness": "fresh",
+      "excerpt": "signal-14",
+      "createdAt": "2026-03-06T04:58:45.235Z"
+    }
+  ]
+}

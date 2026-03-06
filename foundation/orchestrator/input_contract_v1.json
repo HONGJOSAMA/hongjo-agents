@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "phase4-orchestrator-input/v1",
+  "requiredTopLevel": [
+    "schemaVersion",
+    "organizationId",
+    "context",
+    "aggregate",
+    "domainRuns",
+    "evidencePack",
+    "dissentLog"
+  ],
+  "requiredContextFields": [
+    "trainingSessionId",
+    "aarReportId",
+    "actionItemIds",
+    "sourceContext"
+  ],
+  "requiredAggregateFields": [
+    "domainCount",
+    "averageProbability",
+    "maxRiskLevel",
+    "selectedPolicyRule"
+  ],
+  "requiredDomainRunFields": [
+    "domainKey",
+    "agentId",
+    "probability",
+    "confidence",
+    "riskLevel",
+    "evidenceCount",
+    "outputPath"
+  ],
+  "requiredEvidencePackFields": [
+    "domainKey",
+    "evidenceId",
+    "sourceTitle",
+    "trustScore",
+    "excerpt"
+  ]
+}

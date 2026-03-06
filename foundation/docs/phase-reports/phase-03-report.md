@@ -23,6 +23,13 @@
 - 도메인별 입력 필터/회귀 베이스라인 추가
   - `agents/regression_baseline.json`
   - `agents/evaluate_domain_agents.mjs`
+- `specialforce` Session/AAR 문맥 어댑터 추가
+  - `agents/adapters/generate_specialforce_context_sample.mjs`
+  - `agents/adapters/adapt_specialforce_context_to_normalized.mjs`
+  - `agents/run_domain_agents_from_specialforce_context.mjs`
+- Phase 4 오케스트레이터 입력 계약 초안 추가
+  - `foundation/orchestrator/input_contract_v1.json`
+  - `foundation/orchestrator/build_orchestrator_input_v1.mjs`
 - Phase 3 smoke 워크플로우 추가
   - `.github/workflows/phase3-domain-agents-smoke.yml`
 
@@ -32,12 +39,14 @@
 - `foundation/evaluation/metrics/phase3-domain-agent-smoke.{md,json}` 생성 확인
 - `foundation/evaluation/metrics/phase3-domain-agent-eval.{md,json}` 생성 확인
 - schema/contract/evaluation/regression 기준 pass 확인
+- `specialforce` context adapter smoke 생성 확인
+- orchestrator input draft json/report 생성 확인
 
 ## 리스크/이슈
 - 현재는 heuristic bootstrap 단계라 실제 specialforce Session/AAR 문맥 입력은 아직 미연결
 - 메타 에이전트(`Uncertainty`, `Adversarial`, `Policy`)는 미구현
 
 ## 다음 작업
-- specialforce AAR/ActionItem 문맥 입력 어댑터 연결
 - 메타 에이전트 3종 골격 추가
-- 에이전트 출력 스키마를 orchestrator 입력 계약과 연결
+- 오케스트레이터 weighting/dissent 실행 로직 추가
+- specialforce 실제 Session/AAR API payload와 어댑터 필드 매핑 정교화

@@ -85,3 +85,5 @@
 - 2026-03-06: 공통 출력 스키마/계약 버전 고정 (`agents/common/output_schema_v1.json`, `contractVersion=1.0.0`)
 - 2026-03-06: 도메인별 입력 필터 강화 및 trace 규칙 고정 (`agents/*/agent.mjs`, `agents/*/contract.json`)
 - 2026-03-06: domain agent 평가/회귀 스크립트 추가 (`agents/evaluate_domain_agents.mjs`, `agents/regression_baseline.json`)
+- 2026-03-06: `specialforce` Session/AAR context sample adapter 추가 (`agents/adapters/*`, `agents/run_domain_agents_from_specialforce_context.mjs`)
+- 2026-03-06: Phase 4 orchestrator 입력 계약 초안 추가 (`foundation/orchestrator/input_contract_v1.json`, `build_orchestrator_input_v1.mjs`)
