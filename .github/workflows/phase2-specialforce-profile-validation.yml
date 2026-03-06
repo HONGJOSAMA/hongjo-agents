@@ -45,6 +45,11 @@ jobs:
       - name: Run phase2 pipeline with specialforce profile
         run: node foundation/ops/pipelines/run_phase2_pipeline_draft.mjs
 
+      - name: Run security scan (strict)
+        env:
+          PHASE2_SECURITY_SCAN_STRICT: "1"
+        run: node foundation/ops/pipelines/run_phase2_security_scan.mjs
+
       - name: Upload validation artifacts
         if: always()
         uses: actions/upload-artifact@v4
@@ -53,4 +58,6 @@ jobs:
           path: |
             foundation/evaluation/metrics/data_quality_report.md
             foundation/evaluation/metrics/data_quality_summary.json
+            foundation/evaluation/metrics/phase2-security-scan-report.md
+            foundation/evaluation/metrics/phase2-security-scan-report.json
             foundation/data/quarantine/phase2-quarantine-latest.jsonl

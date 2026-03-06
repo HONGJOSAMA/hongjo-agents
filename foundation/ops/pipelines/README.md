@@ -18,6 +18,7 @@ node foundation/ops/pipelines/reinject_replay_output.mjs
 node foundation/ops/pipelines/calc_sample_streak.mjs
 node foundation/ops/pipelines/generate_phase2_readiness_snapshot.mjs
 node foundation/ops/pipelines/check_phase2_live_gate.mjs
+node foundation/ops/pipelines/run_phase2_security_scan.mjs
 ```
 
 품질 게이트 임계치(환경변수):
@@ -69,6 +70,8 @@ node foundation/ops/pipelines/check_phase2_live_gate.mjs
 - `foundation/evaluation/metrics/phase2-readiness-snapshot.json`
 - `foundation/evaluation/metrics/phase2-live-gate-report.md`
 - `foundation/evaluation/metrics/phase2-live-gate-report.json`
+- `foundation/evaluation/metrics/phase2-security-scan-report.md`
+- `foundation/evaluation/metrics/phase2-security-scan-report.json`
 
 ## 자동화
 - GitHub Actions: `.github/workflows/phase2-pipeline-daily.yml`

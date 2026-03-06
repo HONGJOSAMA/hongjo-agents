@@ -48,6 +48,12 @@ jobs:
         continue-on-error: true
         run: node foundation/ops/pipelines/reinject_replay_output.mjs
 
+      - name: Run security scan (non-blocking)
+        if: always()
+        env:
+          PHASE2_SECURITY_SCAN_STRICT: "0"
+        run: node foundation/ops/pipelines/run_phase2_security_scan.mjs
+
       - name: Notify on quality gate failure
         if: ${{ failure() && env.PIPELINE_ALERT_WEBHOOK != '' }}
         run: |
@@ -70,3 +76,5 @@ jobs:
             foundation/evaluation/metrics/data_quality_summary.json
             foundation/evaluation/metrics/quarantine-replay-report.md
             foundation/evaluation/metrics/reinject-replay-report.md
+            foundation/evaluation/metrics/phase2-security-scan-report.md
+            foundation/evaluation/metrics/phase2-security-scan-report.json
