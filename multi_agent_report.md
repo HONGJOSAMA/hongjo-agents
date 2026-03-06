@@ -257,3 +257,27 @@
 
 ### 추가 보완
 - snapshot 파일 누락 오류(`snapshot_missing`)에서도 절대경로 대신 상대경로만 기록하도록 hardening 적용
+
+---
+
+## 11단계. phase2 보안 스캔 자동화
+
+### 발견한 점
+- 보안 점검은 수동 실행/확인에 의존해서 누락될 여지가 있었다.
+
+### 수정 사항
+- 파일: `foundation/ops/pipelines/run_phase2_security_scan.mjs`
+  - 고위험 패턴(키/토큰/개인키/비정상 password 할당) 스캔
+  - report md/json 생성
+  - strict 모드에서는 findings 발생 시 실패 처리
+- 워크플로우 연결:
+  - `.github/workflows/phase2-pipeline-daily.yml` (non-blocking)
+  - `.github/workflows/phase2-readiness-snapshot.yml` (non-blocking)
+  - `.github/workflows/phase2-live-preflight-gate.yml` (strict)
+  - `.github/workflows/phase2-specialforce-profile-validation.yml` (strict)
+- 문서 반영:
+  - pipeline README + phase report/tracker + plan 동기화
+
+### 검증 결과
+- 로컬 실행 기준 findings 0건
+- `phase2-security-scan-report.md/json` 생성 확인
