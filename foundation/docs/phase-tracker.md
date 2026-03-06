@@ -62,3 +62,4 @@
 - 2026-03-06: replay/컷오버 런북 문서화 완료 (`docs/runbooks/*`)
 - 2026-03-06: mapping profile 분리(`default`, `specialforce_v1`) 및 profile 선택 env(`CONNECTOR_MAPPING_PROFILE`) 추가
 - 2026-03-06: replay 결과 normalized 재투입 자동경로 추가 (`reinject_replay_output.mjs`)
+- 2026-03-06: PR 자동머지 워크플로우 추가(동일 저장소 브랜치 대상, main 기준) (`.github/workflows/pr-auto-merge.yml`)
