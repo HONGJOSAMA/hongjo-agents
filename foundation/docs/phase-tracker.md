@@ -9,7 +9,7 @@
 | Phase 1 | 홍승현 / Codex | 2026-03-05 | 2026-03-07 | done | - | 2026-03-06 |
 | Phase 2 | 홍승현 / Codex | 2026-03-06 | 2026-03-09 | in_progress | - | 2026-03-06 |
 | Phase 3 | 홍승현 / Codex | 2026-03-06 | 2026-03-10 | in_progress | - | 2026-03-06 |
-| Phase 4 | 홍승현 / Codex | TBD | TBD | pending | - | 2026-03-05 |
+| Phase 4 | 홍승현 / Codex | 2026-03-06 | 2026-03-10 | in_progress | - | 2026-03-06 |
 | Phase 5 | 홍승현 / Codex | TBD | TBD | pending | - | 2026-03-05 |
 | Phase 6 | 홍승현 / Codex | TBD | TBD | pending | - | 2026-03-05 |
 | Phase 7 | 홍승현 / Codex | TBD | TBD | pending | - | 2026-03-05 |
@@ -87,3 +87,10 @@
 - 2026-03-06: domain agent 평가/회귀 스크립트 추가 (`agents/evaluate_domain_agents.mjs`, `agents/regression_baseline.json`)
 - 2026-03-06: `specialforce` Session/AAR context sample adapter 추가 (`agents/adapters/*`, `agents/run_domain_agents_from_specialforce_context.mjs`)
 - 2026-03-06: Phase 4 orchestrator 입력 계약 초안 추가 (`foundation/orchestrator/input_contract_v1.json`, `build_orchestrator_input_v1.mjs`)
+
+## Phase 4 Evidence (실행 추적)
+
+- 2026-03-06: orchestrator weighting 실행 로직 추가 (`foundation/orchestrator/weighting/apply_weighting_v1.mjs`)
+- 2026-03-06: orchestrator dissent log 생성기 추가 (`foundation/orchestrator/dissent/generate_dissent_log_v1.mjs`)
+- 2026-03-06: orchestrator run/output 계약 추가 (`run_orchestrator_v1.mjs`, `output_contract_v1.json`)
+- 2026-03-06: Phase 4 smoke 워크플로우 추가 (`.github/workflows/phase4-orchestrator-smoke.yml`)

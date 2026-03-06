@@ -1,0 +1,19 @@
+{
+  "pass": true,
+  "schemaVersion": "phase4-orchestrator-output/v1",
+  "evaluatedAt": "2026-03-06T05:20:40.096Z",
+  "finalPrediction": {
+    "probability": 0.72,
+    "confidence": 0.72,
+    "riskLevel": "high",
+    "scenarioLabel": "high_consensus_outlook",
+    "summary": "Weighted consensus across 5 domain agents indicates a high outlook."
+  },
+  "dissentCount": 5,
+  "fallback": {
+    "activated": false,
+    "reason": "none",
+    "mode": "standard"
+  },
+  "failures": []
+}

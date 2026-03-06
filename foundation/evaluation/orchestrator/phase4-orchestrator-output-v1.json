@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "phase4-orchestrator-output/v1",
+  "organizationId": "org-demo-001",
+  "context": {
+    "trainingSessionId": "session-01",
+    "aarReportId": "aar-01",
+    "actionItemIds": [
+      "action-001",
+      "action-002",
+      "action-003",
+      "action-004",
+      "action-005"
+    ],
+    "sourceContext": "foundation/data/specialforce/specialforce-context-sample.json"
+  },
+  "strategy": {
+    "weightingVersion": "phase4-weighting-v1",
+    "selectedPolicyRule": "minimax_regret",
+    "weightFactors": {
+      "confidence": "base",
+      "evidenceCount": "0.9 + evidenceCount*0.08 (cap 1.2)",
+      "riskLevel": "low=0.95, medium=1.05, high=1.15"
+    }
+  },
+  "domainContributions": [
+    {
+      "domainKey": "cyber_information",
+      "baseProbability": 0.72,
+      "weightedProbability": 0.6796,
+      "confidence": 0.72,
+      "riskLevel": "high",
+      "weight": 0.9439
+    },
+    {
+      "domainKey": "geopolitics_security",
+      "baseProbability": 0.72,
+      "weightedProbability": 0.6796,
+      "confidence": 0.72,
+      "riskLevel": "high",
+      "weight": 0.9439
+    },
+    {
+      "domainKey": "macroeconomy",
+      "baseProbability": 0.72,
+      "weightedProbability": 0.6796,
+      "confidence": 0.72,
+      "riskLevel": "high",
+      "weight": 0.9439
+    },
+    {
+      "domainKey": "policy_politics",
+      "baseProbability": 0.72,
+      "weightedProbability": 0.6796,
+      "confidence": 0.72,
+      "riskLevel": "high",
+      "weight": 0.9439
+    },
+    {
+      "domainKey": "supply_chain_trade",
+      "baseProbability": 0.72,
+      "weightedProbability": 0.6796,
+      "confidence": 0.72,
+      "riskLevel": "high",
+      "weight": 0.9439
+    }
+  ],
+  "finalPrediction": {
+    "probability": 0.72,
+    "confidence": 0.72,
+    "riskLevel": "high",
+    "scenarioLabel": "high_consensus_outlook",
+    "summary": "Weighted consensus across 5 domain agents indicates a high outlook."
+  },
+  "dissentLog": [
+    {
+      "domainKey": "cyber_information",
+      "dissentScore": 0,
+      "dissentReason": "high-risk but sub-critical confidence",
+      "alternativeProbability": 0.72
+    },
+    {
+      "domainKey": "geopolitics_security",
+      "dissentScore": 0,
+      "dissentReason": "high-risk but sub-critical confidence",
+      "alternativeProbability": 0.72
+    },
+    {
+      "domainKey": "macroeconomy",
+      "dissentScore": 0,
+      "dissentReason": "high-risk but sub-critical confidence",
+      "alternativeProbability": 0.72
+    },
+    {
+      "domainKey": "policy_politics",
+      "dissentScore": 0,
+      "dissentReason": "high-risk but sub-critical confidence",
+      "alternativeProbability": 0.72
+    },
+    {
+      "domainKey": "supply_chain_trade",
+      "dissentScore": 0,
+      "dissentReason": "high-risk but sub-critical confidence",
+      "alternativeProbability": 0.72
+    }
+  ],
+  "fallback": {
+    "activated": false,
+    "reason": "none",
+    "mode": "standard"
+  }
+}

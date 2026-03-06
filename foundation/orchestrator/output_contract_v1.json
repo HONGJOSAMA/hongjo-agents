@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "phase4-orchestrator-output/v1",
+  "requiredTopLevel": [
+    "schemaVersion",
+    "organizationId",
+    "context",
+    "strategy",
+    "domainContributions",
+    "finalPrediction",
+    "dissentLog",
+    "fallback"
+  ],
+  "requiredStrategyFields": [
+    "weightingVersion",
+    "selectedPolicyRule",
+    "weightFactors"
+  ],
+  "requiredDomainContributionFields": [
+    "domainKey",
+    "baseProbability",
+    "weightedProbability",
+    "confidence",
+    "riskLevel",
+    "weight"
+  ],
+  "requiredFinalPredictionFields": [
+    "probability",
+    "confidence",
+    "riskLevel",
+    "scenarioLabel",
+    "summary"
+  ],
+  "requiredFallbackFields": [
+    "activated",
+    "reason",
+    "mode"
+  ]
+}

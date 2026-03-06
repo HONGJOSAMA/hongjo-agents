@@ -1,0 +1,50 @@
+name: phase4-orchestrator-smoke
+
+on:
+  pull_request:
+    paths:
+      - "foundation/orchestrator/**"
+      - "agents/**"
+      - "foundation/data/**"
+      - "multi_agent_plan.md"
+  push:
+    branches:
+      - main
+    paths:
+      - "foundation/orchestrator/**"
+      - "agents/**"
+      - "foundation/data/**"
+
+jobs:
+  orchestrator:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Build orchestrator input
+        run: |
+          node agents/run_domain_agents_from_specialforce_context.mjs
+          node foundation/orchestrator/build_orchestrator_input_v1.mjs
+
+      - name: Run orchestrator
+        run: node foundation/orchestrator/run_orchestrator_v1.mjs
+
+      - name: Upload orchestrator artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase4-orchestrator-artifacts
+          path: |
+            foundation/evaluation/orchestrator/phase4-orchestrator-input-v1.json
+            foundation/evaluation/orchestrator/phase4-orchestrator-output-v1.json
+            foundation/evaluation/metrics/phase4-orchestrator-input-smoke.md
+            foundation/evaluation/metrics/phase4-orchestrator-input-smoke.json
+            foundation/evaluation/metrics/phase4-orchestrator-run.md
+            foundation/evaluation/metrics/phase4-orchestrator-run.json
