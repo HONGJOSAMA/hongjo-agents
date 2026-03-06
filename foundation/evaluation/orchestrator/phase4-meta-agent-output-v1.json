@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "phase4-meta-agent-output/v1",
+  "organizationId": "org-demo-001",
+  "context": {
+    "trainingSessionId": "session-01",
+    "aarReportId": "aar-01",
+    "selectedPolicyRule": "minimax_regret"
+  },
+  "uncertainty": {
+    "agentId": "uncertainty-agent-v1",
+    "status": "ok",
+    "uncertaintyScore": 0.344,
+    "severity": "medium",
+    "recommendation": "continue monitoring with calibrated probability"
+  },
+  "adversarial": {
+    "agentId": "adversarial-agent-v1",
+    "status": "ok",
+    "challengeScore": 0.0852,
+    "targetDomain": "cyber_information",
+    "recommendation": "no major adversarial contradiction detected"
+  },
+  "policy": {
+    "agentId": "policy-agent-v1",
+    "status": "ok",
+    "actionPriority": "review_now",
+    "recommendedMode": "standard_monitoring",
+    "actionItemCount": 5,
+    "recommendation": "route to decision owner and attach dissent summary"
+  },
+  "evaluatedAt": "2026-03-06T05:31:54.059Z"
+}

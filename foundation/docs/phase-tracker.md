@@ -97,3 +97,4 @@
 - 2026-03-06: calibration draft 추가 (`foundation/orchestrator/calibration/*`)
 - 2026-03-06: meta-agent input contract draft 추가 (`foundation/orchestrator/meta_agents/*`)
 - 2026-03-06: `specialforce` prediction summary API 명세 초안 추가 (`foundation/docs/specialforce-prediction-summary-api-v1.md`)
+- 2026-03-06: 메타 에이전트 3종 실행기 추가 (`uncertainty_agent_v1`, `adversarial_agent_v1`, `policy_agent_v1`)
