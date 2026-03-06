@@ -787,3 +787,4 @@ hongjo/
 - 2026-03-06 12:38 KST [문서화]: quarantine replay runbook + live shadow cutover checklist 추가
 - 2026-03-06 12:48 KST [진행]: connector mapping profile 분리(`default`, `specialforce_v1`) 및 env 선택 지원
 - 2026-03-06 12:52 KST [진행]: replay 결과 normalized 재투입 스크립트/워크플로우 경로 추가
+- 2026-03-06 13:10 KST [자동화]: `main` 대상 PR 자동머지 워크플로우 추가 (`.github/workflows/pr-auto-merge.yml`, same-repo PR 한정)
