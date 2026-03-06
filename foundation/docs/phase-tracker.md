@@ -67,3 +67,5 @@
 - 2026-03-06: `specialforce_v1` 매핑 프로필 로컬 검증 통과(quality gate pass)
 - 2026-03-06: 품질/오류처리/보안 점검 최신화(검증 통과, secret 하드코딩 미검출)
 - 2026-03-06: `specialforce_v1` PR/푸시 회귀검증 워크플로우 추가 (`phase2-specialforce-profile-validation.yml`)
+- 2026-03-06: PR auto-merge 보조체크 실패 무해화(`continue-on-error`, non-blocking warning)
+- 2026-03-06: readiness snapshot 자동화 추가 (`phase2-readiness-snapshot.yml`, `generate_phase2_readiness_snapshot.mjs`)

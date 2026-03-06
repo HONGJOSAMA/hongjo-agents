@@ -16,6 +16,7 @@ node foundation/ops/pipelines/run_phase2_pipeline_draft.mjs
 node foundation/ops/pipelines/replay_quarantine.mjs
 node foundation/ops/pipelines/reinject_replay_output.mjs
 node foundation/ops/pipelines/calc_sample_streak.mjs
+node foundation/ops/pipelines/generate_phase2_readiness_snapshot.mjs
 ```
 
 품질 게이트 임계치(환경변수):
@@ -63,11 +64,14 @@ node foundation/ops/pipelines/calc_sample_streak.mjs
 - `foundation/evaluation/metrics/reinject-replay-report.md`
 - `foundation/evaluation/metrics/sample-mode-readiness.md`
 - `foundation/evaluation/metrics/sample-mode-readiness.json`
+- `foundation/evaluation/metrics/phase2-readiness-snapshot.md`
+- `foundation/evaluation/metrics/phase2-readiness-snapshot.json`
 
 ## 자동화
 - GitHub Actions: `.github/workflows/phase2-pipeline-daily.yml`
 - 매일 UTC 00:15 실행 + 수동 실행(`workflow_dispatch`) 지원
 - 샘플 연속성 체크: `.github/workflows/phase2-sample-readiness.yml`
+- readiness 스냅샷: `.github/workflows/phase2-readiness-snapshot.yml`
 
 ## GitHub Secrets/Variables 설정
 - Secrets:
@@ -79,6 +83,9 @@ node foundation/ops/pipelines/calc_sample_streak.mjs
   - `CSV_INPUT_DIR` (기본 `foundation/data/input/csv`)
   - `PIPELINE_ORGANIZATION_ID`
   - `PIPELINE_DEFAULT_DOMAIN_KEY`
+  - `READINESS_API_SOURCE_CONFIRMED` (`true/false`)
+  - `READINESS_MAPPING_DRAFT_DONE` (`true/false`)
+  - `READINESS_FAILURE_RESPONSE_READY` (`true/false`, 기본 `true`)
 
 ## 현재 범위
 - API/문서/CSV 실입력 모드 기본 구현 완료(입력 부재 시 샘플 폴백)
