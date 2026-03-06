@@ -1,6 +1,6 @@
 {
   "passed": false,
-  "strict": true,
+  "strict": false,
   "snapshotPath": "foundation/evaluation/metrics/phase2-readiness-snapshot.json",
   "thresholds": {
     "minIngest": 95,
@@ -14,7 +14,7 @@
     "failureResponseReady": true
   },
   "quality": {
-    "runId": "phase2-2026-03-06T02-26-37-769Z",
+    "runId": "phase2-2026-03-06T01-58-55-002Z",
     "total": 65,
     "ingestSuccessRate": 100,
     "missingRate": 0,
@@ -32,5 +32,5 @@
     "condition_failed:mappingDraftDone",
     "condition_failed:sampleModeStreakReady"
   ],
-  "evaluatedAt": "2026-03-06T02:28:46.263Z"
+  "evaluatedAt": "2026-03-06T04:01:42.948Z"
 }

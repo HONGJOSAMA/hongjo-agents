@@ -281,3 +281,23 @@
 ### 검증 결과
 - 로컬 실행 기준 findings 0건
 - `phase2-security-scan-report.md/json` 생성 확인
+
+---
+
+## 12단계. phase2 shadow health 자동화
+
+### 발견한 점
+- 품질/보안/게이트 결과가 각각 분산되어 있어 운영 상태를 한 번에 보기 어려웠다.
+
+### 수정 사항
+- 파일: `foundation/ops/pipelines/generate_phase2_shadow_health.mjs`
+  - quality/security/live-gate/readiness 결과를 종합하여 단일 status(`green|yellow`) 계산
+  - `phase2-shadow-health.md/json` 생성
+- 파일: `.github/workflows/phase2-shadow-health.yml`
+  - 일일/수동 실행으로 shadow health 산출 자동화
+  - 관련 모든 리포트 아티팩트 업로드
+- 문서 반영:
+  - pipeline README + phase report/tracker + plan 동기화
+
+### 검증 결과
+- 로컬 실행 기준 `phase2-shadow-health.md/json` 생성 및 status 출력 확인

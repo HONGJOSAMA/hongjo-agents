@@ -67,6 +67,10 @@
   - `foundation/ops/pipelines/run_phase2_security_scan.mjs`
   - daily/readiness/live-preflight/specialforce-validation 워크플로우에 연결
   - `foundation/evaluation/metrics/phase2-security-scan-report.{md,json}` 산출
+- shadow health 요약 자동화 추가
+  - `foundation/ops/pipelines/generate_phase2_shadow_health.mjs`
+  - `.github/workflows/phase2-shadow-health.yml`
+  - `foundation/evaluation/metrics/phase2-shadow-health.{md,json}` 산출
 - PR auto-merge 보조 체크 안정화
   - `.github/workflows/pr-auto-merge.yml` (`continue-on-error`, 비차단 경고 처리 강화)
 
@@ -99,6 +103,8 @@
   - snapshot 누락 오류 시에도 상대경로로만 에러 기록 확인
 - security scan 검증
   - 로컬 실행 기준 findings 0건, report md/json 생성 확인
+- shadow health 검증
+  - 로컬 실행 기준 status 산출 및 md/json 생성 확인
 - 최신 점검 반영
   - 품질검사: schema validate 100/100, pipeline quality gate pass
   - 오류처리: 게이트 실패 시 `exit code 1`, quarantine replay/reinject 경로 유지

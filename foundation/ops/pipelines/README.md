@@ -19,6 +19,7 @@ node foundation/ops/pipelines/calc_sample_streak.mjs
 node foundation/ops/pipelines/generate_phase2_readiness_snapshot.mjs
 node foundation/ops/pipelines/check_phase2_live_gate.mjs
 node foundation/ops/pipelines/run_phase2_security_scan.mjs
+node foundation/ops/pipelines/generate_phase2_shadow_health.mjs
 ```
 
 품질 게이트 임계치(환경변수):
@@ -72,6 +73,8 @@ node foundation/ops/pipelines/run_phase2_security_scan.mjs
 - `foundation/evaluation/metrics/phase2-live-gate-report.json`
 - `foundation/evaluation/metrics/phase2-security-scan-report.md`
 - `foundation/evaluation/metrics/phase2-security-scan-report.json`
+- `foundation/evaluation/metrics/phase2-shadow-health.md`
+- `foundation/evaluation/metrics/phase2-shadow-health.json`
 
 ## 자동화
 - GitHub Actions: `.github/workflows/phase2-pipeline-daily.yml`
@@ -79,6 +82,7 @@ node foundation/ops/pipelines/run_phase2_security_scan.mjs
 - 샘플 연속성 체크: `.github/workflows/phase2-sample-readiness.yml`
 - readiness 스냅샷: `.github/workflows/phase2-readiness-snapshot.yml`
 - live 전환 사전게이트: `.github/workflows/phase2-live-preflight-gate.yml`
+- shadow health 요약: `.github/workflows/phase2-shadow-health.yml`
 
 ## GitHub Secrets/Variables 설정
 - Secrets:

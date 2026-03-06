@@ -7,7 +7,7 @@
   },
   "allReady": false,
   "qualitySummary": {
-    "runId": "phase2-2026-03-06T02-26-37-769Z",
+    "runId": "phase2-2026-03-06T01-58-55-002Z",
     "total": 65,
     "ingestSuccessRate": 100,
     "missingRate": 0,
@@ -26,7 +26,7 @@
     "targetStreak": 3,
     "streak": 0,
     "ready": false,
-    "evaluatedAt": "2026-03-06T02:28:46.181Z"
+    "evaluatedAt": "2026-03-06T04:01:42.809Z"
   },
-  "evaluatedAt": "2026-03-06T02:28:46.221Z"
+  "evaluatedAt": "2026-03-06T04:01:42.852Z"
 }
