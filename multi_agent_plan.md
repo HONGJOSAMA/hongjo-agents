@@ -785,3 +785,5 @@ hongjo/
 - 2026-03-06 12:25 KST [자동화]: phase2 daily workflow에 품질게이트 실패 웹훅 알림(`PIPELINE_ALERT_WEBHOOK`) 추가
 - 2026-03-06 12:35 KST [자동화]: 샘플모드 연속성 판정 워크플로우/스크립트 추가 (`phase2-sample-readiness.yml`, `calc_sample_streak.mjs`)
 - 2026-03-06 12:38 KST [문서화]: quarantine replay runbook + live shadow cutover checklist 추가
+- 2026-03-06 12:48 KST [진행]: connector mapping profile 분리(`default`, `specialforce_v1`) 및 env 선택 지원
+- 2026-03-06 12:52 KST [진행]: replay 결과 normalized 재투입 스크립트/워크플로우 경로 추가

@@ -33,9 +33,14 @@
   - `foundation/ops/pipelines/README.md`
 - 공급자 필드 매핑 설정 파일 추가
   - `foundation/ops/pipelines/connectors/connector-mapping.json`
+- 매핑 프로필 분리
+  - `default`, `specialforce_v1` profile 지원
 - 격리 큐 재처리(replay) 스크립트 추가
   - `foundation/ops/pipelines/replay_quarantine.mjs`
   - `foundation/evaluation/metrics/quarantine-replay-report.md`
+- replay 결과 normalized 재투입 스크립트 추가
+  - `foundation/ops/pipelines/reinject_replay_output.mjs`
+  - `foundation/evaluation/metrics/reinject-replay-report.md`
 - 품질게이트 실패 웹훅 알림 연결
   - `.github/workflows/phase2-pipeline-daily.yml` (`PIPELINE_ALERT_WEBHOOK`)
 - 샘플모드 연속 성공 판정 자동화
@@ -61,6 +66,8 @@
   - 문서/CSV 입력 경로 존재 시 실파일 우선 ingestion 동작 확인
 - replay 스크립트 검증
   - quarantine 입력 0건 기준 replay 결과 0건, unresolved 0건 확인
+- reinject 스크립트 검증
+  - replay 0건 기준 reinject 0건, duplicate skip 동작 확인
 - sample readiness 스크립트 검증
   - 연속 성공 streak 계산 및 readiness 리포트 출력 확인
 
@@ -69,9 +76,9 @@
 - 웹훅 알림 코드는 연결되었으나 `PIPELINE_ALERT_WEBHOOK` secret 미등록 시 미동작
 
 ## 다음 작업
-- 실 API 계약 확정 후 `connector-mapping.json` 공급자별 profile 분리
-- replay 결과를 normalized ingest로 재투입하는 자동경로 추가
 - 웹훅 알림 채널 운영(실제 secret 등록 및 수신 검증)
+- sample mode 3회 연속 성공 달성 후 readiness `ready=true` 확인
+- specialforce 실제 응답 샘플로 `specialforce_v1` profile 검증
 
 ## 실데이터 착수 기준(고정)
 아래 4개 준비조건 충족 즉시 실데이터 shadow mode를 시작한다.

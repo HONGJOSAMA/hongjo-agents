@@ -8,6 +8,7 @@
 - 출력:
   - `foundation/data/quarantine/phase2-replay-output.jsonl`
   - `foundation/evaluation/metrics/quarantine-replay-report.md`
+  - `foundation/evaluation/metrics/reinject-replay-report.md`
 
 ## 절차
 1. quarantine 파일 존재 확인
@@ -18,6 +19,8 @@
    - `unresolved`가 0보다 크면 필드 매핑/원천데이터 보정 후 재실행
 4. 필요 시 pipeline 재실행
    - `node foundation/ops/pipelines/run_phase2_pipeline_draft.mjs`
+5. replay 결과를 normalized stream에 재투입
+   - `node foundation/ops/pipelines/reinject_replay_output.mjs`
 
 ## 판정
 - 성공: `unresolved=0`

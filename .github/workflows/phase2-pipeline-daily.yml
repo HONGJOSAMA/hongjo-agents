@@ -21,6 +21,7 @@ jobs:
       DOC_INPUT_DIR: ${{ vars.DOC_INPUT_DIR || 'foundation/data/input/documents' }}
       CSV_INPUT_DIR: ${{ vars.CSV_INPUT_DIR || 'foundation/data/input/csv' }}
       CONNECTOR_MAPPING_FILE: "foundation/ops/pipelines/connectors/connector-mapping.json"
+      CONNECTOR_MAPPING_PROFILE: ${{ vars.CONNECTOR_MAPPING_PROFILE || 'default' }}
       PIPELINE_ALERT_WEBHOOK: ${{ secrets.PIPELINE_ALERT_WEBHOOK }}
     steps:
       - name: Checkout
@@ -41,6 +42,11 @@ jobs:
         if: always()
         continue-on-error: true
         run: node foundation/ops/pipelines/replay_quarantine.mjs
+
+      - name: Reinject replay output to normalized stream
+        if: always()
+        continue-on-error: true
+        run: node foundation/ops/pipelines/reinject_replay_output.mjs
 
       - name: Notify on quality gate failure
         if: ${{ failure() && env.PIPELINE_ALERT_WEBHOOK != '' }}
@@ -63,3 +69,4 @@ jobs:
             foundation/evaluation/metrics/data_quality_report.md
             foundation/evaluation/metrics/data_quality_summary.json
             foundation/evaluation/metrics/quarantine-replay-report.md
+            foundation/evaluation/metrics/reinject-replay-report.md

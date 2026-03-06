@@ -20,6 +20,7 @@ jobs:
       DOC_INPUT_DIR: ${{ vars.DOC_INPUT_DIR || 'foundation/data/input/documents' }}
       CSV_INPUT_DIR: ${{ vars.CSV_INPUT_DIR || 'foundation/data/input/csv' }}
       CONNECTOR_MAPPING_FILE: "foundation/ops/pipelines/connectors/connector-mapping.json"
+      CONNECTOR_MAPPING_PROFILE: ${{ vars.CONNECTOR_MAPPING_PROFILE || 'default' }}
       SAMPLE_STREAK_TARGET: "3"
       READINESS_WORKFLOW_FILE: "phase2-sample-readiness.yml"
       INCLUDE_CURRENT_SUCCESS: "1"
@@ -46,6 +47,11 @@ jobs:
         continue-on-error: true
         run: node foundation/ops/pipelines/replay_quarantine.mjs
 
+      - name: Reinject replay output
+        if: always()
+        continue-on-error: true
+        run: node foundation/ops/pipelines/reinject_replay_output.mjs
+
       - name: Calculate sample success streak
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -61,5 +67,6 @@ jobs:
             foundation/evaluation/metrics/data_quality_report.md
             foundation/evaluation/metrics/data_quality_summary.json
             foundation/evaluation/metrics/quarantine-replay-report.md
+            foundation/evaluation/metrics/reinject-replay-report.md
             foundation/evaluation/metrics/sample-mode-readiness.md
             foundation/evaluation/metrics/sample-mode-readiness.json
