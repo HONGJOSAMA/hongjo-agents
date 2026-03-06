@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "phase3-domain-agent-regression/v1",
+  "domains": {
+    "macroeconomy": {
+      "horizonValue": 30,
+      "horizonUnit": "day",
+      "minimumEvidence": 3,
+      "minimumFilteredRows": 5,
+      "requiredRuleIds": ["domain_filter", "quality_sort", "macroeconomy_focus"],
+      "minimumSignalStrength": 0.8
+    },
+    "policy_politics": {
+      "horizonValue": 14,
+      "horizonUnit": "day",
+      "minimumEvidence": 3,
+      "minimumFilteredRows": 5,
+      "requiredRuleIds": ["domain_filter", "quality_sort", "policy_politics_focus"],
+      "minimumSignalStrength": 0.8
+    },
+    "geopolitics_security": {
+      "horizonValue": 21,
+      "horizonUnit": "day",
+      "minimumEvidence": 3,
+      "minimumFilteredRows": 5,
+      "requiredRuleIds": ["domain_filter", "quality_sort", "geopolitics_security_focus"],
+      "minimumSignalStrength": 0.8
+    },
+    "supply_chain_trade": {
+      "horizonValue": 21,
+      "horizonUnit": "day",
+      "minimumEvidence": 3,
+      "minimumFilteredRows": 5,
+      "requiredRuleIds": ["domain_filter", "quality_sort", "supply_chain_trade_focus"],
+      "minimumSignalStrength": 0.8
+    },
+    "cyber_information": {
+      "horizonValue": 7,
+      "horizonUnit": "day",
+      "minimumEvidence": 3,
+      "minimumFilteredRows": 5,
+      "requiredRuleIds": ["domain_filter", "quality_sort", "cyber_information_focus"],
+      "minimumSignalStrength": 0.8
+    }
+  }
+}

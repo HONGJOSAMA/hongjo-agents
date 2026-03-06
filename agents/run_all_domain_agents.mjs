@@ -2,31 +2,26 @@
 
 import fs from "node:fs";
 import path from "node:path";
-import { runAgent as runMacroeconomy } from "./macroeconomy/agent.mjs";
-import { runAgent as runPolicyPolitics } from "./policy_politics/agent.mjs";
-import { runAgent as runGeopoliticsSecurity } from "./geopolitics_security/agent.mjs";
-import { runAgent as runSupplyChainTrade } from "./supply_chain_trade/agent.mjs";
-import { runAgent as runCyberInformation } from "./cyber_information/agent.mjs";
+import { domainRegistry } from "./common/registry.mjs";
 
 const ROOT_DIR = process.cwd();
 const reportMdPath = path.resolve(ROOT_DIR, "foundation/evaluation/metrics/phase3-domain-agent-smoke.md");
 const reportJsonPath = path.resolve(ROOT_DIR, "foundation/evaluation/metrics/phase3-domain-agent-smoke.json");
 
-const registry = [
-  ["macroeconomy", runMacroeconomy],
-  ["policy_politics", runPolicyPolitics],
-  ["geopolitics_security", runGeopoliticsSecurity],
-  ["supply_chain_trade", runSupplyChainTrade],
-  ["cyber_information", runCyberInformation],
-];
-
 const results = [];
 const failures = [];
 
-for (const [domainKey, runner] of registry) {
+for (const entry of domainRegistry) {
+  const { domainKey, runAgent } = entry;
   try {
-    const result = await runner();
+    const result = await runAgent();
     const valid = Boolean(
+      result?.schemaVersion &&
+        result?.contractVersion &&
+        result?.input?.filteredRowCount >= 3 &&
+        result?.scoring?.riskLevel &&
+        result?.trace?.selectedRuleIds?.length >= 3 &&
+        result?.validation?.schemaCheckPassed === true &&
       result?.hypothesis &&
         result?.prediction &&
         Array.isArray(result?.evidence) &&

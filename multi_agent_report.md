@@ -345,3 +345,27 @@
 
 ### 판단 근거
 - Phase 3 완료조건의 첫 번째는 “각 도메인 독립 실행”이므로, 최소 실행형 에이전트 골격을 먼저 고정하는 것이 맞다.
+
+---
+
+## 15단계. Phase 3 schema/version/filter/eval 고정
+
+### 발견한 점
+- Phase 3 골격은 실행은 가능했지만, 출력 계약 버전과 평가 기준이 고정돼 있지 않아 이후 회귀 판단이 약했다.
+- 도메인별 입력 선택이 `domainKey` 수준 필터에 머물러 있어, 실제 운영형 에이전트 전환을 위한 규칙 흔적(trace)이 부족했다.
+
+### 수정 사항
+- 파일: `agents/common/output_schema_v1.json`
+  - 공통 출력 스키마 버전 `phase3-domain-agent-output/v1` 고정
+- 파일: `agents/common/base_agent.mjs`
+  - required field 검증, 도메인별 입력 필터, ranked fallback, scoring, trace, validation 필드 추가
+- 파일: `agents/*/agent.mjs`, `agents/*/contract.json`
+  - 도메인별 입력 필터/평가 기준/trace rule id 반영
+- 파일: `agents/regression_baseline.json`, `agents/evaluate_domain_agents.mjs`
+  - horizon/rule/signal strength 기준의 회귀 검증 추가
+- 파일: `.github/workflows/phase3-domain-agents-smoke.yml`
+  - smoke 후 evaluation 실행 및 artifact 업로드로 확장
+
+### 판단 근거
+- 에이전트가 다음 단계에서 오케스트레이터 입력으로 들어가려면, 출력 스키마와 계약 버전이 먼저 고정돼야 한다.
+- 평가 기준은 “문서 선언”이 아니라 실행 스크립트로 고정해야 회귀 차단이 가능하다.

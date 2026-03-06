@@ -1,13 +1,27 @@
 {
   "agentId": "policy-politics-agent-v1",
   "domainKey": "policy_politics",
+  "contractVersion": "1.0.0",
+  "outputSchemaVersion": "phase3-domain-agent-output/v1",
   "input": {
     "source": "foundation/data/normalized/phase2-normalized-sample.jsonl",
-    "requiredFields": ["organizationId", "domainKey", "eventTime", "raw.id", "quality.confidence"]
+    "requiredFields": ["organizationId", "domainKey", "eventTime", "raw.id", "quality.confidence"],
+    "filter": {
+      "entityTypes": ["Observation", "Prediction"],
+      "preferredSourceTypes": ["document", "api", "csv"],
+      "preferredSignalTypes": ["event_signal"],
+      "minimumConfidence": 0.7,
+      "selectionLimit": 5
+    }
   },
   "output": {
-    "required": ["hypothesis", "prediction", "evidence"],
+    "required": ["input", "scoring", "trace", "validation", "hypothesis", "prediction", "evidence"],
     "minimumEvidence": 3
+  },
+  "evaluation": {
+    "minimumFilteredRows": 5,
+    "minimumConfidence": 0.7,
+    "requiredTraceRuleIds": ["domain_filter", "quality_sort", "policy_politics_focus"]
   },
   "rules": [
     "focus on policy_politics observations only",

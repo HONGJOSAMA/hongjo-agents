@@ -16,6 +16,13 @@
   - `agents/common/base_agent.mjs`
   - `agents/run_domain_agent.mjs`
   - `agents/run_all_domain_agents.mjs`
+- 공통 출력 스키마/계약 버전 고정
+  - `agents/common/output_schema_v1.json`
+  - `contractVersion=1.0.0`
+  - `schemaVersion=phase3-domain-agent-output/v1`
+- 도메인별 입력 필터/회귀 베이스라인 추가
+  - `agents/regression_baseline.json`
+  - `agents/evaluate_domain_agents.mjs`
 - Phase 3 smoke 워크플로우 추가
   - `.github/workflows/phase3-domain-agents-smoke.yml`
 
@@ -23,6 +30,8 @@
 - 각 도메인 독립 실행 가능
 - smoke 실행 기준 5개 에이전트 모두 예측 + 가설 + evidence 3건 이상 반환
 - `foundation/evaluation/metrics/phase3-domain-agent-smoke.{md,json}` 생성 확인
+- `foundation/evaluation/metrics/phase3-domain-agent-eval.{md,json}` 생성 확인
+- schema/contract/evaluation/regression 기준 pass 확인
 
 ## 리스크/이슈
 - 현재는 heuristic bootstrap 단계라 실제 specialforce Session/AAR 문맥 입력은 아직 미연결

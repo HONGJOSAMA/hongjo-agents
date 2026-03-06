@@ -1,16 +1,56 @@
 {
+  "schemaVersion": "phase3-domain-agent-output/v1",
+  "contractVersion": "1.0.0",
   "agentId": "supply-chain-trade-agent-v1",
   "domainKey": "supply_chain_trade",
   "displayName": "Supply Chain & Trade Agent",
-  "generatedAt": "2026-03-06T04:31:03.447Z",
+  "generatedAt": "2026-03-06T04:46:03.386Z",
+  "status": "ok",
   "input": {
     "normalizedSource": "foundation/data/normalized/phase2-normalized-sample.jsonl",
     "rowCount": 13,
+    "filteredRowCount": 5,
     "entityTypeBreakdown": {
-      "Observation": 5,
-      "Hypothesis": 4,
-      "Prediction": 4
-    }
+      "Observation": 5
+    },
+    "sourceTypeBreakdown": {
+      "document": 3,
+      "api": 2
+    },
+    "signalTypeBreakdown": {
+      "event_signal": 3,
+      "rate_signal": 2
+    },
+    "selectionPolicy": "strict_filter_only",
+    "selectedObservationIds": [
+      "obs-024",
+      "obs-019",
+      "obs-014",
+      "obs-009",
+      "obs-004"
+    ]
+  },
+  "scoring": {
+    "confidence": 0.72,
+    "signalStrength": 1,
+    "evidenceStrength": 0.72,
+    "riskLevel": "high"
+  },
+  "trace": {
+    "selectedRuleIds": [
+      "domain_filter",
+      "quality_sort",
+      "supply_chain_trade_focus"
+    ],
+    "fallbackUsed": false,
+    "notes": [
+      "strict domain filter satisfied minimum evidence rows"
+    ]
+  },
+  "validation": {
+    "minimumEvidence": 3,
+    "requiredFieldMissingCount": 0,
+    "schemaCheckPassed": true
   },
   "rules": [
     "prioritize logistics and trade friction signals",
@@ -18,7 +58,7 @@
     "return at least 3 evidence records"
   ],
   "hypothesis": {
-    "id": "supply_chain_trade-hypothesis-1772771463446",
+    "id": "supply_chain_trade-hypothesis-1772772363386",
     "organizationId": "org-demo-001",
     "domainKey": "supply_chain_trade",
     "claim": "Trade and logistics signals imply near-term movement in supply reliability.",
@@ -27,60 +67,61 @@
       "sample ingestion quality stays above threshold",
       "no contradictory high-trust signal dominates the domain stream"
     ],
-    "createdAt": "2026-03-06T04:31:03.446Z",
+    "createdAt": "2026-03-06T04:46:03.386Z",
     "confidence": 0.72,
     "linkedObservationIds": [
-      "obs-004",
-      "obs-009",
+      "obs-024",
+      "obs-019",
       "obs-014"
     ]
   },
   "prediction": {
-    "id": "supply_chain_trade-prediction-1772771463446",
+    "id": "supply_chain_trade-prediction-1772772363386",
     "organizationId": "org-demo-001",
     "domainKey": "supply_chain_trade",
-    "runKey": "supply_chain_trade-run-1772771463446",
+    "runKey": "supply_chain_trade-run-1772772363386",
     "horizonValue": 21,
     "horizonUnit": "day",
     "probability": 0.72,
     "confidence": 0.72,
     "modelVersion": "phase3-domain-v1",
     "promptHash": "supply-chain-trade-phase3-v1",
-    "createdAt": "2026-03-06T04:31:03.446Z"
+    "riskLevel": "high",
+    "createdAt": "2026-03-06T04:46:03.386Z"
   },
   "evidence": [
     {
-      "id": "supply_chain_trade-prediction-1772771463446-evidence-1",
+      "id": "supply_chain_trade-prediction-1772772363386-evidence-1",
       "organizationId": "org-demo-001",
-      "predictionId": "supply_chain_trade-prediction-1772771463446",
-      "sourceUrl": "urn:observation:obs-004",
+      "predictionId": "supply_chain_trade-prediction-1772772363386",
+      "sourceUrl": "urn:observation:obs-024",
       "sourceTitle": "source-4",
       "trustScore": 0.5,
       "freshness": "fresh",
-      "excerpt": "signal-4",
-      "createdAt": "2026-03-06T04:31:03.447Z"
+      "excerpt": "signal-24",
+      "createdAt": "2026-03-06T04:46:03.386Z"
     },
     {
-      "id": "supply_chain_trade-prediction-1772771463446-evidence-2",
+      "id": "supply_chain_trade-prediction-1772772363386-evidence-2",
       "organizationId": "org-demo-001",
-      "predictionId": "supply_chain_trade-prediction-1772771463446",
-      "sourceUrl": "urn:observation:obs-009",
+      "predictionId": "supply_chain_trade-prediction-1772772363386",
+      "sourceUrl": "urn:observation:obs-019",
       "sourceTitle": "source-4",
       "trustScore": 0.5,
       "freshness": "fresh",
-      "excerpt": "signal-9",
-      "createdAt": "2026-03-06T04:31:03.447Z"
+      "excerpt": "signal-19",
+      "createdAt": "2026-03-06T04:46:03.386Z"
     },
     {
-      "id": "supply_chain_trade-prediction-1772771463446-evidence-3",
+      "id": "supply_chain_trade-prediction-1772772363386-evidence-3",
       "organizationId": "org-demo-001",
-      "predictionId": "supply_chain_trade-prediction-1772771463446",
+      "predictionId": "supply_chain_trade-prediction-1772772363386",
       "sourceUrl": "urn:observation:obs-014",
       "sourceTitle": "source-4",
       "trustScore": 0.5,
       "freshness": "fresh",
       "excerpt": "signal-14",
-      "createdAt": "2026-03-06T04:31:03.447Z"
+      "createdAt": "2026-03-06T04:46:03.386Z"
     }
   ]
 }
