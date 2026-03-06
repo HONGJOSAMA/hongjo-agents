@@ -58,6 +58,9 @@
 - readiness 스냅샷 자동화 워크플로우 추가
   - `.github/workflows/phase2-readiness-snapshot.yml`
   - `foundation/ops/pipelines/generate_phase2_readiness_snapshot.mjs`
+- live 전환 preflight gate 추가
+  - `.github/workflows/phase2-live-preflight-gate.yml`
+  - `foundation/ops/pipelines/check_phase2_live_gate.mjs`
 - PR auto-merge 보조 체크 안정화
   - `.github/workflows/pr-auto-merge.yml` (`continue-on-error`, 비차단 경고 처리 강화)
 
@@ -84,6 +87,8 @@
   - `CONNECTOR_MAPPING_PROFILE=specialforce_v1` 실행 기준 quality gate pass(ingest 100%, missing 0%, duplicate 0%)
 - readiness 스냅샷 생성 검증
   - 로컬 실행 기준 스냅샷 md/json 생성 확인
+- live gate 스크립트 검증
+  - 현재 readiness 미충족 기준으로 fail 조건/사유 출력 확인
 - 최신 점검 반영
   - 품질검사: schema validate 100/100, pipeline quality gate pass
   - 오류처리: 게이트 실패 시 `exit code 1`, quarantine replay/reinject 경로 유지

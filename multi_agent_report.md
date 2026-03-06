@@ -211,3 +211,25 @@
 ### 판단 근거
 - 보조 자동화 실패가 머지 여부와 무관할 때는 non-blocking으로 처리해 운영 신호를 단순화하는 것이 맞다.
 - readiness snapshot은 실데이터 착수 4조건 상태를 한 번에 확인하게 해 전환 판단 실수를 줄인다.
+
+---
+
+## 9단계. live cutover preflight gate 자동화
+
+### 발견한 점
+- readiness snapshot은 상태 가시성은 제공하지만, 실데이터 전환 자체를 강제 차단하지는 않았다.
+
+### 수정 사항
+- 파일: `foundation/ops/pipelines/check_phase2_live_gate.mjs`
+  - 준비조건 4개 + 품질 임계치 검증 후 strict 모드에서 실패 시 `exit code 1`
+- 파일: `.github/workflows/phase2-live-preflight-gate.yml`
+  - 수동 실행형 preflight workflow 추가
+  - live env 체크 + pipeline + snapshot + gate enforcement 일괄 수행
+- 파일: `foundation/ops/pipelines/README.md` 및 plan/tracker/phase report
+  - 신규 게이트 경로와 운영 절차 반영
+
+### 검증 결과
+- 로컬 기준 gate 스크립트 실행 시 현재 readiness 미충족 상태를 상세 사유와 함께 출력 확인
+
+### 판단 근거
+- 실데이터 전환은 "보이기"가 아니라 "막기"가 필요하므로, 실패 시 명시적으로 non-zero 종료하는 게이트가 필요하다.

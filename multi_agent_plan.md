@@ -796,3 +796,4 @@ hongjo/
 - 2026-03-06 13:48 KST [자동화]: `specialforce_v1` 회귀검증 워크플로우 추가 (`.github/workflows/phase2-specialforce-profile-validation.yml`)
 - 2026-03-06 14:02 KST [보완]: PR auto-merge 보조 체크 실패 무해화(`continue-on-error`, 비차단 경고 처리)
 - 2026-03-06 14:08 KST [자동화]: readiness snapshot 워크플로우/스크립트 추가 (`phase2-readiness-snapshot.yml`, `generate_phase2_readiness_snapshot.mjs`)
+- 2026-03-06 14:18 KST [자동화]: live cutover preflight gate 워크플로우/스크립트 추가 (`phase2-live-preflight-gate.yml`, `check_phase2_live_gate.mjs`)
