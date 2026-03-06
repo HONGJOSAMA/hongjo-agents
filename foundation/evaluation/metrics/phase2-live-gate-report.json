@@ -1,12 +1,19 @@
 {
+  "passed": false,
+  "strict": true,
+  "snapshotPath": "foundation/evaluation/metrics/phase2-readiness-snapshot.json",
+  "thresholds": {
+    "minIngest": 95,
+    "maxMissing": 5,
+    "maxDuplicate": 2
+  },
   "conditions": {
     "apiSourceConfirmed": false,
     "mappingDraftDone": false,
     "sampleModeStreakReady": false,
     "failureResponseReady": true
   },
-  "allReady": false,
-  "qualitySummary": {
+  "quality": {
     "runId": "phase2-2026-03-06T01-58-55-002Z",
     "total": 65,
     "ingestSuccessRate": 100,
@@ -20,13 +27,10 @@
       "maxDuplicateRate": 2
     }
   },
-  "sampleReadiness": {
-    "workflow": "phase2-sample-readiness.yml",
-    "source": "local-fallback",
-    "targetStreak": 3,
-    "streak": 0,
-    "ready": false,
-    "evaluatedAt": "2026-03-06T02:21:19.113Z"
-  },
-  "evaluatedAt": "2026-03-06T02:21:19.154Z"
+  "failures": [
+    "condition_failed:apiSourceConfirmed",
+    "condition_failed:mappingDraftDone",
+    "condition_failed:sampleModeStreakReady"
+  ],
+  "evaluatedAt": "2026-03-06T02:22:13.070Z"
 }

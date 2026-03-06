@@ -797,3 +797,4 @@ hongjo/
 - 2026-03-06 14:02 KST [보완]: PR auto-merge 보조 체크 실패 무해화(`continue-on-error`, 비차단 경고 처리)
 - 2026-03-06 14:08 KST [자동화]: readiness snapshot 워크플로우/스크립트 추가 (`phase2-readiness-snapshot.yml`, `generate_phase2_readiness_snapshot.mjs`)
 - 2026-03-06 14:18 KST [자동화]: live cutover preflight gate 워크플로우/스크립트 추가 (`phase2-live-preflight-gate.yml`, `check_phase2_live_gate.mjs`)
+- 2026-03-06 14:24 KST [보완]: live gate md/json 리포트 자동생성 및 절대경로 노출 제거(상대경로 출력)

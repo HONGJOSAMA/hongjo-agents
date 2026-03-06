@@ -7,6 +7,17 @@ const snapshotPath = path.resolve(
   process.cwd(),
   process.env.PHASE2_READINESS_SNAPSHOT || "foundation/evaluation/metrics/phase2-readiness-snapshot.json",
 );
+const gateReportMdPath = path.resolve(
+  process.cwd(),
+  process.env.PHASE2_LIVE_GATE_REPORT_MD || "foundation/evaluation/metrics/phase2-live-gate-report.md",
+);
+const gateReportJsonPath = path.resolve(
+  process.cwd(),
+  process.env.PHASE2_LIVE_GATE_REPORT_JSON || "foundation/evaluation/metrics/phase2-live-gate-report.json",
+);
+const snapshotPathRelative = path.relative(process.cwd(), snapshotPath);
+const gateReportMdRelative = path.relative(process.cwd(), gateReportMdPath);
+const gateReportJsonRelative = path.relative(process.cwd(), gateReportJsonPath);
 
 function readJson(filePath) {
   if (!fs.existsSync(filePath)) {
@@ -29,6 +40,25 @@ try {
   snapshot = readJson(snapshotPath);
 } catch (error) {
   console.log(`phase2_live_gate_error=${String(error?.message || error)}`);
+  fs.mkdirSync(path.dirname(gateReportMdPath), { recursive: true });
+  fs.writeFileSync(
+    gateReportMdPath,
+    `# Phase 2 Live Gate Report\n\n- Status: fail\n- Error: ${String(error?.message || error)}\n`,
+    "utf8",
+  );
+  fs.writeFileSync(
+    gateReportJsonPath,
+    `${JSON.stringify(
+      {
+        passed: false,
+        error: String(error?.message || error),
+        evaluatedAt: new Date().toISOString(),
+      },
+      null,
+      2,
+    )}\n`,
+    "utf8",
+  );
   process.exitCode = 1;
   process.exit();
 }
@@ -36,6 +66,7 @@ try {
 const quality = snapshot.qualitySummary || {};
 const conditions = snapshot.conditions || {};
 const failures = [];
+const evaluatedAt = new Date().toISOString();
 
 if (!conditions.apiSourceConfirmed) {
   failures.push("condition_failed:apiSourceConfirmed");
@@ -61,10 +92,58 @@ if (typeof quality.duplicateRate === "number" && quality.duplicateRate > maxDupl
 }
 
 const passed = failures.length === 0;
+const report = {
+  passed,
+  strict,
+  snapshotPath: snapshotPathRelative,
+  thresholds: {
+    minIngest,
+    maxMissing,
+    maxDuplicate,
+  },
+  conditions,
+  quality,
+  failures,
+  evaluatedAt,
+};
+
+const reportMd = `# Phase 2 Live Gate Report
+
+- Status: ${passed ? "pass" : "fail"}
+- Strict Mode: ${strict}
+- Evaluated At: ${evaluatedAt}
+- Snapshot: \`${snapshotPathRelative}\`
+
+## Thresholds
+- ingest success >= ${minIngest}
+- missing rate <= ${maxMissing}
+- duplicate rate <= ${maxDuplicate}
+
+## Conditions
+- apiSourceConfirmed: ${conditions.apiSourceConfirmed ? "yes" : "no"}
+- mappingDraftDone: ${conditions.mappingDraftDone ? "yes" : "no"}
+- sampleModeStreakReady: ${conditions.sampleModeStreakReady ? "yes" : "no"}
+- failureResponseReady: ${conditions.failureResponseReady ? "yes" : "no"}
+
+## Quality
+- ingestSuccessRate: ${quality.ingestSuccessRate ?? "n/a"}
+- missingRate: ${quality.missingRate ?? "n/a"}
+- duplicateRate: ${quality.duplicateRate ?? "n/a"}
+
+## Failures
+${failures.length === 0 ? "- none" : failures.map((f) => `- ${f}`).join("\n")}
+`;
+
+fs.mkdirSync(path.dirname(gateReportMdPath), { recursive: true });
+fs.writeFileSync(gateReportMdPath, reportMd, "utf8");
+fs.writeFileSync(gateReportJsonPath, `${JSON.stringify(report, null, 2)}\n`, "utf8");
+
 console.log(`phase2_live_gate_passed=${passed}`);
 console.log(`phase2_live_gate_strict=${strict}`);
-console.log(`phase2_live_gate_snapshot=${snapshotPath}`);
+console.log(`phase2_live_gate_snapshot=${snapshotPathRelative}`);
 console.log(`phase2_live_gate_failures=${failures.length}`);
+console.log(`phase2_live_gate_report_md=${gateReportMdRelative}`);
+console.log(`phase2_live_gate_report_json=${gateReportJsonRelative}`);
 for (const item of failures) {
   console.log(`phase2_live_gate_detail=${item}`);
 }
@@ -72,4 +151,3 @@ for (const item of failures) {
 if (!passed && strict) {
   process.exitCode = 1;
 }
-
