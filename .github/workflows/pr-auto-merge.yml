@@ -9,17 +9,17 @@ on:
       - reopened
       - synchronize
       - ready_for_review
+  check_suite:
+    types:
+      - completed
 
 permissions:
+  checks: read
   contents: write
   pull-requests: write
 
 jobs:
   enable-automerge:
-    if: >
-      github.event.pull_request.draft == false &&
-      github.event.pull_request.base.ref == 'main' &&
-      github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     steps:
       - name: Enable auto-merge (squash)
@@ -29,46 +29,81 @@ jobs:
           script: |
             const owner = context.repo.owner;
             const repo = context.repo.repo;
-            const pull_number = context.payload.pull_request.number;
+            const eventName = context.eventName;
+            const prNumbers = new Set();
 
-            const pr = await github.rest.pulls.get({ owner, repo, pull_number });
+            if (eventName === "pull_request") {
+              prNumbers.add(context.payload.pull_request.number);
+            }
 
-            if (!pr.data.node_id) {
-              core.setFailed("missing_pull_request_node_id");
+            if (eventName === "check_suite") {
+              for (const pr of context.payload.check_suite.pull_requests || []) {
+                if (pr?.number) {
+                  prNumbers.add(pr.number);
+                }
+              }
+            }
+
+            if (prNumbers.size === 0) {
+              core.info("skip_no_associated_pr");
               return;
             }
 
-            if (pr.data.state !== "open") {
-              core.info("skip_not_open");
-              return;
-            }
+            async function enableAutoMergeForPr(pull_number) {
+              const pr = await github.rest.pulls.get({ owner, repo, pull_number });
 
-            if (pr.data.base?.ref !== "main") {
-              core.info("skip_not_main_base");
-              return;
-            }
-
-            try {
-              await github.graphql(
-                `mutation($pullRequestId: ID!) {
-                  enablePullRequestAutoMerge(input: {
-                    pullRequestId: $pullRequestId
-                    mergeMethod: SQUASH
-                  }) {
-                    clientMutationId
-                  }
-                }`,
-                { pullRequestId: pr.data.node_id },
-              );
-              core.info(`enabled_auto_merge_pr_${pull_number}`);
-            } catch (error) {
-              const message = String(error?.message || "");
-              if (
-                message.includes("Pull request is in clean status") ||
-                message.includes("Auto merge is disabled")
-              ) {
-                core.warning(`auto_merge_not_enabled_now_pr_${pull_number}: ${message}`);
+              if (!pr.data.node_id) {
+                core.warning(`skip_missing_node_id_pr_${pull_number}`);
                 return;
               }
-              throw error;
+
+              if (pr.data.state !== "open") {
+                core.info(`skip_not_open_pr_${pull_number}`);
+                return;
+              }
+
+              if (pr.data.draft) {
+                core.info(`skip_draft_pr_${pull_number}`);
+                return;
+              }
+
+              if (pr.data.base?.ref !== "main") {
+                core.info(`skip_not_main_base_pr_${pull_number}`);
+                return;
+              }
+
+              if (pr.data.head?.repo?.full_name !== `${owner}/${repo}`) {
+                core.info(`skip_fork_pr_${pull_number}`);
+                return;
+              }
+
+              try {
+                await github.graphql(
+                  `mutation($pullRequestId: ID!) {
+                    enablePullRequestAutoMerge(input: {
+                      pullRequestId: $pullRequestId
+                      mergeMethod: SQUASH
+                    }) {
+                      clientMutationId
+                    }
+                  }`,
+                  { pullRequestId: pr.data.node_id },
+                );
+                core.info(`enabled_auto_merge_pr_${pull_number}`);
+              } catch (error) {
+                const message = String(error?.message || "");
+                if (
+                  message.includes("Pull request is in unstable status") ||
+                  message.includes("Pull request is in clean status") ||
+                  message.includes("Auto merge is disabled")
+                ) {
+                  core.warning(`auto_merge_not_enabled_now_pr_${pull_number}: ${message}`);
+                  return;
+                }
+                throw error;
+              }
+            }
+
+            for (const pull_number of prNumbers) {
+              await enableAutoMergeForPr(pull_number);
             }
