@@ -69,3 +69,4 @@
 - 2026-03-06: `specialforce_v1` PR/푸시 회귀검증 워크플로우 추가 (`phase2-specialforce-profile-validation.yml`)
 - 2026-03-06: PR auto-merge 보조체크 실패 무해화(`continue-on-error`, non-blocking warning)
 - 2026-03-06: readiness snapshot 자동화 추가 (`phase2-readiness-snapshot.yml`, `generate_phase2_readiness_snapshot.mjs`)
+- 2026-03-06: live cutover preflight gate 추가 (`phase2-live-preflight-gate.yml`, `check_phase2_live_gate.mjs`)

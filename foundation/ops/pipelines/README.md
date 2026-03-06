@@ -17,6 +17,7 @@ node foundation/ops/pipelines/replay_quarantine.mjs
 node foundation/ops/pipelines/reinject_replay_output.mjs
 node foundation/ops/pipelines/calc_sample_streak.mjs
 node foundation/ops/pipelines/generate_phase2_readiness_snapshot.mjs
+node foundation/ops/pipelines/check_phase2_live_gate.mjs
 ```
 
 품질 게이트 임계치(환경변수):
@@ -72,6 +73,7 @@ node foundation/ops/pipelines/generate_phase2_readiness_snapshot.mjs
 - 매일 UTC 00:15 실행 + 수동 실행(`workflow_dispatch`) 지원
 - 샘플 연속성 체크: `.github/workflows/phase2-sample-readiness.yml`
 - readiness 스냅샷: `.github/workflows/phase2-readiness-snapshot.yml`
+- live 전환 사전게이트: `.github/workflows/phase2-live-preflight-gate.yml`
 
 ## GitHub Secrets/Variables 설정
 - Secrets:
@@ -86,6 +88,11 @@ node foundation/ops/pipelines/generate_phase2_readiness_snapshot.mjs
   - `READINESS_API_SOURCE_CONFIRMED` (`true/false`)
   - `READINESS_MAPPING_DRAFT_DONE` (`true/false`)
   - `READINESS_FAILURE_RESPONSE_READY` (`true/false`, 기본 `true`)
+
+라이브 전환 게이트:
+- `check_phase2_live_gate.mjs`는 아래를 모두 만족해야 pass
+  - 준비조건 4개(`apiSourceConfirmed`, `mappingDraftDone`, `sampleModeStreakReady`, `failureResponseReady`)
+  - 품질 임계치(`ingest >= 95`, `missing <= 5`, `duplicate <= 2`)
 
 ## 현재 범위
 - API/문서/CSV 실입력 모드 기본 구현 완료(입력 부재 시 샘플 폴백)
