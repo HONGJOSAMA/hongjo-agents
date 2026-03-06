@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "phase5-prediction-summary-view/v1",
+  "organizationId": "org-demo-001",
+  "trainingSessionId": "session-01",
+  "aarReportId": "aar-01",
+  "finalPrediction": {
+    "probability": 0.72,
+    "confidence": 0.72,
+    "riskLevel": "high",
+    "scenarioLabel": "high_consensus_outlook",
+    "summary": "Weighted consensus across 5 domain agents indicates a high outlook."
+  },
+  "calibration": {
+    "brierScore": 0.2544,
+    "ece": 0.12,
+    "calibrationFactor": 0.85,
+    "confidenceCap": 0.78
+  },
+  "meta": {
+    "uncertaintySeverity": "medium",
+    "adversarialTarget": "cyber_information",
+    "policyActionPriority": "review_now"
+  },
+  "evidencePreview": [
+    {
+      "domainKey": "cyber_information",
+      "evidenceId": "cyber_information-prediction-1772775728517-evidence-1",
+      "sourceTitle": "source-5",
+      "trustScore": 0.72,
+      "excerpt": "signal-25",
+      "citationLabel": "E01"
+    },
+    {
+      "domainKey": "cyber_information",
+      "evidenceId": "cyber_information-prediction-1772775728517-evidence-2",
+      "sourceTitle": "source-5",
+      "trustScore": 0.72,
+      "excerpt": "signal-15",
+      "citationLabel": "E02"
+    },
+    {
+      "domainKey": "geopolitics_security",
+      "evidenceId": "geopolitics_security-prediction-1772775728424-evidence-1",
+      "sourceTitle": "source-3",
+      "trustScore": 0.72,
+      "excerpt": "signal-23",
+      "citationLabel": "E03"
+    },
+    {
+      "domainKey": "geopolitics_security",
+      "evidenceId": "geopolitics_security-prediction-1772775728424-evidence-2",
+      "sourceTitle": "source-3",
+      "trustScore": 0.72,
+      "excerpt": "signal-18",
+      "citationLabel": "E04"
+    },
+    {
+      "domainKey": "macroeconomy",
+      "evidenceId": "macroeconomy-prediction-1772775728333-evidence-1",
+      "sourceTitle": "source-1",
+      "trustScore": 0.72,
+      "excerpt": "signal-21",
+      "citationLabel": "E05"
+    }
+  ],
+  "dissentPreview": [
+    {
+      "domainKey": "cyber_information",
+      "reason": "high-risk but sub-critical confidence",
+      "severity": "low"
+    },
+    {
+      "domainKey": "geopolitics_security",
+      "reason": "high-risk but sub-critical confidence",
+      "severity": "low"
+    },
+    {
+      "domainKey": "macroeconomy",
+      "reason": "high-risk but sub-critical confidence",
+      "severity": "low"
+    }
+  ]
+}

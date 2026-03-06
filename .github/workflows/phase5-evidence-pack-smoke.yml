@@ -1,0 +1,54 @@
+name: phase5-evidence-pack-smoke
+
+on:
+  pull_request:
+    paths:
+      - "foundation/evidence/**"
+      - "foundation/orchestrator/**"
+      - "agents/**"
+      - "multi_agent_plan.md"
+  push:
+    branches:
+      - main
+    paths:
+      - "foundation/evidence/**"
+      - "foundation/orchestrator/**"
+      - "agents/**"
+
+jobs:
+  evidence-pack:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Build upstream orchestration outputs
+        run: |
+          node agents/run_domain_agents_from_specialforce_context.mjs
+          node foundation/orchestrator/build_orchestrator_input_v1.mjs
+          node foundation/orchestrator/run_orchestrator_v1.mjs
+          node foundation/orchestrator/calibration/run_calibration_v1.mjs
+          node foundation/orchestrator/meta_agents/build_meta_agent_input_v1.mjs
+          node foundation/orchestrator/meta_agents/run_meta_agents_v1.mjs
+
+      - name: Build evidence pack
+        run: |
+          node foundation/evidence/build_evidence_pack_v1.mjs
+          node foundation/evidence/build_prediction_summary_view_v1.mjs
+
+      - name: Upload evidence artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase5-evidence-pack-artifacts
+          path: |
+            foundation/evaluation/evidence/phase5-evidence-pack-v1.json
+            foundation/evaluation/evidence/phase5-prediction-summary-view-v1.json
+            foundation/evaluation/metrics/phase5-evidence-pack-smoke.md
+            foundation/evaluation/metrics/phase5-evidence-pack-smoke.json

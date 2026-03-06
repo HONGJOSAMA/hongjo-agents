@@ -10,7 +10,7 @@
 | Phase 2 | 홍승현 / Codex | 2026-03-06 | 2026-03-09 | in_progress | - | 2026-03-06 |
 | Phase 3 | 홍승현 / Codex | 2026-03-06 | 2026-03-10 | in_progress | - | 2026-03-06 |
 | Phase 4 | 홍승현 / Codex | 2026-03-06 | 2026-03-10 | in_progress | - | 2026-03-06 |
-| Phase 5 | 홍승현 / Codex | TBD | TBD | pending | - | 2026-03-05 |
+| Phase 5 | 홍승현 / Codex | 2026-03-06 | 2026-03-11 | in_progress | - | 2026-03-06 |
 | Phase 6 | 홍승현 / Codex | TBD | TBD | pending | - | 2026-03-05 |
 | Phase 7 | 홍승현 / Codex | TBD | TBD | pending | - | 2026-03-05 |
 | Phase 8 | 홍승현 / Codex | TBD | TBD | pending | - | 2026-03-05 |
@@ -98,3 +98,10 @@
 - 2026-03-06: meta-agent input contract draft 추가 (`foundation/orchestrator/meta_agents/*`)
 - 2026-03-06: `specialforce` prediction summary API 명세 초안 추가 (`foundation/docs/specialforce-prediction-summary-api-v1.md`)
 - 2026-03-06: 메타 에이전트 3종 실행기 추가 (`uncertainty_agent_v1`, `adversarial_agent_v1`, `policy_agent_v1`)
+
+## Phase 5 Evidence (실행 추적)
+
+- 2026-03-06: Evidence Pack 계약 초안 추가 (`foundation/evidence/evidence_pack_contract_v1.json`)
+- 2026-03-06: Evidence Pack 생성기 추가 (`foundation/evidence/build_evidence_pack_v1.mjs`)
+- 2026-03-06: prediction summary view read model 추가 (`foundation/evidence/build_prediction_summary_view_v1.mjs`)
+- 2026-03-06: Phase 5 smoke 워크플로우 추가 (`.github/workflows/phase5-evidence-pack-smoke.yml`)

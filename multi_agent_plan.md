@@ -32,7 +32,7 @@
 | Phase 2 | 홍승현 / Codex | 2026-03-06 | 2026-03-09 | in_progress | - | 2026-03-06 |
 | Phase 3 | 홍승현 / Codex | 2026-03-06 | 2026-03-10 | in_progress | - | 2026-03-06 |
 | Phase 4 | 홍승현 / Codex | 2026-03-06 | 2026-03-10 | in_progress | - | 2026-03-06 |
-| Phase 5 | TBD | TBD | TBD | pending | - | 2026-03-05 |
+| Phase 5 | 홍승현 / Codex | 2026-03-06 | 2026-03-11 | in_progress | - | 2026-03-06 |
 | Phase 6 | TBD | TBD | TBD | pending | - | 2026-03-05 |
 | Phase 7 | TBD | TBD | TBD | pending | - | 2026-03-05 |
 | Phase 8 | TBD | TBD | TBD | pending | - | 2026-03-05 |
@@ -808,3 +808,4 @@ hongjo/
 - 2026-03-06 16:20 KST [착수]: Phase 4 Orchestrator V1 weighting/dissent/run 로직 및 smoke workflow 추가
 - 2026-03-06 16:40 KST [진행]: Phase 4 calibration draft, prediction summary API spec, meta-agent input contract 초안 추가
 - 2026-03-06 17:00 KST [진행]: Phase 4 meta-agent 3종 실행기 추가 및 smoke workflow 확장
+- 2026-03-06 17:20 KST [착수]: Phase 5 Evidence Pack 계약/생성기/summary view 초안 추가
