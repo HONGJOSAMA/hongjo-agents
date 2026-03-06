@@ -754,3 +754,5 @@ hongjo/
 - 2026-03-06 11:00 KST [진행]: 품질게이트 + 격리큐 + 요약 JSON 추가 (`run_phase2_pipeline_draft.mjs`)
 - 2026-03-06 11:03 KST [검증]: 게이트 실패조건 주입 시 `exit code 1` 확인
 - 2026-03-06 11:05 KST [자동화]: 일일 cron 워크플로우 추가 (`.github/workflows/phase2-pipeline-daily.yml`)
+- 2026-03-06 11:35 KST [진행]: API/문서/CSV 커넥터를 실입력(env) 모드로 전환, 샘플 폴백 유지
+- 2026-03-06 11:38 KST [검증]: 실입력 경로 사용/폴백 경로 모두에서 파이프라인 게이트 통과 확인

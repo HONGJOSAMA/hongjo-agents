@@ -13,6 +13,13 @@ jobs:
       PIPELINE_MIN_INGEST_SUCCESS_RATE: "95"
       PIPELINE_MAX_MISSING_RATE: "5"
       PIPELINE_MAX_DUPLICATE_RATE: "2"
+      PIPELINE_ORGANIZATION_ID: ${{ vars.PIPELINE_ORGANIZATION_ID || 'org-demo-001' }}
+      PIPELINE_DEFAULT_DOMAIN_KEY: ${{ vars.PIPELINE_DEFAULT_DOMAIN_KEY || 'cyber_information' }}
+      API_BASE_URL: ${{ secrets.API_BASE_URL }}
+      API_ENDPOINT: ${{ vars.API_ENDPOINT || '/observations' }}
+      API_TOKEN: ${{ secrets.API_TOKEN }}
+      DOC_INPUT_DIR: ${{ vars.DOC_INPUT_DIR || 'foundation/data/input/documents' }}
+      CSV_INPUT_DIR: ${{ vars.CSV_INPUT_DIR || 'foundation/data/input/csv' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -22,7 +29,7 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Generate phase1 sample input
+      - name: Generate phase1 sample input (fallback)
         run: node foundation/tests/schema-validation/generate_phase1_samples.mjs
 
       - name: Run phase2 pipeline draft
@@ -41,4 +48,3 @@ jobs:
             foundation/data/quarantine/phase2-quarantine-latest.jsonl
             foundation/evaluation/metrics/data_quality_report.md
             foundation/evaluation/metrics/data_quality_summary.json
-

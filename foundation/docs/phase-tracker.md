@@ -53,3 +53,4 @@
 - 2026-03-06: 격리 큐 추가 (`foundation/data/quarantine/phase2-quarantine-latest.jsonl`)
 - 2026-03-06: 품질게이트 실패 시 `exit code 1` 동작 검증
 - 2026-03-06: 일일 자동실행 워크플로우 추가 (`.github/workflows/phase2-pipeline-daily.yml`)
+- 2026-03-06: 커넥터 실입력 모드 전환 (API/DOC/CSV env 기반, 입력 없을 때 샘플 폴백)

@@ -14,6 +14,26 @@ node foundation/ops/pipelines/run_phase2_pipeline_draft.mjs
 - `PIPELINE_MAX_MISSING_RATE` (기본 5)
 - `PIPELINE_MAX_DUPLICATE_RATE` (기본 2)
 
+실데이터 입력 환경변수:
+- 공통:
+  - `PIPELINE_ORGANIZATION_ID` (기본 `org-demo-001`)
+  - `PIPELINE_DEFAULT_DOMAIN_KEY` (기본 `cyber_information`)
+- API 커넥터:
+  - `API_BASE_URL` (예: `https://api.example.com`)
+  - `API_ENDPOINT` (기본 `/observations`)
+  - `API_TOKEN` (선택)
+  - `API_TIMEOUT_MS` (기본 15000)
+- 문서 커넥터:
+  - `DOC_INPUT_DIR` (기본 `foundation/data/input/documents`)
+  - `DOC_MAX_ROWS` (기본 200)
+- CSV 커넥터:
+  - `CSV_INPUT_DIR` (기본 `foundation/data/input/csv`)
+  - `CSV_MAX_ROWS` (기본 500)
+
+동작 방식:
+- 실데이터 입력 경로/API 응답이 있으면 실데이터 우선 사용
+- 입력이 비어 있으면 샘플 데이터로 폴백하여 파이프라인을 지속 실행
+
 ## 산출물
 - `foundation/data/raw/api/phase2-api-sample.jsonl`
 - `foundation/data/raw/documents/phase2-doc-sample.jsonl`
