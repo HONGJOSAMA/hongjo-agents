@@ -66,3 +66,4 @@
 - 2026-03-06: PR #8 머지로 자동머지 워크플로우 본선 반영 완료 (`ef78027`)
 - 2026-03-06: `specialforce_v1` 매핑 프로필 로컬 검증 통과(quality gate pass)
 - 2026-03-06: 품질/오류처리/보안 점검 최신화(검증 통과, secret 하드코딩 미검출)
+- 2026-03-06: `specialforce_v1` PR/푸시 회귀검증 워크플로우 추가 (`phase2-specialforce-profile-validation.yml`)

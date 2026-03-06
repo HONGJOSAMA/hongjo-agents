@@ -1,0 +1,56 @@
+name: phase2-specialforce-profile-validation
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/**"
+      - "foundation/ops/pipelines/**"
+      - "foundation/tests/schema-validation/**"
+      - "foundation/docs/phase-reports/phase-02-report.md"
+      - "foundation/docs/phase-tracker.md"
+      - "multi_agent_plan.md"
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/**"
+      - "foundation/ops/pipelines/**"
+      - "foundation/tests/schema-validation/**"
+
+jobs:
+  validate-specialforce-profile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      CONNECTOR_MAPPING_PROFILE: "specialforce_v1"
+      PIPELINE_MIN_INGEST_SUCCESS_RATE: "95"
+      PIPELINE_MAX_MISSING_RATE: "5"
+      PIPELINE_MAX_DUPLICATE_RATE: "2"
+      PIPELINE_ORGANIZATION_ID: ${{ vars.PIPELINE_ORGANIZATION_ID || 'org-demo-001' }}
+      PIPELINE_DEFAULT_DOMAIN_KEY: ${{ vars.PIPELINE_DEFAULT_DOMAIN_KEY || 'cyber_information' }}
+      DOC_INPUT_DIR: ${{ vars.DOC_INPUT_DIR || 'foundation/data/input/documents' }}
+      CSV_INPUT_DIR: ${{ vars.CSV_INPUT_DIR || 'foundation/data/input/csv' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Generate phase1 sample input
+        run: node foundation/tests/schema-validation/generate_phase1_samples.mjs
+
+      - name: Run phase2 pipeline with specialforce profile
+        run: node foundation/ops/pipelines/run_phase2_pipeline_draft.mjs
+
+      - name: Upload validation artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase2-specialforce-profile-artifacts
+          path: |
+            foundation/evaluation/metrics/data_quality_report.md
+            foundation/evaluation/metrics/data_quality_summary.json
+            foundation/data/quarantine/phase2-quarantine-latest.jsonl

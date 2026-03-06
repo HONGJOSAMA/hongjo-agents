@@ -164,3 +164,21 @@
 ### 판단 근거
 - 보호 브랜치 정책(PR 경유 머지 + required check)과 자동화의 충돌을 줄이려면 체크 완료 이벤트 기반 재시도가 필요하다.
 - 실데이터 전환 전 단계에서는 문서/증거 동기화가 운영 안정성(재현성, 추적성)의 핵심이다.
+
+---
+
+## 7단계. specialforce profile 회귀검증 자동화
+
+### 발견한 점
+- `specialforce_v1` 프로필 검증은 수동 실행으로는 누락 가능성이 있었다.
+
+### 수정 사항
+- 파일: `.github/workflows/phase2-specialforce-profile-validation.yml`
+  - PR/`main` push 시 파이프라인 실행
+  - `CONNECTOR_MAPPING_PROFILE=specialforce_v1` 고정 검증
+  - 데이터 품질 리포트/요약/quarantine 아티팩트 업로드
+- 파일: `multi_agent_plan.md`, `foundation/docs/phase-tracker.md`, `foundation/docs/phase-reports/phase-02-report.md`
+  - 자동화 추가 이력 동기화
+
+### 판단 근거
+- 프로필 매핑 회귀를 PR 단계에서 차단해야 실데이터 전환 시 리스크를 낮출 수 있다.
