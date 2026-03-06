@@ -31,7 +31,7 @@
 | Phase 1 | 홍승현 / Codex | 2026-03-05 | 2026-03-07 | done | - | 2026-03-06 |
 | Phase 2 | 홍승현 / Codex | 2026-03-06 | 2026-03-09 | in_progress | - | 2026-03-06 |
 | Phase 3 | 홍승현 / Codex | 2026-03-06 | 2026-03-10 | in_progress | - | 2026-03-06 |
-| Phase 4 | TBD | TBD | TBD | pending | - | 2026-03-05 |
+| Phase 4 | 홍승현 / Codex | 2026-03-06 | 2026-03-10 | in_progress | - | 2026-03-06 |
 | Phase 5 | TBD | TBD | TBD | pending | - | 2026-03-05 |
 | Phase 6 | TBD | TBD | TBD | pending | - | 2026-03-05 |
 | Phase 7 | TBD | TBD | TBD | pending | - | 2026-03-05 |
@@ -805,3 +805,4 @@ hongjo/
 - 2026-03-06 15:05 KST [착수]: Phase 3 Domain Agents V1 시작, 5도메인 에이전트 골격/계약/공통 러너 추가
 - 2026-03-06 15:40 KST [진행]: Phase 3 공통 출력 스키마/계약 버전 고정, 도메인 입력 필터 강화, 평가/회귀 러너 추가
 - 2026-03-06 16:00 KST [진행]: specialforce Session/AAR context adapter 및 Phase 4 orchestrator 입력 계약 초안 추가
+- 2026-03-06 16:20 KST [착수]: Phase 4 Orchestrator V1 weighting/dissent/run 로직 및 smoke workflow 추가

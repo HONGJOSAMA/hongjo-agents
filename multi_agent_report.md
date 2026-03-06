@@ -395,3 +395,29 @@
 ### 판단 근거
 - 지금 접점을 고정해두면 Phase 4는 weighting/dissent 실행 로직에만 집중할 수 있다.
 - `specialforce` 실 API 연동 전에도 sample context로 end-to-end 계약 검증을 계속 돌릴 수 있다.
+
+---
+
+## 17단계. Phase 4 orchestrator v1 실행 로직 착수
+
+### 발견한 점
+- Phase 4는 입력 계약 초안만 있었고, 실제 weighting/dissent/fallback을 계산하는 실행기가 없었다.
+- 이 상태에서는 오케스트레이터가 문서 설계에 머물러 있어 다음 단계 UI/API 연결의 기준 출력이 부족했다.
+
+### 수정 사항
+- 파일: `foundation/orchestrator/weighting/apply_weighting_v1.mjs`
+  - confidence/evidence/risk 기반 가중치 계산 추가
+- 파일: `foundation/orchestrator/dissent/generate_dissent_log_v1.mjs`
+  - weighted consensus와 개별 도메인 편차 기반 dissent log 생성
+- 파일: `foundation/orchestrator/run_orchestrator_v1.mjs`
+  - 최종 확률/신뢰도/리스크/시나리오/fallback 출력
+- 파일: `foundation/orchestrator/output_contract_v1.json`
+  - orchestrator output 계약 고정
+- 파일: `.github/workflows/phase4-orchestrator-smoke.yml`
+  - input build -> orchestrator run -> artifact 업로드 자동화
+- 파일: `foundation/docs/phase-reports/phase-04-report.md`
+  - Phase 4 진행 리포트 신규 추가
+
+### 판단 근거
+- 지금 필요한 것은 완전한 ML 오케스트레이터가 아니라, Phase 5/6/7이 기대할 수 있는 안정된 실행 출력이다.
+- weighting/dissent/fallback을 먼저 고정하면 이후 calibration과 UI 연결이 훨씬 단순해진다.

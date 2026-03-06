@@ -3,7 +3,7 @@
   "contextPath": "foundation/data/specialforce/specialforce-context-sample.json",
   "normalizedPath": "foundation/data/normalized/phase3-specialforce-adapter.jsonl",
   "outputDir": "foundation/evaluation/agents/specialforce_context",
-  "evaluatedAt": "2026-03-06T04:58:45.282Z",
+  "evaluatedAt": "2026-03-06T05:20:40.008Z",
   "results": [
     {
       "domainKey": "macroeconomy",
